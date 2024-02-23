@@ -14,7 +14,7 @@ using std::endl;
 
 inline auto ASSERT(bool cond, const string &message) noexcept {
     if (UNLIKELY(!cond)) {
-        std::cerr << "ASSERT: " << message << endl;
+        cerr << "ASSERT: " << message << endl;
         exit(EXIT_FAILURE);
     }
 }
