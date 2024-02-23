@@ -3,6 +3,9 @@
         "iosfwd": "cpp",
         "string": "cpp",
         "atomic": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "typeinfo": "cpp",
+        "ostream": "cpp",
+        "thread": "cpp"
     }
 }
