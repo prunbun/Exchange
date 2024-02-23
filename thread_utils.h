@@ -6,6 +6,7 @@
 #include <atomic> // access to thread-safe variables
 #include <unistd.h> // access to functions such as sleep()
 #include <sys/syscall.h> // access to CPU flags
+#include <thread_utils_pin_cores.h> // helper functions to allow access to macOS kernel API
 
 using std::string;
 using std::atomic;
@@ -14,14 +15,13 @@ using std::forward;
 using std::thread;
 
 namespace Common {
-    /*
-        CREDITS TO: yshen@hybridkernel.com, Binding Threads to Cores on OSX
-    */
-    inline bool pinThreadToCore(int core_id) noexcept {
-        cpu_set_t cpu_set;
-        CPU_ZERO(&cpu_set);
-        CPU_SET(core_id, &cpu_set);
 
+    inline bool pinThreadToCore(int core_id) noexcept {
+        cpu_set_t cpu_set; // bits representing available cores
+        CPU_ZERO(&cpu_set); // clear all pins on cores
+        CPU_SET(core_id, &cpu_set); // add a pin on a particular core
+
+        // pin this thread on the specified core, and return 0 if it succeeded
         return (pthread_setaffinity_np(pthread_self(), sizeof(cpu_set), &cpu_set) == 0);
     }
 
@@ -78,5 +78,40 @@ namespace Common {
         return new_thread;
     }
 }
+
+/*
+    Sample code that would use this thread util
+    ---
+
+
+    This is a function we would like the thread to execute: 
+    void task(int a, int b, bool should_sleep) {
+
+        cout << "output = " << a + b << endl;
+
+        if (should_sleep) {
+            using namespace std::literals::chrono_literals;
+            std::this_thread::sleep_for(5s);
+        }
+    }
+
+    Here is main:
+    int main() {
+
+        // create the two threads
+        // note that if the thread fails to pin to a core or start a task, it will be a nullptr
+        auto thread_1 = createAndStartThread(0, "worker1", task, 1, 2, false);
+        auto thread_2 = createAndStartThread(1, "worker2", task, 2, 3, true);
+
+        // join the threads back to main
+        thread_1->join();
+        thread_2->join(); // you will notice that main() will wait until thread_2 wakes up
+
+        cout << "main() exiting..." << endl;
+        
+        return 0;
+    }
+
+*/
 
 #endif
