@@ -14,7 +14,7 @@ using std::cerr;
 using std::forward;
 using std::thread;
 
-namespace Common {
+namespace ThreadUtils {
 
     inline bool pinThreadToCore(int core_id) noexcept {
         cpu_set_t cpu_set; // bits representing available cores
