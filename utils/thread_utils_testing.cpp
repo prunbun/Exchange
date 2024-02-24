@@ -14,7 +14,7 @@ void task(int a, int b, bool should_sleep) {
 
 // Here is main:
 int main() {
-    using namespace ThreadUtils;
+    using namespace Common;
 
     // create the two threads
     // note that if the thread fails to pin to a core or start a task, it will be a nullptr

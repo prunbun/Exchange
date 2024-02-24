@@ -9,7 +9,7 @@
 #include "thread_utils_pin_cores.h" // helper functions to allow access to macOS kernel API
 #include <thread>
 
-namespace ThreadUtils {
+namespace Common {
 
     inline bool pinThreadToCore(int core_id) noexcept {
         cpu_set_t cpu_set; // bits representing available cores
@@ -98,7 +98,7 @@ namespace ThreadUtils {
 
     Here is main:
     int main() {
-        using namespace ThreadUtils;
+        using namespace Common;
 
         // create the two threads
         // note that if the thread fails to pin to a core or start a task, it will be a nullptr
