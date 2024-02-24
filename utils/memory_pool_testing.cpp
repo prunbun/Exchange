@@ -20,7 +20,7 @@ int main() {
     const int new_mem_pool_size = 50;
     MemPool<ExampleType> new_mem_pool(new_mem_pool_size);
 
-    for (int i = 0; i < new_mem_pool_size + 1; i++) {
+    for (int i = 0; i < new_mem_pool_size + 1; ++i) {
         // remember that delete is not required as new_mem_pool will be deallocated after main() exits
         ExampleType* allocated_data = new_mem_pool.allocate(ExampleType{{1, 2}}); 
         
