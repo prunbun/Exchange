@@ -86,8 +86,7 @@ namespace Common {
                     Explaining a few design choices here:
                     
                     1. we made sure that the first element of our struct was the T object, so we can use this to 'lookup' the index
-
-                    2. note that in c++ pointer subtraction yields the number of elements that exist in between the pointers
+                    2. note that in C++, pointer subtraction yields the number of elements that exist in between the pointers
                 */
                 auto delete_obj_mem_block_pointer = reinterpret_cast<const ObjectBlock*>(obj_to_delete);
                 int index_of_del_obj_block = delete_obj_mem_block_pointer - &storage[0];
