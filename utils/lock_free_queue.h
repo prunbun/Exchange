@@ -56,7 +56,7 @@ namespace Common {
 
             // returns a pointer to the next object that can be read
             // if the queue is empty, returns null
-            T* getNextRead() const noexcept { // <- NOTE: functions that do not modify state should be marked with 'const'
+            const T* getNextRead() const noexcept { // <- NOTE: functions that do not modify state should be marked with 'const'
                 return (next_read_index == next_write_index ? nullptr : &queue[next_read_index]);
             }
 
