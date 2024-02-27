@@ -19,7 +19,7 @@ inline auto ASSERT(bool cond, const string &message) noexcept {
     }
 }
 
-inline auto FATAL(const string message) noexcept {
+inline auto FATAL(const string &message) noexcept {
     cerr << "FATAL: " << message << endl;
 
     exit(EXIT_FAILURE);
