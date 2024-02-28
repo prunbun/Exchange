@@ -18,9 +18,12 @@ This includes:
 
 ### Associated Files
 
-| File                       | Component                                                                 |
-|----------------------------|---------------------------------------------------------------------------|
-| utils/thread_utils.h       | creating and starting threads, including pinning threads to specific cores|
+| File                       | Component                                                                                         |
+|----------------------------|---------------------------------------------------------------------------------------------------|
+| utils/thread_utils.h       | creating and starting threads, including pinning threads to specific cores                        |
+| utils/macros.h             | ASSERT() and branch prediction definitions                                                        |
+| utils/memory_pool.h        | allocates memory for a given template object, T, avoiding dynamic memory allocation during runtime|
+| utils/lock_free_queue.h    | data structure that allows for threads to share data without using locks or mutexes               |
 
 Testing
 -------
