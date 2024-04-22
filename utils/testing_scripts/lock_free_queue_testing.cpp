@@ -1,5 +1,5 @@
-#include "lock_free_queue.h"
-#include "thread_utils.h"
+#include "../lock_free_queue.h"
+#include "../thread_utils.h"
 
 using namespace Common;
 

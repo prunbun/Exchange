@@ -1,4 +1,4 @@
-#include "thread_utils.h"
+#include "../thread_utils.h"
 #include <iostream>
 
 // This is a function we would like the thread to execute: 

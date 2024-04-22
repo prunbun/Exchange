@@ -1,5 +1,5 @@
-#ifndef THREEAD_UTILS_H
-#define THREEAD_UTILS_H
+#ifndef THREAD_UTILS_H
+#define THREAD_UTILS_H
 
 #include <iostream>
 #include <cstring>
