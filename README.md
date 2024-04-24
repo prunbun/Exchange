@@ -23,6 +23,7 @@ This includes:
 | utils/thread_utils.h       | creating and starting threads, including pinning threads to specific cores                        |
 | utils/memory_pool.h        | allocates memory for a given template object, T, avoiding dynamic memory allocation during runtime|
 | utils/lock_free_queue.h    | data structure that allows for threads to share data without using locks or mutexes               |
+| utils/logger.h             | Logger class that can be used by the main thread for logging strings and format strings to a file |
 | utils/testing_scripts/     | .cpp files with tests on util components' functionality and examples of how to use them           |
 
 Testing
