@@ -51,7 +51,7 @@ namespace Common {
                         // update the queue and let the thread go on cooldown
                         queue.updateReadIndex();
                         using namespace std::chrono_literals;
-                        std::this_thread::sleep_for(1ms); 
+                        std::this_thread::sleep_for(10ms); 
                     }
                 }
             }
@@ -163,6 +163,54 @@ namespace Common {
             void pushValue(const double value) noexcept {
                 pushToLoggerQueue(LogElement{LogType::DOUBLE, {.d = value}});
             }
+
+            /*
+                API for main thread to use logger
+            */
+
+           // logging a format string
+           template<typename T, typename... Vars>
+           void log(const char *format_string, const T &value, Vars... remaining_vars) noexcept {
+                // while we have more to log
+                while (*format_string) {
+
+                    // is this an escape/variable?
+                    if (*format_string == '%') {
+
+                        // if we want to actually log a '%' character, then, we would escape it by doing '%%', 
+                        // so we skip this one, and log the next '%' after this 
+                        if(UNLIKELY(*(format_string + 1) == '%')) {
+                            ++format_string;
+                        } else {
+                            pushValue(value);
+                            log(format_string + 1, remaining_vars...); // <- recursively call log to 'consume' this value
+                            return;
+                        }
+                    }
+
+                    pushValue(*format_string++) // <- notice how this is unreachable if there was a variable
+                }
+
+                FATAL("printf log() did not include enough % keywords to print out all variables");
+           }
+
+           // logging a plain string
+           // notice that this function will also be called when all variables are logged in the previous log() function
+           void log(const char *message) noexcept {
+                while(*message) {
+                    if (*message == '%') {
+                        if (UNLIKELY(*(message + 1) == '%')) {
+                            ++message; // <- follows same logic as above for escaping '%'
+                        } else {
+                            FATAL("Found a printf keyword in the plain string log(), but variables were not provided");
+                        }
+                    }
+
+                    pushValue(*message++);
+                }
+           }
+
+
     };
 
 
