@@ -188,7 +188,7 @@ namespace Common {
                         }
                     }
 
-                    pushValue(*format_string++) // <- notice how this is unreachable if there was a variable
+                    pushValue(*format_string++); // <- notice how this is unreachable if there was a variable
                 }
 
                 FATAL("printf log() did not include enough % keywords to print out all variables");
