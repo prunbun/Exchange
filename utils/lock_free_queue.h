@@ -43,7 +43,7 @@ namespace Common {
 
             /* LFQueue public functions */
 
-            // returns a reference to the next object in the queue that the user can modify
+            // returns a pointer to the next object in the queue that the user can modify
             T* getNextWriteTo() noexcept {
                 return &queue[next_write_index];
             }

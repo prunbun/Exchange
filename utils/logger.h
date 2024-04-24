@@ -96,6 +96,73 @@ namespace Common {
             Logger(const Logger &&) = delete; // move constructor
             Logger& operator=(const Logger &) = delete; // copy assignment constructor
             Logger& operator=(const Logger &&) = delete; // move assignment constructor
+
+            
+            // main way to push to logger queue
+            void pushToLoggerQueue(const LogElement &log_element) noexcept {
+                *(queue.getNextWriteTo()) = log_element;
+                queue.updateWriteIndex();
+            } 
+
+            // Overload pushValue for different data types
+
+            // 1.1 char
+            void pushValue(const char value) noexcept {
+                pushToLoggerQueue(LogElement{LogType::CHAR, {.c = value}});
+            }
+
+            // 1.2 char array
+            void pushValue(const char *value) {
+                while (*value) {
+                    pushValue(*value);
+                    ++value;
+                }
+            }
+
+            // 1.3 string
+            void pushValue(const std::string &value) noexcept {
+                pushValue(value.c_str());
+            }
+
+            // int
+            void pushValue(const int value) noexcept {
+                pushToLoggerQueue(LogElement{LogType::INTEGER, {.i = value}});
+            }
+
+            // long int
+            void pushValue(const long int value) noexcept {
+                pushToLoggerQueue(LogElement{LogType::LONG_INTEGER, {.l = value}});
+            }
+
+            // long long int
+            void pushValue(const long long int value) noexcept {
+                pushToLoggerQueue(LogElement{LogType::LONG_LONG_INTEGER, {.ll = value}});
+            }
+
+            // unsigned int
+            void pushValue(const unsigned int value) noexcept {
+                pushToLoggerQueue(LogElement{LogType::UNSIGNED_INTEGER, {.u = value}});
+            }
+
+            // unsigned long int
+            void pushValue(const unsigned long int value) noexcept {
+                pushToLoggerQueue(LogElement{LogType::UNSIGNED_LONG_INTEGER, {.ul = value}});
+            }
+
+            // unsigned long long int
+            void pushValue(const unsigned long long int value) noexcept {
+                pushToLoggerQueue(LogElement{LogType::UNSIGNED_LONG_LONG_INTEGER, {.ull = value}});
+            }
+
+            // float
+            void pushValue(const float value) noexcept {
+                pushToLoggerQueue(LogElement{LogType::FLOAT, {.f = value}});
+            }
+
+            // double
+            void pushValue(const double value) noexcept {
+                pushToLoggerQueue(LogElement{LogType::DOUBLE, {.d = value}});
+            }
     };
 
 
