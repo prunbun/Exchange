@@ -109,5 +109,43 @@ namespace Common {
         return (setsockopt(fd, IPPROTO_IP, IP_ADD_MEMBERSHIP, &mreq, sizeof(mreq)) != -1);
     }
 
-    int createSocket(Logger &logger, const std::string &t_ip, const std::string &interface, int port, bool is_udp, bool is_blocking, bool is_listening, int ttl, bool needs_so_timestamp);
+    int createSocket(Logger &logger, const std::string &t_ip, const std::string &interface, int port, bool is_udp, bool is_blocking, bool is_listening, int ttl, bool needs_so_timestamp) {
+        // PART 1: we have to create the addrinfo struct that is used by the system to create a socket
+        
+        // 1.1 string that will hold the timestamp of when we create this socket
+        std::string time_string;
+
+        // 1.2 retrieves the ip address we want this socket to listen on
+        const std::string ip = t_ip.empty() ? getIFaceIP(interface) : t_ip;
+
+        logger.log("%:% %() % ip:% interface:% port:% is_udp:% is_blocking:% is_listening:% ttl:& SOtime:% \n", 
+            __FILE__, __LINE__, __FUNCTION__, 
+            Common::getCurrentTimeStr(&time_string),
+            ip, interface, port, is_udp, is_blocking, is_listening, ttl, needs_so_timestamp
+        );
+
+        // 1.3 populating the addrinfo hints struct that will be args into getaddrinfo, which will then be used to create the socket
+        addrinfo hints{}; // <- the curly braces initialize all fields to their default values
+        hints.ai_family = AF_INET;
+        hints.ai_socktype = is_udp ? SOCK_DGRAM : SOCK_STREAM;
+        hints.ai_protocol = is_udp ? IPPROTO_UDP : IPPROTO_TCP;
+
+            // so generally, the system does a DNS query to resolve hostnames and some other lookups to resolve service port number
+            // this code tells getaddrinfo to treat the inputs as the numeric values and not do a lookup
+        if (std::isdigit(ip.c_str()[0])) {
+            hints.ai_flags |= AI_NUMERICHOST;
+        }
+        hints.ai_flags |= AI_NUMERICSERV;
+
+        // 1.4 pass in the hints to getaddrinfo and generate the socket creation args
+        addrinfo *result = nullptr;
+        const auto possible_err = getaddrinfo(ip.c_str(), std::to_string(port).c_str(), &hints, &result);
+
+        if (possible_err) {
+            logger.log("getaddrinfo() failed, info: error: % errno: % \n", gai_strerror(possible_err), strerror(errno));
+        }
+
+        NOT COMPLETE
+
+    }
 }
