@@ -65,7 +65,7 @@ namespace Common {
                 ASSERT(file.is_open(), "Could not open log file " + filename); // remember that macros.h was included in "logtype.h"
 
                 // start the logger thread
-                // note that we need: a core to pin on (optiona), a thread name, func to execute, and its corresponding args (optional)
+                // note that we need: a core to pin on (optional), a thread name, func to execute, and its corresponding args (optional)
                 logger_thread = createAndStartThread(-1, "logger_thread", [this]() { flushQueue(); } ); // flushQueue will write all logs to the open file
                 ASSERT(logger_thread != nullptr, "Logger thread did not start");
             }
