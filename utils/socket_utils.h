@@ -145,7 +145,87 @@ namespace Common {
             logger.log("getaddrinfo() failed, info: error: % errno: % \n", gai_strerror(possible_err), strerror(errno));
         }
 
-        NOT COMPLETE
+        
+        // PART 2: Create the socket using the params
+        
+        // getinfoaddr creates a linked list of socket args for all the different interfaces
+        // 2.1 we use a for loop to traverse this list
+        int socket_file_descriptor = -1;
+        int one = 1;
+        for (addrinfo *socket_args = result; socket_args; socket_args = socket_args->ai_next) {
+            
+            // 2.2 try to create the socket
+            socket_file_descriptor = socket(socket_args->ai_family, socket_args->ai_socktype, socket_args->ai_protocol);
+            if (socket_file_descriptor == -1) {
+                logger.log("socket() function failed. errno: % \n", strerror(errno));
+                return -1;
+            }
 
+            // 2.3 if the socket was created successfully, we should set it to be non-blocking and have no packet delays
+            if (!is_blocking) {
+                if (!setNonBlocking(socket_file_descriptor)) {
+                    logger.log("setNonBlocking failed. errno: % \n", strerror(errno));
+                    return -1;
+                }
+
+                // note that the delays only occur during TCP connections to ensure reliable delivery
+                if (!is_udp && !setNoDelay(socket_file_descriptor)) {
+                    logger.log("setNoDelay failed. errno: % \n", strerror(errno));
+                    return -1;
+                }
+            }
+
+            // 2.4 now, we have to split between two types of sockets: listening and connecting (connecting with target ip)
+            // note that connect() would return 0 if it worked
+            if (!is_listening && 
+                connect(socket_file_descriptor, socket_args->ai_addr, socket_args->ai_addrlen) == -1 &&
+                !wouldBlock()
+            ) {
+                logger.log("connect() failed. errno: % \n", strerror(errno));
+                return -1;
+            }
+
+            constexpr int MaxTCPServerBacklog = 1024;
+            if (is_listening && setsockopt(socket_file_descriptor, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<void *>(&one), sizeof(one)) == -1) {
+                logger.log("setsockopt() failed. errno: % \n", strerror(errno));
+                return -1;
+            }
+            if (is_listening && bind(socket_file_descriptor, socket_args->ai_addr, socket_args->ai_addrlen) == -1) {
+                logger.log("bind() failed. errno: % \n", strerror(errno));
+                return -1;
+            }
+            if (!is_udp && is_listening && listen(socket_file_descriptor, MaxTCPServerBacklog) == -1) {
+                logger.log("listen() failed. errno: % \n", strerror(errno));
+                return -1;
+            }
+
+            // 2.5 set the TTL for packets if it is provided and let the socket know to register timestamps for packets
+            if (is_udp && ttl) {
+                // this checks the prefix since only a certain range of addr are for multicast
+                const bool is_multicast = atoi(ip.c_str()) & 0xe0; 
+
+                if (is_multicast && !setMcastTTL(socket_file_descriptor, ttl)) {
+                    logger.log("setMcastTTL() failed. errno: % \n", strerror(errno));
+                    return -1;
+                }
+                if (!is_multicast && !setTTL(socket_file_descriptor, ttl)) {
+                    logger.log("setTTL() failed. errno: % \n", strerror(errno));
+                    return -1;
+                }
+            }
+
+            if (needs_so_timestamp && !setSOTimestamp(socket_file_descriptor)) {
+                logger.log("setSOTimestamp() failed. errno: % \n", strerror(errno));
+                return -1;
+            }
+
+        }
+
+        // PART 3: free memory and return, remember that many things we do are on the stack, but getaddrinfo is on the heap
+        if (result) {
+            freeaddrinfo(result);
+        }
+
+        return socket_file_descriptor;
     }
 }
