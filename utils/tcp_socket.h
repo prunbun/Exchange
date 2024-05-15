@@ -58,6 +58,12 @@ namespace Common {
             delete[] receive_buffer;
             receive_buffer = nullptr;
         }
+
+        TCPSocket() = delete;
+        TCPSocket(const TCPSocket &) = delete;
+        TCPSocket(const TCPSocket &&) = delete;
+        TCPSocket &operator=(const TCPSocket &) = delete;
+        TCPSocket &operator=(const TCPSocket &&) = delete;
     };
 
 }
