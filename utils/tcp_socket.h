@@ -64,6 +64,18 @@ namespace Common {
         TCPSocket(const TCPSocket &&) = delete;
         TCPSocket &operator=(const TCPSocket &) = delete;
         TCPSocket &operator=(const TCPSocket &&) = delete;
+
+
+        /* MEMBER FUNCTIONS */
+
+        // creates a TCP Socket that either listens on or coneects to the given ip, interface, and port
+        int connect(const std::string &ip, const std::string &interface, int port, bool is_listening);
+
+        // Publishes all data in send buffers and executes the callback if data exists in the receive buffer
+        bool sendAndReceive() noexcept;
+
+        // Writes provided data to send buffer
+        void send(const void *data, size_t length) noexcept;
     };
 
 }
