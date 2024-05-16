@@ -14,6 +14,7 @@
 #include <ifaddrs.h>
 #include <sys/socket.h>
 #include <fcntl.h>
+#include <sys/event.h>
 
 #include "logger.h"
 
