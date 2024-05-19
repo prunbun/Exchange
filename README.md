@@ -38,6 +38,9 @@ Testing
 ```
   ./a.out
 ```
+<br />
+
+-----
 
 Part 2: The Exchange
 ------
