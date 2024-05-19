@@ -76,7 +76,8 @@ namespace Common {
                 // First, we have to make sure that everything that should be logged is written (some apps skip this for performance)
                 while (queue.size()) {
                     using namespace std::chrono_literals;
-                    std::this_thread::sleep_for(1s); // note the longer duration than the logger cooldown of 1ms
+                    std::cout << queue.size() << std::endl;
+                    std::this_thread::sleep_for(10ms); // note the longer duration than the logger cooldown of 1ms
                 }
 
                 // Next, we should stop the logger's runtime to allow flushQueue to exit

@@ -42,6 +42,8 @@ namespace Common {
 
             freeifaddrs(ifaddr); // library function that will free the linked list
         }
+
+        return buf;
     }
 
     bool setNonBlocking (int fd) {
@@ -60,7 +62,7 @@ namespace Common {
         }
 
         // otherwise, set the flags to nonblocking using an OR with O_NONBLOCK
-        bool op_successful = fcntl(fd, F_SETFL, flags | O_NONBLOCK);
+        int op_successful = fcntl(fd, F_SETFL, flags | O_NONBLOCK);
         return (op_successful != -1);
     }
 
@@ -70,7 +72,7 @@ namespace Common {
         int one = 1;
 
         // as a clarification, a 'file descriptor' or fd here, is a identifier given by the OS to a particular socket, file etc.
-        bool op_successful = setsockopt(fd, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<void *>(&one), sizeof(one));
+        int op_successful = setsockopt(fd, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<void *>(&one), sizeof(one));
         return (op_successful != -1);
     }
 
@@ -78,7 +80,7 @@ namespace Common {
         // this method records the timestamp at which a packet arrives at the socket 
 
         int one = 1;
-        bool op_successful = setsockopt(fd, SOL_SOCKET, SO_TIMESTAMP, reinterpret_cast<void *>(&one), sizeof(one));
+        int op_successful = setsockopt(fd, SOL_SOCKET, SO_TIMESTAMP, reinterpret_cast<void *>(&one), sizeof(one));
         return (op_successful != -1);
     }
 
@@ -95,12 +97,12 @@ namespace Common {
         // TTL represents the number of hops a packet can take from sender to receiver
         // this is generally good practice for security reasons, reducing network congestion, and stopping cycles
         
-        bool op_successful = setsockopt(fd, IPPROTO_IP, IP_MULTICAST_TTL, reinterpret_cast<void *>(&ttl), sizeof(ttl));
+        int op_successful = setsockopt(fd, IPPROTO_IP, IP_MULTICAST_TTL, reinterpret_cast<void *>(&ttl), sizeof(ttl));
         return (op_successful != -1);
     }
 
     bool setTTL(int fd, int ttl) {
-        bool op_successful = setsockopt(fd, IPPROTO_IP, IP_TTL, reinterpret_cast<void *>(&ttl), sizeof(ttl));
+        int op_successful = setsockopt(fd, IPPROTO_IP, IP_TTL, reinterpret_cast<void *>(&ttl), sizeof(ttl));
         return (op_successful != -1);
     }
 
@@ -119,7 +121,7 @@ namespace Common {
         // 1.2 retrieves the ip address we want this socket to listen on
         const std::string ip = t_ip.empty() ? getIFaceIP(interface) : t_ip;
 
-        logger.log("%:% %() % ip:% interface:% port:% is_udp:% is_blocking:% is_listening:% ttl:& SOtime:% \n", 
+        logger.log("%:% %() % ip:% interface:% port:% is_udp:% is_blocking:% is_listening:% ttl:% SOtime:% \n", 
             __FILE__, __LINE__, __FUNCTION__, 
             Common::getCurrentTimeStr(&time_string),
             ip, interface, port, is_udp, is_blocking, is_listening, ttl, needs_so_timestamp

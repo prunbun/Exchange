@@ -95,7 +95,6 @@ namespace Common {
 
             void poll() noexcept {
                 const int max_events = 1 + sockets.size();
-
                 // check if any sockets need to be removed from the kqueue
                 for (auto socket : disconnected_sockets) {
                     del(socket);
@@ -181,10 +180,10 @@ namespace Common {
                     accepted_socket->socket_file_descriptor = file_descriptor;
                     accepted_socket->receive_callback = receive_callback;
                     ASSERT(kqueue_add(accepted_socket), "unable to add socket. error: " + std::string(std::strerror(errno)));
-                    if (std::find(sockets.begin(), sockets.end(), socket) == sockets.end()) {
+                    if (std::find(sockets.begin(), sockets.end(), accepted_socket) == sockets.end()) {
                         sockets.push_back(accepted_socket);
                     }
-                    if (std::find(receieve_sockets.begin(), receieve_sockets.end(), socket) == receieve_sockets.end()) {
+                    if (std::find(receieve_sockets.begin(), receieve_sockets.end(), accepted_socket) == receieve_sockets.end()) {
                         receieve_sockets.push_back(accepted_socket);
                     }
                 }
