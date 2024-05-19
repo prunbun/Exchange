@@ -46,6 +46,6 @@ Part 2: The Exchange
 ------
 The second phase of the project includes implementing an application that uses our core building blocks, namely an exchange and its associated infrastructure.
 This includes:
-1. Publishing data to all participants
-2. Receiving orders
-3. Matching Engine
+1. Market Data Publisher
+2. Matching Engine + Order Book
+3. Order Gateway
