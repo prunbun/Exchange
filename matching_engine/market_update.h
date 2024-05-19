@@ -66,5 +66,6 @@ namespace Exchange {
 
 #pragma pack(pop)
 
+    // queue for the engine to send status updates of orders to the market
     typedef LFQUEUE<MEMarketUpdate> MEMarketUpdateLFQueue;
 }
