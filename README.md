@@ -24,6 +24,8 @@ This includes:
 | utils/memory_pool.h        | allocates memory for a given template object, T, avoiding dynamic memory allocation during runtime|
 | utils/lock_free_queue.h    | data structure that allows for threads to share data without using locks or mutexes               |
 | utils/logger.h             | Logger class that can be used by the main thread for logging strings and format strings to a file |
+| utils/tcp_socket.h         | Basic networking layer object that helps to simulate 'clients' and 'servers'                      |
+| utils/tcp_server.h         | Server that highlights the 'kqueue' library to manage 'clients'                                   |
 | utils/testing_scripts/     | .cpp files with tests on util components' functionality and examples of how to use them           |
 
 Testing
@@ -37,3 +39,10 @@ Testing
   ./a.out
 ```
 
+Part 2: The Exchange
+------
+The second phase of the project includes implementing an application that uses our core building blocks, namely an exchange and its associated infrastructure.
+This includes:
+1. Publishing data to all participants
+2. Receiving orders
+3. Matching Engine
