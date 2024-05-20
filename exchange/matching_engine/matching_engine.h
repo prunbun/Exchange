@@ -1,15 +1,13 @@
 #pragma once
 
-#include "../utils/thread_utils.h"
-#include "../utils/lock_free_queue.h"
-#include "../utils/macros.h"
-#include "../utils/logger.h"
+#include "../../utils/thread_utils.h"
+#include "../../utils/lock_free_queue.h"
+#include "../../utils/macros.h"
+#include "../../utils/logger.h"
 
-#include "client_request.h"
-#include "client_response.h"
-#include "market_update.h"
-
-// #include "matching_engine_order_book.h"
+#include "../order_gateway/client_request.h"
+#include "../order_gateway/client_response.h"
+#include "../market_publisher/market_update.h"
 
 namespace Exchange {
 
