@@ -106,7 +106,7 @@ namespace Common {
         return (op_successful != -1);
     }
 
-    inline bool join(int fd, const std::string &ip, const std::string &interface, int port) {
+    inline bool join(int fd, const std::string &ip) {
         // subscribes the given fd to a multicast stream on a given interface
         const ip_mreq mreq{{inet_addr(ip.c_str())}, {htonl(INADDR_ANY)}};
         return (setsockopt(fd, IPPROTO_IP, IP_ADD_MEMBERSHIP, &mreq, sizeof(mreq)) != -1);
