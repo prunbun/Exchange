@@ -1,5 +1,4 @@
-#ifndef THREAD_UTILS_H
-#define THREAD_UTILS_H
+#pragma once
 
 #include <iostream>
 #include <cstring>
@@ -115,5 +114,3 @@ namespace Common {
     }
 
 */
-
-#endif

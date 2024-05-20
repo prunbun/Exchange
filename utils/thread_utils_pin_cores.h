@@ -1,9 +1,9 @@
+#pragma once 
+
 /*
     CREDITS TO: yshen@hybridkernel.com, Binding Threads to Cores on OSX
     This code helps to pin threads to specific cores on OSX
 */
-#ifndef THREAD_UTILS_PIN_CORES_H
-#define THREAD_UTILS_PIN_CORES_H
 
 #define SYSCTL_CORE_COUNT   "machdep.cpu.core_count"
 
@@ -27,7 +27,7 @@ CPU_SET(int num, cpu_set_t *cs) { cs->count |= (1 << num); }
 static inline int
 CPU_ISSET(int num, cpu_set_t *cs) { return (cs->count & (1 << num)); }
 
-int pthread_setaffinity_np(
+inline int pthread_setaffinity_np(
     pthread_t thread, 
     size_t cpu_size,
     cpu_set_t *cpu_set
@@ -45,5 +45,3 @@ int pthread_setaffinity_np(
                     (thread_policy_t)&policy, 1);
   return 0;
 }
-
-#endif

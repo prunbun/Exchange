@@ -23,7 +23,7 @@ namespace Common {
     constexpr int MaxTCPServerBacklog = 1024;
 
     // take an interface name as a string and return the associated ip address
-    std::string getIFaceIP(const std::string &interface) {
+    inline std::string getIFaceIP(const std::string &interface) {
         char buf[NI_MAXHOST] = {'\0'}; // NI_MAXHOST is the length of the longest hostname possible
         ifaddrs *ifaddr = nullptr; // this will be a linked list
 
@@ -46,7 +46,7 @@ namespace Common {
         return buf;
     }
 
-    bool setNonBlocking (int fd) {
+    inline bool setNonBlocking (int fd) {
         // here, we don't want the socket to wait until it has data to read, otherwise the application blocks
 
         const auto flags = fcntl(fd, F_GETFL, 0); // get socket file descriptor flags
@@ -66,7 +66,7 @@ namespace Common {
         return (op_successful != -1);
     }
 
-    bool setNoDelay (int fd) {
+    inline bool setNoDelay (int fd) {
         // this method disables something called Nagle's algorithm, that intentionally puts a delay in between packets to avoid dropping them
         // but for low-latency, this slows down the application
         int one = 1;
@@ -76,7 +76,7 @@ namespace Common {
         return (op_successful != -1);
     }
 
-    bool setSOTimestamp (int fd) {
+    inline bool setSOTimestamp (int fd) {
         // this method records the timestamp at which a packet arrives at the socket 
 
         int one = 1;
@@ -84,7 +84,7 @@ namespace Common {
         return (op_successful != -1);
     }
 
-    bool wouldBlock() {
+    inline bool wouldBlock() {
         // checks whether a socket operation would block or not
 
         // errno is a global variable that is set when functions execute/fail for the programmer to know what is going on
@@ -93,7 +93,7 @@ namespace Common {
         return (errno == EWOULDBLOCK || errno == EINPROGRESS);
     }
 
-    bool setMcastTTL(int fd, int ttl) {
+    inline bool setMcastTTL(int fd, int ttl) {
         // TTL represents the number of hops a packet can take from sender to receiver
         // this is generally good practice for security reasons, reducing network congestion, and stopping cycles
         
@@ -101,18 +101,18 @@ namespace Common {
         return (op_successful != -1);
     }
 
-    bool setTTL(int fd, int ttl) {
+    inline bool setTTL(int fd, int ttl) {
         int op_successful = setsockopt(fd, IPPROTO_IP, IP_TTL, reinterpret_cast<void *>(&ttl), sizeof(ttl));
         return (op_successful != -1);
     }
 
-    bool join(int fd, const std::string &ip, const std::string &interface, int port) {
+    inline bool join(int fd, const std::string &ip, const std::string &interface, int port) {
         // subscribes the given fd to a multicast stream on a given interface
         const ip_mreq mreq{{inet_addr(ip.c_str())}, {htonl(INADDR_ANY)}};
         return (setsockopt(fd, IPPROTO_IP, IP_ADD_MEMBERSHIP, &mreq, sizeof(mreq)) != -1);
     }
 
-    int createSocket(Logger &logger, const std::string &t_ip, const std::string &interface, int port, bool is_udp, bool is_blocking, bool is_listening, int ttl, bool needs_so_timestamp) {
+    inline int createSocket(Logger &logger, const std::string &t_ip, const std::string &interface, int port, bool is_udp, bool is_blocking, bool is_listening, int ttl, bool needs_so_timestamp) {
         // PART 1: we have to create the addrinfo struct that is used by the system to create a socket
         
         // 1.1 string that will hold the timestamp of when we create this socket
