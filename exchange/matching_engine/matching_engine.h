@@ -9,6 +9,8 @@
 #include "../order_gateway/client_response.h"
 #include "../market_publisher/market_update.h"
 
+#include "me_order_book.h"
+
 namespace Exchange {
 
     class MatchingEngine final {

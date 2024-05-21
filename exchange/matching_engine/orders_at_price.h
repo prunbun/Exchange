@@ -9,7 +9,6 @@ namespace Exchange {
 
     // this file defines a struct that will hold all the orders at a given side
     // it is a node in a doubly linked to find the previous and next price structs
-
     struct MEOrdersAtPrice {
         Side side = Side::INVALID;
         Price price = Price_INVALID;
