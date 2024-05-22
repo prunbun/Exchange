@@ -68,6 +68,21 @@ namespace Exchange {
         }
     };
 
+    // this is the response format the client will receive from the gateway
+    struct OMClientResponse {
+        size_t seq_number = 0;
+        MEClientResponse me_client_response;
+
+        std::string toString() const {
+            std::stringstream ss;
+
+            ss << "OMClientRequest [seq: " << seq_number 
+            << " " << me_client_response.toString() << "]"; 
+
+            return ss.str();
+        }
+    };
+
 #pragma pack(pop)
 
     // queue for the engine to send status updates of orders to clients

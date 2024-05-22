@@ -58,6 +58,21 @@ namespace Exchange {
         }
     };
 
+    // this is the request format that will be used by clients to send orders to the gateway
+    struct OMClientRequest {
+        size_t seq_number = 0;
+        MEClientRequest me_client_request;
+        
+        std::string toString() const {
+            std::stringstream ss;
+
+            ss << "OMClientRequest [seq: " << seq_number 
+            << " " << me_client_request.toString() << "]"; 
+
+            return ss.str();
+        }
+    };
+
 #pragma pack(pop) // undoing the previous #pragma command, we only want to pack structs that will go on the network
     
     // queue for the engine to process orders and update the order book
