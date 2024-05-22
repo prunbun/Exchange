@@ -68,6 +68,7 @@ namespace Exchange {
     };
 
     // "Market Data Protocol", difference is that it has a seq. number that clients can check for message drops
+    // This is the actual format that goes out to clients
     struct MDPMarketUpdate {
         size_t seq_number = 0;
         MEMarketUpdate me_market_update;
