@@ -300,6 +300,97 @@ namespace Exchange {
                 orders_at_price_pool.deallocate(orders_at_price);
             }
 
+            Qty checkForMatch(ClientId client_id, OrderId client_order_id, TickerId instrument_id, 
+                                Side side, Price price, Qty qty, OrderId unique_market_order_id) noexcept {
+                Qty leaves_qty = qty;
+
+                if (side == Side::BUY) {
+                    // we want to match on all available sell orders
+                    
+                    // keep matching until we have active sell orders and we have some qty left
+                    while (leaves_qty && asks_by_price) {
+                        // best sell price we can get
+                        MEOrder * ask_iterator = asks_by_price->first_me_order;
+                        if (LIKELY(price < ask_iterator->price)) {
+                            // if buyer wants lower than what we can offer, we stop the matching
+                            break;
+                        }
+
+                        // otherwise match as much as you can with the current best offer
+                        match(instrument_id, client_id, side, client_order_id,
+                            unique_market_order_id, ask_iterator, &leaves_qty
+                            );
+                    }
+                }
+
+                if (side == Side::SELL) {
+                    while (leaves_qty && bids_by_price) {
+                        MEOrder * bid_iterator = bids_by_price->first_me_order;
+                        if (LIKELY(price > bid_iterator->price)) {
+                            // if the sell price is higher than any of our buyers, stop the matching
+                            break;
+                        }
+
+                        match(instrument_id, client_id, side, client_order_id,
+                            unique_market_order_id, bid_iterator, &leaves_qty
+                            );
+                    }
+                }
+
+                return leaves_qty;  
+            }
+
+            void match(TickerId instrument_id, ClientId client_id, Side side, OrderId client_order_id,
+                        OrderId unique_market_order_id, MEOrder * iterator, Qty *leaves_qty) noexcept {
+                MEOrder * order = iterator;
+                Qty order_qty = order->qty;
+
+                // PART 1: lets execute the trade for as many qty as possible
+                Qty fill_qty = std::min(*leaves_qty, order_qty);
+                *leaves_qty -= fill_qty;
+                order->qty -= fill_qty;
+
+                // now we can notify both the aggressive and passive order owners that a trade occurred
+                // note that we execute at the price of the passive trade in the order book
+
+                // aggressive order owner message
+                client_response = {ClientResponseType::FILLED, client_id, instrument_id, client_order_id,
+                                    unique_market_order_id, side, iterator->price, fill_qty, *leaves_qty
+                                    };
+                matching_engine->sendClientResponse(&client_response);
+
+                // passive order owner message
+                client_response = {ClientResponseType::FILLED, order->client_id, instrument_id,
+                                    order->client_order_id, order->market_order_id, order->side,
+                                    iterator->price, fill_qty, order_qty
+                                    };
+                matching_engine->sendClientResponse(&client_response);
+
+                // market update of the trade, making sure client id's are not revealed
+                market_update = {MarketUpdateType::TRADE, OrderId_INVALID, instrument_id, side,
+                                iterator->price, fill_qty, Priority_INVALID
+                                };
+                matching_engine->sendMarketUpdate(&market_update);
+
+                // PART 2: Let's notify the market/participants about changes to the order book
+                if (!order->qty) {
+                    // if we completely filled the passive order, we can remove it from our order book
+                    market_update = {MarketUpdateType::CANCEL, order->market_order_id, instrument_id,
+                                    order->side, order->price, order->qty, Priority_INVALID
+                                    };
+                    matching_engine->sendMarketUpdate(&market_update);
+                    removeOrder(order);
+                } else {
+                    // we just tell the market about the modified amount
+                    market_update = {MarketUpdateType::MODIFY, order->market_order_id, instrument_id,
+                                    order->side, order->price, order->qty, order->priority
+                                    };
+                    matching_engine->sendMarketUpdate(&market_update);
+                }
+                
+
+            }
+
             std::string toString(bool, bool) const {
                 return "";
             }
