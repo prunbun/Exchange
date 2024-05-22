@@ -4,7 +4,7 @@ project(Pranav's_Exchange)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_COMPILER clang++)
-set(CMAKE_CXX_FLAGS "-std=c++20 -Wall -Wextra -Werror -Wpedantic")
+set(CMAKE_CXX_FLAGS "-std=c++20 -Wall -Wextra -Werror -Wpedantic -Wno-unused-variable")
 set(CMAKE_VERBOSE_MAKEFILE on)
 
 add_subdirectory(utils)

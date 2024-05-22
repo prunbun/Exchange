@@ -21,7 +21,7 @@ namespace Exchange {
         MEOrdersAtPrice() = default;
 
         MEOrdersAtPrice(Side side_param, Price price_param, MEOrder *first_me_order_param, MEOrdersAtPrice *prev_entry_param, MEOrdersAtPrice *next_entry_param)
-                        : side(side_param), price(price_param), first_me_order(first_me_order), prev_entry(prev_entry_param), next_entry(next_entry_param) {}
+                        : side(side_param), price(price_param), first_me_order(first_me_order_param), prev_entry(prev_entry_param), next_entry(next_entry_param) {}
 
         std::string to_string() const {
             std::stringstream ss;

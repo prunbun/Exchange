@@ -41,7 +41,7 @@ rule CUSTOM_COMMAND
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__libcommon_unscanned_Release
+rule CXX_COMPILER__libutils_unscanned_Release
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}clang++ $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -51,7 +51,7 @@ rule CXX_COMPILER__libcommon_unscanned_Release
 #############################################
 # Rule for linking CXX static library.
 
-rule CXX_STATIC_LIBRARY_LINKER__libcommon_Release
+rule CXX_STATIC_LIBRARY_LINKER__libutils_Release
   command = $PRE_LINK && /opt/homebrew/Cellar/cmake/3.29.3/bin/cmake -E rm -f $TARGET_FILE && /Library/Developer/CommandLineTools/usr/bin/ar qc $TARGET_FILE $LINK_FLAGS $in && /Library/Developer/CommandLineTools/usr/bin/ranlib $TARGET_FILE && /opt/homebrew/Cellar/cmake/3.29.3/bin/cmake -E touch $TARGET_FILE && $POST_BUILD
   description = Linking CXX static library $TARGET_FILE
   restat = $RESTAT

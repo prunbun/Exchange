@@ -60,33 +60,7 @@ namespace Exchange {
             }
 
             // find out which ticker it is for and forward the request to that order book
-            void processClientRequest(const MEClientRequest * client_request) noexcept {
-                MEOrderBook * order_book = ticker_order_book[client_request->ticker_id];
-
-                // depending on what type of request it is, we call a different order book function
-                switch (client_request->type) {
-                    case ClientRequestType::NEW: {
-                        order_book->add(client_request->client_id,
-                                        client_request->order_id,
-                                        client_request->ticker_id,
-                                        client_request->side, client_request->price,
-                                        client_request->qty
-                                        );
-                    }
-                        break;
-
-                    case ClientRequestType::CANCEL: {
-                        // notice how we don't provide more params than necessary to the func
-                        order_book->cancel(client_request->client_id, client_request->order_id, client_request->ticker_id);
-                    }
-                        break;
-
-                    default: {
-                        FATAL("Received invalid client-request-type: " + clientRequestTypeToString(client_request->type));
-                    }
-                        break;
-                }
-            }
+            void processClientRequest(const MEClientRequest * client_request) noexcept;
 
             // once the order book is done producing a response, the engine sends the response to the gateway
             void sendClientResponse(const MEClientResponse * client_response) noexcept {

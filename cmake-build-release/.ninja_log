@@ -1,7 +1,17 @@
 # ninja log v6
-2	10	1716242363998063221	clean	1f0117926fe85a19
-5	1073	1716242364021351067	utils/CMakeFiles/libcommon.dir/tcp_socket.cpp.o	f5ae788b880eae70
-4	1107	1716242364020873031	utils/CMakeFiles/libcommon.dir/tcp_server.cpp.o	77ca7720d02bdf46
-2	9	1716266187870342224	clean	1f0117926fe85a19
-9	1239	1716266187895653259	utils/CMakeFiles/libcommon.dir/tcp_socket.cpp.o	f5ae788b880eae70
-9	1267	1716266187895361509	utils/CMakeFiles/libcommon.dir/tcp_server.cpp.o	77ca7720d02bdf46
+842	873	1716350349144666848	exchange/liblibexchange.a	d6a8f59a06de3e8f
+4	842	1716350348307247265	exchange/CMakeFiles/libexchange.dir/matching_engine/me_order_book.cpp.o	c005c5519de794fb
+5	889	1716350348307768516	CMakeFiles/exchange_main.dir/exchange/exchange_main.cpp.o	1f00ed0cd8335fbc
+5	939	1716350348308198683	utils/CMakeFiles/libcommon.dir/tcp_server.cpp.o	bee73a72bf940aa0
+4	771	1716350348306687098	exchange/CMakeFiles/libexchange.dir/matching_engine/matching_engine.cpp.o	319b64664e608dd5
+1	10	1716350348285237235	clean	1f0117926fe85a19
+771	1560	1716350349073775707	utils/CMakeFiles/libcommon.dir/tcp_socket.cpp.o	88ab0a31542d5f3
+3	11	1716350592321139942	clean	1f0117926fe85a19
+4	778	1716350592342882972	exchange/CMakeFiles/libexchange.dir/matching_engine/matching_engine.cpp.o	319b64664e608dd5
+4	844	1716350592343233181	exchange/CMakeFiles/libexchange.dir/matching_engine/me_order_book.cpp.o	c005c5519de794fb
+3	864	1716350592342591680	utils/CMakeFiles/libutils.dir/tcp_socket.cpp.o	251d3c856ff336bd
+844	878	1716350593183139350	exchange/liblibexchange.a	d6a8f59a06de3e8f
+3	936	1716350592342114013	utils/CMakeFiles/libutils.dir/tcp_server.cpp.o	9ae87b8455d5cfa9
+936	967	1716350593275146353	utils/liblibutils.a	880eac6dcc692d89
+778	1602	1716350593117553467	CMakeFiles/exchange_main.dir/exchange/exchange_main.cpp.o	1f00ed0cd8335fbc
+1602	1708	1716350593940921113	exchange_main	f52b1acd47be6471

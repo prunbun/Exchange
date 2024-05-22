@@ -47,11 +47,11 @@ cmake_ninja_workdir = /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$
 #############################################
 # Order-only phony target for exchange_main
 
-build cmake_object_order_depends_target_exchange_main: phony || cmake_object_order_depends_target_libexchange
+build cmake_object_order_depends_target_exchange_main: phony || cmake_object_order_depends_target_libexchange cmake_object_order_depends_target_libutils
 
 build CMakeFiles/exchange_main.dir/exchange/exchange_main.cpp.o: CXX_COMPILER__exchange_main_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/exchange/exchange_main.cpp || cmake_object_order_depends_target_exchange_main
   DEP_FILE = CMakeFiles/exchange_main.dir/exchange/exchange_main.cpp.o.d
-  FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -O3 -DNDEBUG -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
+  FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -Wno-unused-variable -O3 -DNDEBUG -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/exchange"
   OBJECT_DIR = CMakeFiles/exchange_main.dir
   OBJECT_FILE_DIR = CMakeFiles/exchange_main.dir/exchange
@@ -64,9 +64,9 @@ build CMakeFiles/exchange_main.dir/exchange/exchange_main.cpp.o: CXX_COMPILER__e
 #############################################
 # Link the executable exchange_main
 
-build exchange_main: CXX_EXECUTABLE_LINKER__exchange_main_Release CMakeFiles/exchange_main.dir/exchange/exchange_main.cpp.o | exchange/liblibexchange.a || exchange/liblibexchange.a
-  FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -O3 -DNDEBUG -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
-  LINK_LIBRARIES = -llibutils  exchange/liblibexchange.a  -lpthread
+build exchange_main: CXX_EXECUTABLE_LINKER__exchange_main_Release CMakeFiles/exchange_main.dir/exchange/exchange_main.cpp.o | utils/liblibutils.a exchange/liblibexchange.a || exchange/liblibexchange.a utils/liblibutils.a
+  FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -Wno-unused-variable -O3 -DNDEBUG -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
+  LINK_LIBRARIES = utils/liblibutils.a  exchange/liblibexchange.a  -lpthread
   OBJECT_DIR = CMakeFiles/exchange_main.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -103,44 +103,44 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 
 # =============================================================================
-# Object build statements for STATIC_LIBRARY target libcommon
+# Object build statements for STATIC_LIBRARY target libutils
 
 
 #############################################
-# Order-only phony target for libcommon
+# Order-only phony target for libutils
 
-build cmake_object_order_depends_target_libcommon: phony || .
+build cmake_object_order_depends_target_libutils: phony || .
 
-build utils/CMakeFiles/libcommon.dir/tcp_server.cpp.o: CXX_COMPILER__libcommon_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/utils/tcp_server.cpp || cmake_object_order_depends_target_libcommon
-  DEP_FILE = utils/CMakeFiles/libcommon.dir/tcp_server.cpp.o.d
-  FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -O3 -DNDEBUG -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
+build utils/CMakeFiles/libutils.dir/tcp_server.cpp.o: CXX_COMPILER__libutils_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/utils/tcp_server.cpp || cmake_object_order_depends_target_libutils
+  DEP_FILE = utils/CMakeFiles/libutils.dir/tcp_server.cpp.o.d
+  FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -Wno-unused-variable -O3 -DNDEBUG -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange"
-  OBJECT_DIR = utils/CMakeFiles/libcommon.dir
-  OBJECT_FILE_DIR = utils/CMakeFiles/libcommon.dir
+  OBJECT_DIR = utils/CMakeFiles/libutils.dir
+  OBJECT_FILE_DIR = utils/CMakeFiles/libutils.dir
 
-build utils/CMakeFiles/libcommon.dir/tcp_socket.cpp.o: CXX_COMPILER__libcommon_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/utils/tcp_socket.cpp || cmake_object_order_depends_target_libcommon
-  DEP_FILE = utils/CMakeFiles/libcommon.dir/tcp_socket.cpp.o.d
-  FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -O3 -DNDEBUG -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
+build utils/CMakeFiles/libutils.dir/tcp_socket.cpp.o: CXX_COMPILER__libutils_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/utils/tcp_socket.cpp || cmake_object_order_depends_target_libutils
+  DEP_FILE = utils/CMakeFiles/libutils.dir/tcp_socket.cpp.o.d
+  FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -Wno-unused-variable -O3 -DNDEBUG -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange"
-  OBJECT_DIR = utils/CMakeFiles/libcommon.dir
-  OBJECT_FILE_DIR = utils/CMakeFiles/libcommon.dir
+  OBJECT_DIR = utils/CMakeFiles/libutils.dir
+  OBJECT_FILE_DIR = utils/CMakeFiles/libutils.dir
 
 
 # =============================================================================
-# Link build statements for STATIC_LIBRARY target libcommon
+# Link build statements for STATIC_LIBRARY target libutils
 
 
 #############################################
-# Link the static library utils/liblibcommon.a
+# Link the static library utils/liblibutils.a
 
-build utils/liblibcommon.a: CXX_STATIC_LIBRARY_LINKER__libcommon_Release utils/CMakeFiles/libcommon.dir/tcp_server.cpp.o utils/CMakeFiles/libcommon.dir/tcp_socket.cpp.o
+build utils/liblibutils.a: CXX_STATIC_LIBRARY_LINKER__libutils_Release utils/CMakeFiles/libutils.dir/tcp_server.cpp.o utils/CMakeFiles/libutils.dir/tcp_socket.cpp.o
   ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
-  LANGUAGE_COMPILE_FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -O3 -DNDEBUG
-  OBJECT_DIR = utils/CMakeFiles/libcommon.dir
+  LANGUAGE_COMPILE_FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -Wno-unused-variable -O3 -DNDEBUG
+  OBJECT_DIR = utils/CMakeFiles/libutils.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = utils/liblibcommon.a
-  TARGET_PDB = libcommon.a.dbg
+  TARGET_FILE = utils/liblibutils.a
+  TARGET_PDB = libutils.a.dbg
 
 
 #############################################
@@ -182,7 +182,14 @@ build cmake_object_order_depends_target_libexchange: phony || .
 
 build exchange/CMakeFiles/libexchange.dir/matching_engine/matching_engine.cpp.o: CXX_COMPILER__libexchange_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/exchange/matching_engine/matching_engine.cpp || cmake_object_order_depends_target_libexchange
   DEP_FILE = exchange/CMakeFiles/libexchange.dir/matching_engine/matching_engine.cpp.o.d
-  FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -O3 -DNDEBUG -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
+  FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -Wno-unused-variable -O3 -DNDEBUG -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
+  INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/exchange"
+  OBJECT_DIR = exchange/CMakeFiles/libexchange.dir
+  OBJECT_FILE_DIR = exchange/CMakeFiles/libexchange.dir/matching_engine
+
+build exchange/CMakeFiles/libexchange.dir/matching_engine/me_order_book.cpp.o: CXX_COMPILER__libexchange_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/exchange/matching_engine/me_order_book.cpp || cmake_object_order_depends_target_libexchange
+  DEP_FILE = exchange/CMakeFiles/libexchange.dir/matching_engine/me_order_book.cpp.o.d
+  FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -Wno-unused-variable -O3 -DNDEBUG -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/exchange"
   OBJECT_DIR = exchange/CMakeFiles/libexchange.dir
   OBJECT_FILE_DIR = exchange/CMakeFiles/libexchange.dir/matching_engine
@@ -195,9 +202,9 @@ build exchange/CMakeFiles/libexchange.dir/matching_engine/matching_engine.cpp.o:
 #############################################
 # Link the static library exchange/liblibexchange.a
 
-build exchange/liblibexchange.a: CXX_STATIC_LIBRARY_LINKER__libexchange_Release exchange/CMakeFiles/libexchange.dir/matching_engine/matching_engine.cpp.o
+build exchange/liblibexchange.a: CXX_STATIC_LIBRARY_LINKER__libexchange_Release exchange/CMakeFiles/libexchange.dir/matching_engine/matching_engine.cpp.o exchange/CMakeFiles/libexchange.dir/matching_engine/me_order_book.cpp.o
   ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
-  LANGUAGE_COMPILE_FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -O3 -DNDEBUG
+  LANGUAGE_COMPILE_FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -Wno-unused-variable -O3 -DNDEBUG
   OBJECT_DIR = exchange/CMakeFiles/libexchange.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -231,13 +238,13 @@ build exchange/rebuild_cache: phony exchange/CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build libcommon: phony utils/liblibcommon.a
-
 build libexchange: phony exchange/liblibexchange.a
 
-build liblibcommon.a: phony utils/liblibcommon.a
-
 build liblibexchange.a: phony exchange/liblibexchange.a
+
+build liblibutils.a: phony utils/liblibutils.a
+
+build libutils: phony utils/liblibutils.a
 
 # =============================================================================
 # Folder targets.
@@ -261,7 +268,7 @@ build exchange/all: phony exchange/liblibexchange.a
 #############################################
 # Folder: /Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/cmake-build-release/utils
 
-build utils/all: phony utils/liblibcommon.a
+build utils/all: phony utils/liblibutils.a
 
 # =============================================================================
 # Unknown Build Time Dependencies.
