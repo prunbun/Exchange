@@ -9,7 +9,7 @@
 #include "client_request.h"
 #include "client_response.h"
 #include "utils/exchange_limits.h"
-// #include "fifo_sequencer.h"
+#include "fifo_sequencer.h"
 
 namespace Exchange {
 
@@ -145,6 +145,40 @@ namespace Exchange {
             void stop() {
                 running = false;
             };
+
+            // runs the server that drives the order gateway
+            void run() noexcept {
+                logger.log("%:% %() % Order server running... \n",
+                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string)
+                );
+
+                while(running) {
+                    // run the server
+                    tcp_server.poll();
+                    tcp_server.sendAndReceive();
+
+                    // also want to send out the client responses to placed orders
+                    for (auto client_response = outgoing_responses->getNextRead(); outgoing_responses->size() && client_response; 
+                        client_response = outgoing_responses->getNextRead()) {
+
+                        auto &next_outgoing_seq_number = cid_next_outgoing_seq_number[client_response->client_id];
+                        logger.log("%:% %() % Processing cid:% seq:% % \n",
+                            __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string),
+                            client_response->client_id, next_outgoing_seq_number, client_response->toString()
+                        );
+
+                        // note that we effectively send OMClientResponse by stacking the sends
+                        ASSERT(cid_tcp_socket[client_response->client_id] != nullptr,
+                         "Don't have a TCPSocket for ClientId:" + std::to_string(client_response->client_id));
+                        cid_tcp_socket[client_response->client_id]->send(&next_outgoing_seq_number, sizeof(next_outgoing_seq_number));
+                        cid_tcp_socket[client_response->client_id]->send(client_response, sizeof(MEClientResponse));
+                        
+                        outgoing_responses->updateReadIndex();
+
+                        ++next_outgoing_seq_number;
+                    }
+                }
+            }
 
     };
 
