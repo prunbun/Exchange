@@ -111,6 +111,13 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 build cmake_object_order_depends_target_libutils: phony || .
 
+build utils/CMakeFiles/libutils.dir/multicast_socket.cpp.o: CXX_COMPILER__libutils_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/utils/multicast_socket.cpp || cmake_object_order_depends_target_libutils
+  DEP_FILE = utils/CMakeFiles/libutils.dir/multicast_socket.cpp.o.d
+  FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -Wno-unused-variable -O3 -DNDEBUG -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
+  INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange"
+  OBJECT_DIR = utils/CMakeFiles/libutils.dir
+  OBJECT_FILE_DIR = utils/CMakeFiles/libutils.dir
+
 build utils/CMakeFiles/libutils.dir/tcp_server.cpp.o: CXX_COMPILER__libutils_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/utils/tcp_server.cpp || cmake_object_order_depends_target_libutils
   DEP_FILE = utils/CMakeFiles/libutils.dir/tcp_server.cpp.o.d
   FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -Wno-unused-variable -O3 -DNDEBUG -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
@@ -133,7 +140,7 @@ build utils/CMakeFiles/libutils.dir/tcp_socket.cpp.o: CXX_COMPILER__libutils_uns
 #############################################
 # Link the static library utils/liblibutils.a
 
-build utils/liblibutils.a: CXX_STATIC_LIBRARY_LINKER__libutils_Release utils/CMakeFiles/libutils.dir/tcp_server.cpp.o utils/CMakeFiles/libutils.dir/tcp_socket.cpp.o
+build utils/liblibutils.a: CXX_STATIC_LIBRARY_LINKER__libutils_Release utils/CMakeFiles/libutils.dir/multicast_socket.cpp.o utils/CMakeFiles/libutils.dir/tcp_server.cpp.o utils/CMakeFiles/libutils.dir/tcp_socket.cpp.o
   ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   LANGUAGE_COMPILE_FLAGS = -std=c++20 -Wall -Wextra -Werror -Wpedantic -Wno-unused-variable -O3 -DNDEBUG
   OBJECT_DIR = utils/CMakeFiles/libutils.dir
