@@ -105,3 +105,26 @@ Part 4: The Market Publisher
 --------
 The final major component of the exchange is called the Market Publisher. It is responsible for providing updates to the order book to all market partipants via UDP. It has two threads, one sends out only deltas in the order book while the other periodically sends out a full snapshot of the order book.
 
+### Highlighted Files
+
+| File                                       | Description                                                                                                                            |
+|--------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| market_publisher/market_data_publisher.h   | As it receives updates from the matching engine, the thead sends them out using the .sendAndRecv() method defined for the UDP socket   |
+| market_publisher/snapshot_synthesizer.h    | Accumulates a collection of orders that represent a lightweight, local copy of the order book, and periodically sends out the snapshot |
+<br />
+
+-------
+
+Tooling and Running the Exchange
+--------
+This project can be run using the exchange_main.cpp file that spins up all three components and keeps the exchange alive until it is killed through the command line.
+
+I used CMake and Ninja to make the build/run process easier. Use the following commands run the application. Once the process has been terminated, results can be seen in corresponding `.log` files!
+
+From the Exchange/ directory:
+```
+  ./build.sh
+```
+```
+  ./cmake-build-release/exchange_main
+```
