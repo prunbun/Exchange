@@ -1,14 +1,23 @@
-# Exchange
+# An Exchange in Modern C++
+
+## Contents
+- [Introduction](./README.md#introduction)
+- [Part 1: Core Building Blocks](./README.md#core-building-blocks)
+- [Part 2: The Matching Engine](./README.md#the-matching-engine)
+- [Part 3: The Order Gateway](./README.md#the-order-gateway)
+- [Part 4: The Market Publisher](./README.md#the-market-publisher)
+- [Tooling and Running the Exchange](./README.md#tooling-and-running-the-exchange)
+
+## Introduction
+
 In this project, I build an end-to-end financial trading exchange in Modern C++ that includes low-latency building blocks and infrastructure to support a matching engine!! It also includes testing scripts and simple, comprehensive commentary to explain the power of C++. <br />
 
 CMake and Ninja are used as build tools for this project. Code is written to be compiled on a MacOS machine.
 
 Credits to Sourav Ghosh for his resources on learning low-latency C++. He has great books and I would encourage anyone who is interested to pick them up.
 
------
+## Core Building Blocks
 
-Part 1: Core Building Blocks
-------
 The first phase of the project includes implementing the core building blocks of low latency applications.
 This includes:
 1. Threads
@@ -42,10 +51,8 @@ Unit Testing
 ```
 <br />
 
------
+## The Matching Engine
 
-Part 2: The Matching Engine
-------
 The first major component of the exchange is called the Matching Engine. It is responsible for maintaining an internal 'order book' for passive orders and matching incoming aggresive orders.
 It is also responsible for communicating with other parts of the exchange for retrieving new orders from clients and sending out updates to its order book.
 
@@ -75,10 +82,8 @@ The data structure design of the Matching Engine is as follows:
 | matching_engine/matching_engine_order.h    | object that represent an order and associated data, has a helpful toString() method                                 |
 <br />
 
--------
+## The Order Gateway
 
-Part 3: The Order Gateway
------
 The second major component of the exchange is called the Order Gateway. It is responsible for accepting connections from market participants, receiving their orders, and providing them with updates on their orders' status.
 
 There are a few important functions that this part performs
@@ -99,10 +104,8 @@ There are a few important functions that this part performs
 | order_gateway/fifo_sequencer.h             | sorts and sends orders to the matching engine after receiving them from the gateway                                 |
 <br />
 
--------
+## The Market Publisher
 
-Part 4: The Market Publisher
---------
 The final major component of the exchange is called the Market Publisher. It is responsible for providing updates to the order book to all market partipants via UDP. It has two threads, one sends out only deltas in the order book while the other periodically sends out a full snapshot of the order book.
 
 ### Highlighted Files
@@ -113,10 +116,8 @@ The final major component of the exchange is called the Market Publisher. It is 
 | market_publisher/snapshot_synthesizer.h    | Accumulates a collection of orders that represent a lightweight, local copy of the order book, and periodically sends out the snapshot |
 <br />
 
--------
+## Tooling and Running the Exchange
 
-Tooling and Running the Exchange
---------
 This project can be run using the exchange_main.cpp file that spins up all three components and keeps the exchange alive until it is killed through the command line.
 
 I used CMake and Ninja to make the build/run process easier. Use the following commands run the application. Once the process has been terminated, results can be seen in corresponding `.log` files!
