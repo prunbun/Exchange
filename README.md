@@ -1,6 +1,8 @@
 # Exchange
 In this project, I build an end-to-end financial trading exchange in Modern C++ that includes low-latency building blocks and infrastructure to support a matching engine!! It also includes testing scripts and simple, comprehensive commentary to explain the power of C++. <br />
 
+CMake and Ninja are used as build tools for this project. Code is written to be compiled on a MacOS machine.
+
 Credits to Sourav Ghosh for his resources on learning low-latency C++. He has great books and I would encourage anyone who is interested to pick them up.
 
 -----
@@ -15,9 +17,9 @@ This includes:
 4. Logging Framework
 5. TCP Socket
 
-### Associated Files
+### Highlighted Files
 
-| File                       | Component                                                                                         |
+| File                       | Description                                                                                       |
 |----------------------------|---------------------------------------------------------------------------------------------------|
 | utils/macros.h             | ASSERT() and branch prediction definitions                                                        |
 | utils/thread_utils.h       | creating and starting threads, including pinning threads to specific cores                        |
@@ -28,7 +30,7 @@ This includes:
 | utils/tcp_server.h         | Server that highlights the 'kqueue' library to manage 'clients'                                   |
 | utils/testing_scripts/     | .cpp files with tests on util components' functionality and examples of how to use them           |
 
-Testing
+Unit Testing
 -------
 * Note that you can run the ``*.cpp`` tests in the ``../testing_scripts`` folder through the following commands:
 
@@ -64,13 +66,42 @@ The data structure design of the Matching Engine is as follows:
       - b) arrays usually have more contiguous memory, helping performance
       - c) I can exploit the natural ordering of the indices and avoid overhead that true maps contain. There are weaknesses to this approach that it is possible the arrays are sparse and cannot be resized, but the exchange has set limits on what range client and order id's can take, meaning that as the exchange includes more participants, there is less 'wasted' memory.
 
-### Associated Files
+### Highlighted Files
 
-| File                                       | Component                                                                                                           |
+| File                                       | Description                                                                                                         |
 |--------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
 | matching_engine/matching_engine.h          | API that other exchange components can call to start the engine and send updates to the order book                  |
 | matching_engine/me_order_book.h            | core order book object, each security has a corresponding book, to which the Matching Engine forwards updates to    |
 | matching_engine/matching_engine_order.h    | object that represent an order and associated data, has a helpful toString() method                                 |
+<br />
 
+-------
 
+Part 3: The Order Gateway
+-----
+The second major component of the exchange is called the Order Gateway. It is responsible for accepting connections from market participants, receiving their orders, and providing them with updates on their orders' status.
+
+There are a few important functions that this part performs
+1. Protocol for Communication
+    - One that is internal with the Matching Engine and another that is public with market participants that includes sequence id's for ensuring proper communication
+    - Importantly, even though the Order Server operates using TCP, it includes sequence numbers for maintaining the correctness of the application layer
+3. FIFO Sequencing 
+    - Sorts using the time at which the server's socket receives orders from participants to ensure fairness
+4. Privacy
+    - The Order Server communicates with participants directly, ensuring that only they can receive sensitive data regarding the order
+    - Using UDP would be a privacy violation
+
+### Highlighted Files
+
+| File                                       | Description                                                                                                         |
+|--------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| order_gateway/order_server.h               | main file, includes definitions of callbacks regarding what the sockets and server should do upon receiving an order|
+| order_gateway/fifo_sequencer.h             | sorts and sends orders to the matching engine after receiving them from the gateway                                 |
+<br />
+
+-------
+
+Part 4: The Market Publisher
+--------
+The final major component of the exchange is called the Market Publisher. It is responsible for providing updates to the order book to all market partipants via UDP. It has two threads, one sends out only deltas in the order book while the other periodically sends out a full snapshot of the order book.
 
