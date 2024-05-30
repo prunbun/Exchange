@@ -40,7 +40,7 @@ namespace Exchange {
                 if (pending_size >= pending_client_requests.size()) {
                     FATAL("Too many pending requests");
                 }
-                pending_client_requests.at(pending_size++) = std::move(RecvTimeClientRequest{rx_time, request});
+                pending_client_requests.at(pending_size++) = RecvTimeClientRequest{rx_time, request};
             }
 
             // sorts the entries and writes them to the lfq
