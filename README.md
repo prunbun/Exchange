@@ -1,7 +1,9 @@
 # Exchange
-In this project, I build an end-to-end financial trading exchange that includes an order-book and a client, along with surrounding infrastructure!
+In this project, I build an end-to-end financial trading exchange that includes an order-book and a client, along with surrounding infrastructure! It also includes testing scripts and simple, comprehensive commentary to explain the power of C++.
 
 Importantly, this code is fully written in Modern C++ and is designed to be low-latency. <br />
+
+Credits to Sourav Ghosh for his resources on learning low-latency C++. He has great books and I would encourage anyone who is interested to pick them up.
 
 -----
 
@@ -42,10 +44,14 @@ Testing
 
 -----
 
-Part 2: The Exchange
+Part 2: The Matching Engine
 ------
-The second phase of the project includes implementing an application that uses our core building blocks, namely an exchange and its associated infrastructure.
-This includes:
-1. Market Data Publisher
-2. Matching Engine + Order Book
-3. Order Gateway
+The first major component of the exchange is called the Matching Engine. It is responsible for maintaining an internal 'order book' for passive orders and matching incoming aggresive orders.
+It is also responsible for communicating with other parts of the exchange for retrieving new orders from clients and sending out updates to its order book.
+
+The data structure design of the Matching Engine is as follows:
+1. Order Book:
+   - Represented as two linked lists of prices.
+
+
+
