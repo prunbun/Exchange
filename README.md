@@ -120,7 +120,7 @@ The final major component of the exchange is called the Market Publisher. It is 
 
 This project can be run using the exchange_main.cpp file that spins up all three components and keeps the exchange alive until it is killed through the command line.
 
-I used CMake and Ninja to make the build/run process easier. Use the following commands run the application. Once the process has been terminated, results can be seen in corresponding `.log` files!
+I used CMake and Ninja to make the build/run process easier. Use the following commands to run the application. Once the process has been terminated, results can be seen in corresponding `.log` files!
 
 From the Exchange/ directory:
 ```
