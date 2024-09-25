@@ -87,13 +87,13 @@ namespace Common {
         return (n_rcv > 0);
     }
 
-        // Writes provided data to send buffer
-        void TCPSocket::send(const void *data, size_t length) noexcept {
-            if (length > 0) {
-                memcpy(send_buffer + next_send_valid_index, data, length);
-                next_send_valid_index += length;
-            }
-
-            return;
+    // Writes provided data to send buffer
+    void TCPSocket::send(const void *data, size_t length) noexcept {
+        if (length > 0) {
+            memcpy(send_buffer + next_send_valid_index, data, length);
+            next_send_valid_index += length;
         }
+
+        return;
+    }
 }
