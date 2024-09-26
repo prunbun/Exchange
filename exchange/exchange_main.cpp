@@ -85,7 +85,7 @@ int main() {
     order_server->start();
 
     // ---------
-    // making this code run until it is explicetely killed by the user
+    // making this code run until it is explicitly killed by the user
     while (true) {
         logger->log("%:% %() % Keeping exchange alive... \n",
             __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string)

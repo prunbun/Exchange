@@ -77,7 +77,7 @@ namespace Common {
                 while (queue.size()) {
                     using namespace std::chrono_literals;
                     std::cout << queue.size() << std::endl;
-                    std::this_thread::sleep_for(10ms); // note the longer duration than the logger cooldown of 1ms
+                    std::this_thread::sleep_for(100ms); // note the longer duration than the logger cooldown of 1ms
                 }
 
                 // Next, we should stop the logger's runtime to allow flushQueue to exit

@@ -1,49 +1,51 @@
 creating TCPServer on interface:lo port:12345 
-../socket_utils.h:125 createSocket() Mon May 20 17:18:30 2024 ip: interface:lo port:12345 is_udp:0 is_blocking:0 is_listening:1 ttl:0 SOtime:1 
+../socket_utils.h:125 createSocket() Wed Sep 25 18:01:49 2024 ip: interface:lo port:12345 is_udp:0 is_blocking:0 is_listening:1 ttl:0 SOtime:1 
 Connecting TCPClient - [0] on ip:127.0.0.1 interface:lo port:12345 
-../socket_utils.h:125 createSocket() Mon May 20 17:18:30 2024 ip:127.0.0.1 interface:lo port:12345 is_udp:0 is_blocking:0 is_listening:0 ttl:0 SOtime:1 
-../tcp_server.cpp:43 poll() Mon May 20 17:18:30 2024 EVFILT_READ listener_socket:5 
-../tcp_server.cpp:89 poll() Mon May 20 17:18:30 2024 new connection! 
-../tcp_server.cpp:103 poll() Mon May 20 17:18:30 2024 accepted socket:7 
-../tcp_server.cpp:89 poll() Mon May 20 17:18:30 2024 new connection! 
+../socket_utils.h:125 createSocket() Wed Sep 25 18:01:49 2024 ip:127.0.0.1 interface:lo port:12345 is_udp:0 is_blocking:0 is_listening:0 ttl:0 SOtime:1 
+../tcp_server.cpp:43 poll() Wed Sep 25 18:01:49 2024 EVFILT_READ listener_socket:5 
+../tcp_server.cpp:89 poll() Wed Sep 25 18:01:49 2024 new connection! 
+../tcp_server.cpp:103 poll() Wed Sep 25 18:01:49 2024 accepted socket:7 
+../tcp_server.cpp:89 poll() Wed Sep 25 18:01:49 2024 new connection! 
 Sending TCPClient-[0] Client-[0] : Sending 0 
-../tcp_socket.cpp:78 sendAndReceive() Mon May 20 17:18:30 2024 send socket:6 len:22 
-../tcp_server.cpp:51 poll() Mon May 20 17:18:30 2024 EVFILT_READ listener_socket:7 
-../tcp_socket.cpp: 55 sendAndReceive() Mon May 20 17:18:30 2024 read socket: 7 len:22 utime:1716239910633675000 ktime:0 diff:1716239910633675000 
+../tcp_socket.cpp:78 sendAndReceive() Wed Sep 25 18:01:49 2024 send socket:6 len:22 
+../tcp_server.cpp:51 poll() Wed Sep 25 18:01:50 2024 EVFILT_READ listener_socket:7 
+../tcp_socket.cpp: 55 sendAndReceive() Wed Sep 25 18:01:50 2024 read socket: 7 len:22 utime:1727305310472967000 ktime:0 diff:1727305310472967000 
 TCPServer::tcpServerRecvCallback() socket:7 len:22 rx:0 
-../tcp_socket.cpp:78 sendAndReceive() Mon May 20 17:18:30 2024 send socket:7 len:46 
+../tcp_socket.cpp:78 sendAndReceive() Wed Sep 25 18:01:50 2024 send socket:7 len:46 
 TCPServer::tcpServerRecvFinishedCallback() 
 Sending TCPClient-[0] Client-[0] : Sending 100 
-../tcp_socket.cpp:78 sendAndReceive() Mon May 20 17:18:30 2024 send socket:6 len:24 
-../tcp_server.cpp:51 poll() Mon May 20 17:18:31 2024 EVFILT_READ listener_socket:7 
-../tcp_socket.cpp: 55 sendAndReceive() Mon May 20 17:18:31 2024 read socket: 7 len:24 utime:1716239911136791000 ktime:0 diff:1716239911136791000 
+../tcp_socket.cpp: 55 sendAndReceive() Wed Sep 25 18:01:50 2024 read socket: 6 len:46 utime:1727305310473385000 ktime:0 diff:1727305310473385000 
+TCPServer::tcpClientRecvCallback() socket:6 len:0 rx:0 msg:TCPServer received msg: Client-[0] : Sending 0 
+../tcp_socket.cpp:78 sendAndReceive() Wed Sep 25 18:01:50 2024 send socket:6 len:24 
+../tcp_server.cpp:51 poll() Wed Sep 25 18:01:50 2024 EVFILT_READ listener_socket:7 
+../tcp_socket.cpp: 55 sendAndReceive() Wed Sep 25 18:01:50 2024 read socket: 7 len:24 utime:1727305310978683000 ktime:0 diff:1727305310978683000 
 TCPServer::tcpServerRecvCallback() socket:7 len:24 rx:0 
-../tcp_socket.cpp:78 sendAndReceive() Mon May 20 17:18:31 2024 send socket:7 len:48 
+../tcp_socket.cpp:78 sendAndReceive() Wed Sep 25 18:01:50 2024 send socket:7 len:48 
 TCPServer::tcpServerRecvFinishedCallback() 
 Sending TCPClient-[0] Client-[0] : Sending 200 
-../tcp_socket.cpp: 55 sendAndReceive() Mon May 20 17:18:31 2024 read socket: 6 len:46 utime:1716239911136844000 ktime:0 diff:1716239911136844000 
-TCPServer::tcpClientRecvCallback() socket:6 len:0 rx:0 msg:TCPServer received msg: Client-[0] : Sending 0 
-../tcp_socket.cpp:78 sendAndReceive() Mon May 20 17:18:31 2024 send socket:6 len:24 
-../tcp_server.cpp:51 poll() Mon May 20 17:18:31 2024 EVFILT_READ listener_socket:7 
-../tcp_socket.cpp: 55 sendAndReceive() Mon May 20 17:18:31 2024 read socket: 7 len:24 utime:1716239911638935000 ktime:0 diff:1716239911638935000 
+../tcp_socket.cpp: 55 sendAndReceive() Wed Sep 25 18:01:50 2024 read socket: 6 len:48 utime:1727305310980291000 ktime:0 diff:1727305310980291000 
+TCPServer::tcpClientRecvCallback() socket:6 len:0 rx:0 msg:TCPServer received msg: Client-[0] : Sending 100 
+../tcp_socket.cpp:78 sendAndReceive() Wed Sep 25 18:01:50 2024 send socket:6 len:24 
+../tcp_server.cpp:51 poll() Wed Sep 25 18:01:51 2024 EVFILT_READ listener_socket:7 
+../tcp_socket.cpp: 55 sendAndReceive() Wed Sep 25 18:01:51 2024 read socket: 7 len:24 utime:1727305311485600000 ktime:0 diff:1727305311485600000 
 TCPServer::tcpServerRecvCallback() socket:7 len:24 rx:0 
-../tcp_socket.cpp:78 sendAndReceive() Mon May 20 17:18:31 2024 send socket:7 len:48 
+../tcp_socket.cpp:78 sendAndReceive() Wed Sep 25 18:01:51 2024 send socket:7 len:48 
 TCPServer::tcpServerRecvFinishedCallback() 
 Sending TCPClient-[0] Client-[0] : Sending 300 
-../tcp_socket.cpp: 55 sendAndReceive() Mon May 20 17:18:31 2024 read socket: 6 len:48 utime:1716239911638971000 ktime:0 diff:1716239911638971000 
-TCPServer::tcpClientRecvCallback() socket:6 len:0 rx:0 msg:TCPServer received msg: Client-[0] : Sending 100 
-../tcp_socket.cpp:78 sendAndReceive() Mon May 20 17:18:31 2024 send socket:6 len:24 
-../tcp_server.cpp:51 poll() Mon May 20 17:18:32 2024 EVFILT_READ listener_socket:7 
-../tcp_socket.cpp: 55 sendAndReceive() Mon May 20 17:18:32 2024 read socket: 7 len:24 utime:1716239912139617000 ktime:0 diff:1716239912139617000 
+../tcp_socket.cpp: 55 sendAndReceive() Wed Sep 25 18:01:51 2024 read socket: 6 len:48 utime:1727305311485911000 ktime:0 diff:1727305311485911000 
+TCPServer::tcpClientRecvCallback() socket:6 len:0 rx:0 msg:TCPServer received msg: Client-[0] : Sending 200 
+../tcp_socket.cpp:78 sendAndReceive() Wed Sep 25 18:01:51 2024 send socket:6 len:24 
+../tcp_server.cpp:51 poll() Wed Sep 25 18:01:51 2024 EVFILT_READ listener_socket:7 
+../tcp_socket.cpp: 55 sendAndReceive() Wed Sep 25 18:01:51 2024 read socket: 7 len:24 utime:1727305311989176000 ktime:0 diff:1727305311989176000 
 TCPServer::tcpServerRecvCallback() socket:7 len:24 rx:0 
-../tcp_socket.cpp:78 sendAndReceive() Mon May 20 17:18:32 2024 send socket:7 len:48 
+../tcp_socket.cpp:78 sendAndReceive() Wed Sep 25 18:01:51 2024 send socket:7 len:48 
 TCPServer::tcpServerRecvFinishedCallback() 
 Sending TCPClient-[0] Client-[0] : Sending 400 
-../tcp_socket.cpp: 55 sendAndReceive() Mon May 20 17:18:32 2024 read socket: 6 len:48 utime:1716239912139687000 ktime:0 diff:1716239912139687000 
-TCPServer::tcpClientRecvCallback() socket:6 len:0 rx:0 msg:TCPServer received msg: Client-[0] : Sending 200 
-../tcp_socket.cpp:78 sendAndReceive() Mon May 20 17:18:32 2024 send socket:6 len:24 
-../tcp_server.cpp:51 poll() Mon May 20 17:18:32 2024 EVFILT_READ listener_socket:7 
-../tcp_socket.cpp: 55 sendAndReceive() Mon May 20 17:18:32 2024 read socket: 7 len:24 utime:1716239912644897000 ktime:0 diff:1716239912644897000 
+../tcp_socket.cpp: 55 sendAndReceive() Wed Sep 25 18:01:51 2024 read socket: 6 len:48 utime:1727305311989521000 ktime:0 diff:1727305311989521000 
+TCPServer::tcpClientRecvCallback() socket:6 len:0 rx:0 msg:TCPServer received msg: Client-[0] : Sending 300 
+../tcp_socket.cpp:78 sendAndReceive() Wed Sep 25 18:01:51 2024 send socket:6 len:24 
+../tcp_server.cpp:51 poll() Wed Sep 25 18:01:52 2024 EVFILT_READ listener_socket:7 
+../tcp_socket.cpp: 55 sendAndReceive() Wed Sep 25 18:01:52 2024 read socket: 7 len:24 utime:1727305312491371000 ktime:0 diff:1727305312491371000 
 TCPServer::tcpServerRecvCallback() socket:7 len:24 rx:0 
-../tcp_socket.cpp:78 sendAndReceive() Mon May 20 17:18:32 2024 send socket:7 len:48 
+../tcp_socket.cpp:78 sendAndReceive() Wed Sep 25 18:01:52 2024 send socket:7 len:48 
 TCPServer::tcpServerRecvFinishedCallback() 

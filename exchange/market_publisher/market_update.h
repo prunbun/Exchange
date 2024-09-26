@@ -8,7 +8,7 @@
 using namespace Common;
 
 namespace Exchange {
-#pragma pack(push, 1)
+#pragma pack(push, 1) // ensures that we don't introduce padding for alignment
 
     // this file defines objects used by the matching engine to send order updates to be published to the market
     enum class MarketUpdateType : uint8_t {
@@ -91,7 +91,7 @@ namespace Exchange {
         }
     };
 
-#pragma pack(pop)
+#pragma pack(pop) // puts our configuration back
 
     // queue for the engine to send status updates of orders to the market
     typedef LFQUEUE<MEMarketUpdate> MEMarketUpdateLFQueue;

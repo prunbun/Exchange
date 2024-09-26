@@ -44,6 +44,29 @@ namespace Common {
                 };
             }
 
+            ~TCPServer() {
+                std::unordered_set<TCPSocket *> unique_sockets;
+
+                // Insert pointers from all vectors into the set
+                for (auto socket : sockets) {
+                    unique_sockets.insert(socket);
+                }
+                for (auto socket : receieve_sockets) {
+                    unique_sockets.insert(socket);
+                }
+                for (auto socket : send_sockets) {
+                    unique_sockets.insert(socket);
+                }
+                for (auto socket : disconnected_sockets) {
+                    unique_sockets.insert(socket);
+                }
+
+                // Now delete each unique socket once
+                for (auto socket : unique_sockets) {
+                    delete socket;
+                }
+            }
+
             auto destroy() {
                 close(kqueue_file_descriptor);
                 kqueue_file_descriptor = -1;
@@ -82,6 +105,7 @@ namespace Common {
                 sockets.erase(std::remove(sockets.begin(), sockets.end(), socket), sockets.end());
                 receieve_sockets.erase(std::remove(receieve_sockets.begin(), receieve_sockets.end(), socket), receieve_sockets.end());
                 send_sockets.erase(std::remove(send_sockets.begin(), send_sockets.end(), socket), send_sockets.end());
+                delete socket;
             }
 
             // update all data structures with new state of incoming socket events

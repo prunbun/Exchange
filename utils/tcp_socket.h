@@ -69,7 +69,7 @@ namespace Common {
 
         /* MEMBER FUNCTIONS */
 
-        // creates a TCP Socket that either listens on or coneects to the given ip, interface, and port
+        // creates a TCP Socket that either listens on or connects to the given ip, interface, and port
         int connect(const std::string &ip, const std::string &interface, int port, bool is_listening);
 
         // Publishes all data in send buffers and executes the callback if data exists in the receive buffer

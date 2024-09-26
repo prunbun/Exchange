@@ -67,7 +67,7 @@ namespace Common {
     }
 
     inline bool setNoDelay (int fd) {
-        // this method disables something called Nagle's algorithm, that intentionally puts a delay in between packets to avoid dropping them
+        // this method disables something called Nagle's algorithm, that tries to combine small messages and send them together
         // but for low-latency, this slows down the application
         int one = 1;
 
@@ -133,8 +133,8 @@ namespace Common {
         hints.ai_socktype = is_udp ? SOCK_DGRAM : SOCK_STREAM;
         hints.ai_protocol = is_udp ? IPPROTO_UDP : IPPROTO_TCP;
 
-            // so generally, the system does a DNS query to resolve hostnames and some other lookups to resolve service port number
-            // this code tells getaddrinfo to treat the inputs as the numeric values and not do a lookup
+        // so generally, the system does a DNS query to resolve hostnames and some other lookups to resolve service port number
+        // this code tells getaddrinfo to treat the inputs as the numeric values and not do a lookup
         if (std::isdigit(ip.c_str()[0])) {
             hints.ai_flags |= AI_NUMERICHOST;
         }
