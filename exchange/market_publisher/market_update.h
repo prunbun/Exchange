@@ -8,7 +8,7 @@
 using namespace Common;
 
 namespace Exchange {
-#pragma pack(push, 1) // ensures that we don't introduce padding for alignment
+#pragma pack(push, 1) // ensures that we don't introduce padding for alignment, drawbacks include compiler variability and additional overhead for accessing at an offset
 
     // this file defines objects used by the matching engine to send order updates to be published to the market
     enum class MarketUpdateType : uint8_t {

@@ -93,7 +93,7 @@ namespace Exchange {
                     MEOrdersAtPrice * new_orders_at_price = orders_at_price_pool.allocate(order->side, order->price, order, nullptr, nullptr);
                     addOrdersAtPrice(new_orders_at_price);
                 } else {
-                    MEOrder * first_order = (orders_at_price ? orders_at_price->first_me_order : nullptr);
+                    MEOrder * first_order = (orders_at_price ? orders_at_price->first_me_order : nullptr); // note that this should NEVER occur
                     
                     // some linked-list operations now, we want to insert it at the end and want to make the list cyclical
                     first_order->prev_order->next_order = order; // get the LAST order by going backwards and insert this order at the end
@@ -171,6 +171,7 @@ namespace Exchange {
                         target->prev_entry->next_entry = new_orders_at_price;
                         target->prev_entry = new_orders_at_price;
 
+                        // If it is the new best price
                         if ((new_orders_at_price->side == Side::BUY && new_orders_at_price->price > best_orders_by_price->price) ||
                             (new_orders_at_price->side == Side::SELL && new_orders_at_price->price < best_orders_by_price->price)) {
                             target->next_entry = (target->next_entry == best_orders_by_price ? new_orders_at_price : target->next_entry);
@@ -218,7 +219,7 @@ namespace Exchange {
                 if (UNLIKELY(orders_at_price->next_entry == orders_at_price)) {
                     (side_param == Side::BUY ? bids_by_price : asks_by_price) = nullptr;
                 } else {
-                    // else remove it from the side's linked list, update the champ pointer, and nullify its staye
+                    // else remove it from the side's linked list, update the champ pointer, and nullify its state
                     orders_at_price->prev_entry->next_entry = orders_at_price->next_entry;
                     orders_at_price->next_entry->prev_entry = orders_at_price->prev_entry;
 
