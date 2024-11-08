@@ -77,6 +77,25 @@ rule CXX_STATIC_LIBRARY_LINKER__libexchange_Release
 
 
 #############################################
+# Rule for compiling CXX files.
+
+rule CXX_COMPILER__libtrading_unscanned_Release
+  depfile = $DEP_FILE
+  deps = gcc
+  command = ${LAUNCHER}${CODE_CHECK}g++ $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building CXX object $out
+
+
+#############################################
+# Rule for linking CXX static library.
+
+rule CXX_STATIC_LIBRARY_LINKER__libtrading_Release
+  command = $PRE_LINK && /opt/homebrew/Cellar/cmake/3.29.3/bin/cmake -E rm -f $TARGET_FILE && /Library/Developer/CommandLineTools/usr/bin/ar qc $TARGET_FILE $LINK_FLAGS $in && /Library/Developer/CommandLineTools/usr/bin/ranlib $TARGET_FILE && /opt/homebrew/Cellar/cmake/3.29.3/bin/cmake -E touch $TARGET_FILE && $POST_BUILD
+  description = Linking CXX static library $TARGET_FILE
+  restat = $RESTAT
+
+
+#############################################
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE

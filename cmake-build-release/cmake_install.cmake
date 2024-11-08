@@ -41,6 +41,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/cmake-build-release/utils/cmake_install.cmake")
   include("/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/cmake-build-release/exchange/cmake_install.cmake")
+  include("/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/cmake-build-release/trading/cmake_install.cmake")
 
 endif()
 
