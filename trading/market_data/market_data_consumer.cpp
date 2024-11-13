@@ -120,8 +120,16 @@ namespace Trading {
 
             // let's update the socket's state based on how much we data we read
             memcpy(socket->inbound_data.data(), socket->inbound_data.data() + i, socket->next_receive_valid_index - i);
-            socket->next_receive_valid_index -= i
+            socket->next_receive_valid_index -= i;
         }
+    }
+
+    void MarketDataConsumer::startSnapshotSync() {
+
+    }
+
+    void MarketDataConsumer::queueMessage(bool is_snapshot, const Exchange::MDPMarketUpdate * request) {
+
     }
 
 }
