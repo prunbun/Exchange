@@ -124,8 +124,22 @@ namespace Trading {
         }
     }
 
+    // This is called the first time we are beginning a recovery
     void MarketDataConsumer::startSnapshotSync() {
 
+        // clear the maps used for storing messages during recovery
+        snapshot_queued_messages.clear();
+        incremental_queued_msgs.clear();
+
+        // now let's connect to the exchange's snapshot endpoint
+        ASSERT(snapshot_mcast_socket.init(snapshot_ip, iface, snapshot_port, /* is listening*/ true) >= 0, 
+            "Unable to create snapshot mcast socket. error:" + std::string(std::strerror(errno))
+        );
+
+        ASSERT(snapshot_mcast_socket.join(snapshot_ip), 
+            "Join failed on:" + std::to_string(snapshot_mcast_socket.socket_file_descriptor) + " error: " +
+            std::string(std::strerror(errno)) 
+        );
     }
 
     void MarketDataConsumer::queueMessage(bool is_snapshot, const Exchange::MDPMarketUpdate * request) {
