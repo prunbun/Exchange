@@ -68,6 +68,7 @@ namespace Trading {
 
             void run();
             void recvCallback(MulticastSocket *socket) noexcept;
+            void checkSnapshotSync();
             void startSnapshotSync();
             void queueMessage(bool is_snapshot, const Exchange::MDPMarketUpdate * request);
 

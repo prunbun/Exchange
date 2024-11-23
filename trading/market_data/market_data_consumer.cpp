@@ -124,6 +124,10 @@ namespace Trading {
         }
     }
 
+    void MarketDataConsumer::checkSnapshotSync() {
+        
+    };
+
     // This is called the first time we are beginning a recovery
     void MarketDataConsumer::startSnapshotSync() {
 
@@ -142,8 +146,34 @@ namespace Trading {
         );
     }
 
+    // this method performs the core synchronization work
+    // remember that we can get both incremental AND snapshot messages here
     void MarketDataConsumer::queueMessage(bool is_snapshot, const Exchange::MDPMarketUpdate * request) {
+        
+        // at this point, we know that when we first started recovery, the queue maps were empty
+        // this means that if we ever get duplicates in the map, we have moved onto the next snapshot
+        if (is_snapshot) {
+            if (snapshot_queued_messages.find(request->seq_number) != snapshot_queued_messages.end()) {
+                logger.log("%:% %() % Packet drops on snapshot socket. Received for a 2nd time:%\n",
+                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
+                    request->toString()
+                );
+                snapshot_queued_messages.clear();
+            }
 
+            snapshot_queued_messages[request->seq_number] = request->me_market_update;
+
+        } else { // incremental
+            incremental_queued_msgs[request->seq_number] = request->me_market_update;
+        }
+
+        logger.log("%:% %() % size snapshot:% incremental:% % => %\n",
+            __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
+            snapshot_queued_messages.size(), request->seq_number, request->toString()
+        );
+
+        // at this point, we might be able to stop the recovery phase
+        checkSnapshotSync();
     }
 
 }
