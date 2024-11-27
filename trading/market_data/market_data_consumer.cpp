@@ -124,7 +124,174 @@ namespace Trading {
         }
     }
 
+    /*
+        As context, if we are in recovery mode, essentially, we are going to wipe our client's order
+        book and rewrite it using the snapshot we get from the market.
+
+        This means we have phases.
+        Phase 1: Make sure we have a complete snapshot
+        Phase 2: Stitch on any incremental changes that have come since then onto the snapshot
+        Phase 3: Get all of the changes to the client's order book through the LFQ
+    */
     void MarketDataConsumer::checkSnapshotSync() {
+
+        // PHASE 1: Check to make sure we have a complete snapshot
+
+        // if we dont have a snapshot at all, there is nothing we can do
+        if (snapshot_queued_messages.empty()) {
+            return;
+        }
+
+        // let's check if we have a start message
+        const auto &first_snapshot_message = snapshot_queued_messages.begin()->second;
+        if (first_snapshot_message.type != Exchange::MarketUpdateType::SNAPSHOT_START) {
+            logger.log("%:% %() % Returning because we have not seen a SNAPSHOT_START yet.\n",
+                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str)
+            );
+
+            // we need the first entry in the map to be the SNAPSHOT_START
+            snapshot_queued_messages.clear();
+            return;
+        }
+
+        // now, we need to check if we have a sequential snapshot with no gaps
+        std::vector<Exchange::MEMarketUpdate> final_events;
+
+        bool have_complete_snapshot = true;
+        size_t next_snapshot_seq = 0;
+        for (auto &snap_queue_entry : snapshot_queued_messages) {
+
+            // log the map entry
+            logger.log("%:% %() % % => %\n",
+                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
+                snap_queue_entry.first, snap_queue_entry.second.toString()
+            );
+
+            // check sequence number
+            if (snap_queue_entry.first != next_snapshot_seq) {
+                logger.log("%:% %() % Detected gap in snapshot stream! Expected:% found:% %.\n",
+                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
+                    next_snapshot_seq, snap_queue_entry.first, snap_queue_entry.second.toString()
+                );
+
+                have_complete_snapshot = false;
+                break;
+            }
+
+            // add it to our final events log (exclude the sentinel starts and ends)
+            if (snap_queue_entry.second.type != Exchange::MarketUpdateType::SNAPSHOT_START &&
+                snap_queue_entry.second.type != Exchange::MarketUpdateType::SNAPSHOT_END
+                ) {
+
+                final_events.push_back(snap_queue_entry.second);
+            }
+
+            ++next_snapshot_seq;
+        } 
+
+        // we might not have had a complete snapshot, let's check that
+        if (!have_complete_snapshot) {
+            logger.log("%:% %() % Returning because found gaps in snapshot stream. \n",
+                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str)
+            );
+            snapshot_queued_messages.clear();
+            return;
+        }
+
+        // Nice! So now let's check if the snapshot is over or not yet
+        const auto &last_snapshot_msg = snapshot_queued_messages.rbegin()->second;
+        if (last_snapshot_msg.type != Exchange::MarketUpdateType::SNAPSHOT_END) {
+            logger.log("%:% %() % Haven't seen a SNAPSHOT_END message yet! Returning... \n",
+                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str)            
+            );
+            
+            return;
+        }
+
+        // PHASE 2: Check if we have incremental messages we can stitch on after the snapshot ends
+        // NOTE: if we have gaps in the remaining incrementals, we need to synchronize them too...
+        //       so we will deicide to just let the snapshot grow and keep queueing messages until the snapshot
+        //       is big enough such that we get to the part where incrementals have no gaps again 
+        // NOTE: For START/END sentinels, the order_id is the latest sequence number for that snapshot
+
+        bool have_complete_incremental = true;
+        size_t num_incrementals = 0;
+        next_exp_inc_seq_num = last_snapshot_msg.order_id;
+
+        // loop through our queue of incremental messages
+        for (auto incr_msg = incremental_queued_msgs.begin(); 
+                incr_msg != incremental_queued_msgs.end();
+                ++incr_msg
+            ) {
+            
+            // log msg
+            logger.log("%:% %() % Next incremental message; next_exp: % vs. seq: % %.\n"
+                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
+                next_exp_inc_seq_num, incr_msg->first, incr_msg->second.toString()
+            );
+
+            // let's skip those that are before the end of our snapshot, we can just forget about those
+            if (incr_msg->first < next_exp_inc_seq_num) {
+                continue;
+            }
+
+            // now let's make sure there are no gaps
+            if (incr_msg->first != next_exp_inc_seq_num) {
+                logger.log("%:% %() % Detected gap in incremental stream! Expected: % Found: %. \n",
+                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
+                    next_exp_inc_seq_num, incr_msg->first, incr_msg->second.toString()
+                );
+                have_complete_incremental = false;
+                break;
+            }
+
+            // cool, let's push this back onto our final_events as long it isn't accidentally a snapshot sentinel
+            logger.log("%:% %() % % => %\n",
+                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
+                incr_msg->first, incr_msg->second.toString()
+            );
+            if (incr_msg->second.type != Exchange::MarketUpdateType::SNAPSHOT_START &&
+                incr_msg->second.type != Exchange::MarketUpdateType::SNAPSHOT_END
+                ) {
+
+                final_events.push_back(incr_msg->second);
+                ++next_exp_inc_seq_num;
+                ++num_incrementals;
+            }
+        }
+
+        // we might not have had a complete set of incrementals so let's catch that
+        if (!have_complete_incremental) {
+            logger.log("%:% %() % Returning because we have gaps in queued incrementals.\n"
+                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str)
+            );
+
+            // at this point, this snapshot isn't enough to recover, so unfortunately, we need a new one
+            snapshot_queued_messages.clear();
+            return;
+        }
+
+        // PHASE 3: Alright! Let's send the snapshot + incremental messages to the client
+        for (const auto &final_msg : final_events) {
+            auto next_write = incoming_md_updates->getNextWriteTo();
+            *next_write = final_msg;
+            incoming_md_updates->updateWriteIndex();
+        }
+
+        // Cleanup time!
+        logger.log("%:% %() % Recovered % snapshot and % incremental orders. \n",
+            __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
+            snapshot_queued_messages.size() - 2, num_incrementals
+        );
+
+        snapshot_queued_messages.clear();
+        incremental_queued_msgs.clear();
+
+        // recovery complete!
+        in_recovery = false;
+
+        // close socket file descriptor that is listening to the multicast stream
+        snapshot_mcast_socket.leave(snapshot_ip, snapshot_port);
         
     };
 
