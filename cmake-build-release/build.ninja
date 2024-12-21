@@ -263,6 +263,20 @@ build trading/CMakeFiles/libtrading.dir/market_data/market_data_consumer.cpp.o: 
   OBJECT_DIR = trading/CMakeFiles/libtrading.dir
   OBJECT_FILE_DIR = trading/CMakeFiles/libtrading.dir/market_data
 
+build trading/CMakeFiles/libtrading.dir/strategy/market_order.cpp.o: CXX_COMPILER__libtrading_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/trading/strategy/market_order.cpp || cmake_object_order_depends_target_libtrading
+  DEP_FILE = trading/CMakeFiles/libtrading.dir/strategy/market_order.cpp.o.d
+  FLAGS = -std=c++2a -Wall -Wextra -Werror -Wpedantic -O3 -DNDEBUG -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
+  INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading"
+  OBJECT_DIR = trading/CMakeFiles/libtrading.dir
+  OBJECT_FILE_DIR = trading/CMakeFiles/libtrading.dir/strategy
+
+build trading/CMakeFiles/libtrading.dir/strategy/market_order_book.cpp.o: CXX_COMPILER__libtrading_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/trading/strategy/market_order_book.cpp || cmake_object_order_depends_target_libtrading
+  DEP_FILE = trading/CMakeFiles/libtrading.dir/strategy/market_order_book.cpp.o.d
+  FLAGS = -std=c++2a -Wall -Wextra -Werror -Wpedantic -O3 -DNDEBUG -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
+  INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading"
+  OBJECT_DIR = trading/CMakeFiles/libtrading.dir
+  OBJECT_FILE_DIR = trading/CMakeFiles/libtrading.dir/strategy
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target libtrading
@@ -271,7 +285,7 @@ build trading/CMakeFiles/libtrading.dir/market_data/market_data_consumer.cpp.o: 
 #############################################
 # Link the static library trading/liblibtrading.a
 
-build trading/liblibtrading.a: CXX_STATIC_LIBRARY_LINKER__libtrading_Release trading/CMakeFiles/libtrading.dir/market_data/market_data_consumer.cpp.o
+build trading/liblibtrading.a: CXX_STATIC_LIBRARY_LINKER__libtrading_Release trading/CMakeFiles/libtrading.dir/market_data/market_data_consumer.cpp.o trading/CMakeFiles/libtrading.dir/strategy/market_order.cpp.o trading/CMakeFiles/libtrading.dir/strategy/market_order_book.cpp.o
   ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   LANGUAGE_COMPILE_FLAGS = -std=c++2a -Wall -Wextra -Werror -Wpedantic -O3 -DNDEBUG
   OBJECT_DIR = trading/CMakeFiles/libtrading.dir
