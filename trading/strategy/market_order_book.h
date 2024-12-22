@@ -45,6 +45,11 @@ namespace Trading {
                 trade_engine = trade_engine_param;
             }
 
+            // method that is called with every processed update from market data consumer
+            void onMarketUpdate(const Exchange::MEMarketUpdate *market_update) noexcept;
+
+            void updateBBO(bool update_bid, bool update_ask) noexcept;
+
     };
 
     typedef std::array<MarketOrderBook *, ME_MAX_TICKERS> MarketOrderBookHashMap;
