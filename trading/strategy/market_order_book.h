@@ -50,6 +50,8 @@ namespace Trading {
 
             void updateBBO(bool update_bid, bool update_ask) noexcept;
 
+            std::string toString(bool detailed, bool validity_check) const;
+
     };
 
     typedef std::array<MarketOrderBook *, ME_MAX_TICKERS> MarketOrderBookHashMap;

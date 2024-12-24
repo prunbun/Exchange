@@ -69,10 +69,10 @@ namespace Trading {
 
             std::stringstream ss;
 
-            ss << "BBO{" 
+            ss << "BBO{ " 
             << qtyToString(bid_qty) << "@" << priceToString(bid_price) << " X "
             << priceToString(ask_price) << "@" << qtyToString(ask_qty)
-            << "}";
+            << " }";
 
             return ss.str();
         }

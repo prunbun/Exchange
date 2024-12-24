@@ -146,3 +146,94 @@ void Trading::MarketOrderBook::updateBBO(bool update_bid, bool update_ask) noexc
     return;
 
 }
+
+std::string Trading::MarketOrderBook::toString(bool detailed, bool validity_check) const {
+
+    std::stringstream ss;
+    std::string local_time_str;
+
+
+    // printer function to print out all orders at a certain price
+    auto printer = [&](std::stringstream &ss, MarketOrdersAtPrice *iter, Side side, Price &last_price, bool sanity_check) {
+
+        char buf[4096];
+        Qty qty = 0;
+        size_t num_orders = 0;
+
+        // go through each of the orders
+        for (auto o_iter = iter->first_mkt_order;; o_iter = o_iter->next_order) {
+            qty += o_iter->qty;
+            ++num_orders;
+
+            // if we get to the first order again, then break (note we shouldn't have empty LL)
+            if (o_iter->next_order == iter->first_mkt_order) {
+                break;
+            }
+        }
+
+        // format print the price, qty, and num orders at this price level
+        sprintf(buf, " <px:%3s prev:%3s next:%3s> %-3s @ %-5s(%-4s)", 
+            priceToString(iter->price).c_str(), priceToString(iter->prev_entry->price).c_str(),
+            priceToString(iter->next_entry->price).c_str(),
+            priceToString(iter->price).c_str(), qtyToString(qty).c_str(), std::to_string(num_orders).c_str()
+        );
+        ss << buf;
+
+        // now we print each individual order if we want a detailed breakdown 
+        if (detailed) {
+            for (auto o_iter = iter->first_mkt_order;; o_iter = o_iter->next_order) {
+                sprintf(buf, "[oid:%s q:%s prev:%s next:%s] ",
+                    orderIdToString(o_iter->order_id).c_str(), qtyToString(o_iter->qty).c_str(),
+                    orderIdToString(o_iter->prev_order ? o_iter->prev_order->order_id : OrderId_INVALID).c_str(),
+                    orderIdToString(o_iter->next_order ? o_iter->next_order->order_id : OrderId_INVALID).c_str()
+                );
+                ss << buf;
+
+                if (o_iter->next_order == iter->first_mkt_order) {
+                    break;
+                }
+            }
+        }
+        ss << std::endl;
+
+        // let's do a sanity check to make sure that this order book is following the rules we want
+        // we want each price level to be ascending for the SELL
+        // and descending for the BUY
+        // and we reset last_price to the current price so we can make sure that all of them follow
+        // these rules
+        if (sanity_check) {
+            if ((side == Side::SELL && last_price >= iter->price) || (side == Side::BUY && last_price <= iter->price)) {
+                FATAL("Bids/Asks not sorted by ascending/descending prices last: " + priceToString(last_price) + " itr: " + iter->toString());
+                last_price = iter->price;
+            }
+        }
+    };
+
+
+    // here, we use the printer helper function print out the entire order book for this ticker
+    ss << "Ticker: " << tickerIdToString(ticker_id) << std::endl;
+    { // asks
+        auto ask_itr = asks_by_price;
+        auto last_ask_price = std::numeric_limits<Price>::min();
+        for (size_t count = 0; ask_itr; ++count) {
+            ss << "ASKS L:" << count << " => ";
+            auto next_ask_itr = (ask_itr->next_entry == asks_by_price ? nullptr : ask_itr->next_entry);
+            printer(ss, ask_itr, Side::SELL, last_ask_price, validity_check);
+            ask_itr = next_ask_itr;
+        }
+    }
+    ss << std::endl << "                          X" << std::endl << std::endl;
+    { // bids
+        auto bid_itr = bids_by_price;
+        auto last_bid_price = std::numeric_limits<Price>::max();
+        for (size_t count = 0; bid_itr; ++count) {
+            ss << "BIDS L:" << count << " => ";
+            auto next_bid_itr = (bid_itr->next_entry == bids_by_price ? nullptr : bid_itr->next_entry);
+            printer(ss, bid_itr, Side::BUY, last_bid_price, validity_check);
+            bid_itr = next_bid_itr;
+        }
+    }
+
+    // conver the ss to a c++ string
+    return ss.str();
+}
