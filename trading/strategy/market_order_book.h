@@ -32,8 +32,6 @@ namespace Trading {
             MarketOrdersAtPrice *bids_by_price = nullptr;
             MarketOrdersAtPrice *asks_by_price = nullptr;
 
-
-
             BBO bbo;
 
             std::string time_str;
@@ -63,7 +61,7 @@ namespace Trading {
                 return price_orders_at_price.at(priceToIndex(price));
             }
 
-            auto addOrdersAtPrice(MarketOrdersAtPrice * new_orders_at_price) noexcept {
+            void addOrdersAtPrice(MarketOrdersAtPrice * new_orders_at_price) noexcept {
                 // first, we need to add it to our hashmap
                 price_orders_at_price.at(priceToIndex(new_orders_at_price->price)) = new_orders_at_price;
 
@@ -127,7 +125,7 @@ namespace Trading {
                         target->prev_entry->next_entry = new_orders_at_price;
                         target->prev_entry = new_orders_at_price;
 
-                        // now, we need to fix the doubly linked part of the best_orders_at_price
+                        // now, we need to fix the doubly linked part of the best_orders_by_price
                         if (
                             (new_orders_at_price->side == Side::BUY && new_orders_at_price->price > best_orders_by_price->price) 
                             ||
@@ -139,13 +137,86 @@ namespace Trading {
                                 // fix the pointer of the best for BUY and best for SELL
                                 (new_orders_at_price->side == Side::BUY ? bids_by_price : asks_by_price) = new_orders_at_price;
                         }
+                    }
+                }
+            }
 
+            void removeOrdersAtPrice(Side side, Price price) noexcept {
+                const auto best_orders_by_price = (side == Side::BUY ? bids_by_price : asks_by_price);
+                auto orders_at_price = getOrdersAtPrice(price);
+
+                // its possible that this is the only price level in this book
+                if (UNLIKELY(orders_at_price->next_entry == orders_at_price)) {
+                    (side == Side::BUY ? bids_by_price : asks_by_price) = nullptr;
+                
+                } else { // now we have to break some links
+
+                    // fix the links originating from the neighbors
+                    orders_at_price->prev_entry->next_entry = orders_at_price->next_entry;
+                    orders_at_price->next_entry->prev_entry = orders_at_price->prev_entry;
+
+                    // fix the 'best' price level if it has changed
+                    if (orders_at_price == best_orders_by_price) {
+                        (side == Side::BUY ? bids_by_price : asks_by_price) = orders_at_price->next_entry;
                     }
 
-
+                    // nullify this price level's links
+                    orders_at_price->prev_entry = orders_at_price->next_entry = nullptr;
                 }
 
+                // remove it from our hashmap and deallocate
+                price_orders_at_price.at(priceToIndex(price)) = nullptr;
+                orders_at_price_pool.deallocate(orders_at_price);
+            }
 
+            void addOrder(MarketOrder *order) noexcept {
+                const auto orders_at_price = getOrdersAtPrice(order->price);
+
+                // if the price level doesn't exist, then we have to create it, else we add it to the level
+                if (!orders_at_price) {
+                    order->next_order->prev_order = order;
+
+                    auto new_orders_at_price = orders_at_price_pool.allocate(order->side, order->price, order, nullptr, nullptr);
+                    addOrdersAtPrice(new_orders_at_price);
+                } else {
+                    auto first_order = (orders_at_price ? orders_at_price->first_mkt_order : nullptr);
+
+                    first_order->prev_order->next_order = order;
+                    order->prev_order = first_order->prev_order;
+                    order->next_order = first_order;
+                    first_order->prev_order = order;
+                }
+
+                // finally, let's add it to our hashmap
+                oid_to_order.at(order->order_id) = order;
+            }
+
+            void removeOrder(MarketOrder *order) noexcept {
+                
+                auto orders_at_price = getOrdersAtPrice(order->price);
+
+                if (order->prev_order == order) { // only one in the price level, just remove the level
+                    removeOrdersAtPrice(order->side, order->price);
+
+                } else { // just remove this order from the price level
+                    const auto order_before = order->prev_order;
+                    const auto order_after = order->next_order;
+
+                    // break the links
+                    order_before->next_order = order_after;
+                    order_after->prev_order = order_before;
+
+                    // keep price level first order consistent
+                    if (orders_at_price->first_mkt_order == order) {
+                        orders_at_price->first_mkt_order = order_after;
+                    }
+
+                    order->prev_order = order->next_order = nullptr;
+                }
+
+                // remove from hashmap and deallocate
+                oid_to_order.at(order->order_id) = nullptr;
+                order_pool.deallocate(order);
             }
 
     };
