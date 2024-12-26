@@ -67,3 +67,59 @@ void Trading::OrderGateway::run() {
         }
     }
 }
+
+void Trading::OrderGateway::recvCallback(TCPSocket *socket, Nanos rx_time) noexcept {
+
+    logger.log("%:% %() % Received socket:% len:% %\n",
+        __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
+        socket->socket_file_descriptor, socket->next_receive_valid_index, rx_time
+    );
+
+    // we decode the received market data
+    if (socket->next_receive_valid_index >= sizeof(Exchange::OMClientResponse)) {
+
+        size_t i = 0;
+
+        for(; i + sizeof(Exchange::OMClientResponse) <= socket->next_receive_valid_index; i += sizeof(Exchange::OMClientResponse)) {
+
+            const Exchange::OMClientResponse * response = reinterpret_cast<const Exchange::OMClientResponse *>(socket->receive_buffer + i);
+            logger.log("%:% %() % Received %\n",
+                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
+                response->toString()
+            );
+
+            // need to make sure the response we get is for this client, else, we ifnore it
+            if (response->me_client_response.client_id != client_id) {
+                logger.log("%:% %() % ERROR Incorrect client id. ClientId expected:% received:%.\n",
+                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
+                    client_id, response->me_client_response.client_id
+                );
+                continue;
+            }
+
+            // now we have to verify the sequence number
+            if(response->seq_number != next_expected_sequence_number) {
+                logger.log("%:% %() % ERROR Incorrect sequence number. ClientId:%. SeqNum expected:% received:%.\n",
+                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
+                    client_id, next_expected_sequence_number, response->seq_number
+                );
+                continue;
+            }
+
+            // now, it has passed all of our checks
+            // we increment our seq num and send it to the trading engine
+            ++next_expected_sequence_number;
+
+            auto next_write = incoming_responses->getNextWriteTo();
+            *next_write = std::move(response->me_client_response);
+            incoming_responses->updateWriteIndex();
+        }
+
+        // we have read as much information as we can, so we now update the socket buffer
+        // by 'erasing' what we read and shifting the data in the socket over
+        // remember, we just read 'i' bytes of data
+        memcpy(socket->receive_buffer, socket->receive_buffer + i, socket->next_receive_valid_index - i);
+        socket->next_receive_valid_index -= i;
+    }
+
+}

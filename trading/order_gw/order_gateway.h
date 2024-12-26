@@ -47,6 +47,9 @@ namespace Trading {
             // thread with infinite loop
             void run();
 
+            // socket will call this after receiving any data (with itself as the "socket" param)
+            void recvCallback(TCPSocket *socket, Nanos rx_time) noexcept;
+
     };
 
 }
