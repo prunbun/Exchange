@@ -50,6 +50,10 @@ namespace Trading {
 
             void updateBBO(bool update_bid, bool update_ask) noexcept;
 
+            const BBO * getBBO() noexcept {
+                return &bbo;
+            }
+
             std::string toString(bool detailed, bool validity_check) const;
 
         private:
