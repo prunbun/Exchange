@@ -82,7 +82,8 @@ namespace Common {
     enum class Side : int8_t {
         BUY = 1,
         INVALID = 0,
-        SELL = -1
+        SELL = -1,
+        MAX = 2
     };
 
     inline std::string sideToString(Side side) {
@@ -92,7 +93,9 @@ namespace Common {
             case Side::INVALID:
                 return "INVALID";
             case Side::SELL:
-                return "Invalid";
+                return "SELL";
+            case Side::MAX:
+                return "MAX";
         }
 
         return "UNKNOWN";
