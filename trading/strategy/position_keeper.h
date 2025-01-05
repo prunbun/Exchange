@@ -154,10 +154,43 @@ namespace Trading {
             std::array<PositionInfo, ME_MAX_TICKERS> ticker_position;
 
         public:
+            
+            PositionKeeper(Common::Logger * logger_param): logger(logger_param) {
+
+            }
+            
             const PositionInfo * getPositionInfo(TickerId ticker_id) const noexcept {
                 return &(ticker_position.at(ticker_id));
             }
 
+            std::string toString() const {
+                double total_pnl = 0;
+                Qty total_vol = 0;
+
+                std::stringstream ss;
+
+                for (TickerId i = 0; i < ticker_position.size(); ++i) {
+                    ss << "TickerId: " << tickerIdToString(i) << " "
+                        << ticker_position.at(i).toString() << "\n";
+
+                    total_pnl += ticker_position.at(i).total_pnl;
+                    total_vol += ticker_position.at(i).volume;
+                }
+
+                ss << "Total PnL:" << total_pnl << " Vol: " << total_vol << "\n";
+
+                return ss.str();
+            }
+
+            // FILLED 
+            void addFill(const Exchange::MEClientResponse * client_response) noexcept {
+                ticker_position.at(client_response->ticker_id).addFill(client_response, logger);
+            }
+
+            // ADDED
+            void updateBBO(TickerId ticker_id, const BBO *bbo) noexcept {
+                ticker_position.at(ticker_id).updateBBO(bbo, logger);
+            }
     };
 
 }
