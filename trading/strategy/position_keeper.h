@@ -142,6 +142,21 @@ namespace Trading {
                 }
             }
         }
+    };
+
+
+    class PositionKeeper {
+
+        private:
+            std::string time_str;
+            Common::Logger *logger = nullptr;
+
+            std::array<PositionInfo, ME_MAX_TICKERS> ticker_position;
+
+        public:
+            const PositionInfo * getPositionInfo(TickerId ticker_id) const noexcept {
+                return &(ticker_position.at(ticker_id));
+            }
 
     };
 
