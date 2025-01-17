@@ -76,7 +76,21 @@ namespace Trading {
     typedef std::array<RiskInfo, ME_MAX_TICKERS> TickerRiskInfoHashMap;
 
 
+    class RiskManager {
 
+        private:
+            std::string time_str;
+            Common::Logger *logger = nullptr;
+
+            TickerRiskInfoHashMap ticker_risk_hashmap;
+
+        public:
+            RiskManager(Common::Logger * logger_param, const PositionKeeper *position_keeper_param, const TradeEngineConfigHashmap &ticker_config_param);
+
+            RiskCheckResult checkPreTradeRisk(TickerId ticker_id, Side side, Qty qty) const noexcept {
+                return ticker_risk_hashmap.at(ticker_id).checkPreTradeRisk(side, qty);
+            }
+    };
 
 }
 
