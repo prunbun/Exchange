@@ -44,16 +44,65 @@ namespace Trading {
             }
 
 
-            // 
+            // primary method used by trading strategies to generate and manage orders
             void moveOrders(TickerId ticker_id, Price bid_price, Price ask_price, Qty trade_size) noexcept {
 
+                auto bid_order = &(ticker_order_hashmap.at(ticker_id).at(sideToIndex(Side::BUY)));
+                moveOrder(bid_order, ticker_id, bid_price, Side::BUY, trade_size);
 
+                auto sell_order = &(ticker_order_hashmap.at(ticker_id).at(sideToIndex(Side::SELL)));
+                moveOrder(sell_order, ticker_id, ask_price, Side::SELL, trade_size);
 
+                return;
             }
 
+            // handles incoming responses from the exchange
+            void onOrderUpdate(const Exchange::MEClientResponse *client_response) noexcept {
 
+                logger->log("%:% %() % Incoming order update: %\n",
+                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
+                    client_response->toString().c_str()
+                );
+
+                // fetch the corresponding order
+                OMOrder * order = &(ticker_order_hashmap.at(client_response->ticker_id).at(sideToIndex(client_response->side)));
+                logger->log("%:% %() % Order in-map state: %\n",
+                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
+                    order->toString().c_str()
+                );
+
+                // update the order state
+                switch (client_response->type) {
+
+                    // these are cases that are following what we expect
+                    case Exchange::ClientResponseType::ACCEPTED: {
+                        order->order_state = OMOrderState::LIVE;
+                    }
+                        break;
+
+                    case Exchange::ClientResponseType::CANCELED: {
+                        order->order_state = OMOrderState::DEAD;
+                    }
+                        break;
+
+                    // if our order gets filled, then we declare the order DEAD if the entire order was filled
+                    case Exchange::ClientResponseType::FILLED: {
+                        order->qty = client_response->leaves_qty;
+
+                        if (!order->qty) {
+                            order->order_state = OMOrderState::DEAD;
+                        }
+                    }
+                        break;
+
+                    // we ignore the others because there is nothing we can do in these cases
+                    case Exchange::ClientResponseType::CANCEL_REJECTED:
+                    case Exchange::ClientResponseType::INVALID: {
+                    }
+                        break;
+                }
+            }
             
-
     };
 
 }
