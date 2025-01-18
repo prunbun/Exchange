@@ -7,7 +7,7 @@
 #include "exchange/order_gateway/client_request.h"
 
 #include "om_order.h"
-// #include "risk_manager.h"
+#include "risk_manager.h"
 
 using namespace Common;
 
