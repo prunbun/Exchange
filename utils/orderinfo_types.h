@@ -148,4 +148,36 @@ namespace Common {
     };
 
     typedef std::array<TradeEngineConfig, ME_MAX_TICKERS> TradeEngineConfigHashmap;
+
+    // algorithm that our client could be using
+    enum class AlgoType : int8_t {
+        INVALID = 0,
+        RANDOM = 1,
+        MAKER = 2,
+        TAKER = 3,
+        MAX = 4
+    };
+
+    inline std::string algoTypeToString(AlgoType type) {
+        switch (type) {
+            case AlgoType::RANDOM: {return "RANDOM";}
+            case AlgoType::MAKER: {return "MAKER";}
+            case AlgoType::TAKER: {return "TAKER";}
+            case AlgoType::INVALID: {return "INVALID";}
+            case AlgoType::MAX: {return "MAX";}
+        }
+
+        return "UNKNOWN";
+    }
+
+    inline AlgoType stringToAlgoType(const std::string &str) {
+        for (auto i = static_cast<int>(AlgoType::INVALID); i <= static_cast<int>(AlgoType::MAX); ++i) {
+            const AlgoType algo_type = static_cast<AlgoType>(i);
+            if (algoTypeToString(algo_type) == str) {
+                return algo_type;
+            }
+        }
+
+        return AlgoType::INVALID;
+    }
 }
