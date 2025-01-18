@@ -43,7 +43,7 @@ namespace Trading {
 
             // called when the client updates its orderbook
             // we can compute the fair market price feature
-            void onOrderBookUpdate(TickerId ticker_id, Price price, Side side, MarketOrderBook * book) {
+            void onOrderBookUpdate(TickerId ticker_id, Price price, Side side, const MarketOrderBook * book) {
                 
                 // first, let's get the state of this orderbook
                 const BBO * bbo = book->getBBO();
@@ -63,7 +63,7 @@ namespace Trading {
 
             // called when the client receives a TRADE update on the exchange multicast
             // we can compute the aggressive trade ratio feature
-            void onTradeUpdate(const Exchange::MEMarketUpdate * market_update, MarketOrderBook * book) noexcept {
+            void onTradeUpdate(const Exchange::MEMarketUpdate * market_update, const MarketOrderBook * book) noexcept {
 
                 // state of orderbook
                 const BBO * bbo = book->getBBO();

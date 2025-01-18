@@ -50,7 +50,7 @@ namespace Trading {
 
             void updateBBO(bool update_bid, bool update_ask) noexcept;
 
-            const BBO * getBBO() noexcept {
+            const BBO * getBBO() const noexcept {
                 return &bbo;
             }
 
