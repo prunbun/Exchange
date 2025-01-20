@@ -6,6 +6,8 @@
 #include "order_manager.h"
 #include "feature_engine.h"
 
+#include "trade_engine.h"
+
 using namespace Common;
 
 namespace Trading {
@@ -23,7 +25,7 @@ namespace Trading {
 
         public:
             LiquidityTaker(Common::Logger * logger_param, TradeEngine *trade_engine_param, 
-                            FeatureEngine * feature_engine_param, OrderManager * order_manager_param, TradeEngineConfigHashmap &ticker_cfg_param);
+                            FeatureEngine * feature_engine_param, OrderManager * order_manager_param, const TradeEngineConfigHashmap &ticker_cfg_param);
             
             void onOrderBookUpdate(TickerId ticker_id, Price price, Side side, const MarketOrderBook * book) noexcept;
             void onTradeUpdate(const Exchange::MEMarketUpdate * market_update, const MarketOrderBook *book) noexcept;

@@ -6,15 +6,15 @@ Trading::MarketMaker::MarketMaker(Common::Logger *logger_param, TradeEngine *tra
 {
 
     // we will set the trade engine's callbacks to call the methods in this strategy
-    trade_engine_param->algoOnOrderBookUpdate = [this](auto ticker_id, auto price, auto side, auto book) {
+    trade_engine_param->algoOnOrderBookUpdate = [this](TickerId ticker_id, Price price, Side side, const MarketOrderBook * book) {
         onOrderBookUpdate(ticker_id, price, side, book);
     };
 
-    trade_engine_param->algoOnTradeUpdate = [this](auto market_update, auto book) {
+    trade_engine_param->algoOnTradeUpdate = [this](const Exchange::MEMarketUpdate * market_update, const MarketOrderBook * book) {
         onTradeUpdate(market_update, book);
     };
 
-    trade_engine_param->algoOnOrderUpdate = [this](auto client_response) {
+    trade_engine_param->algoOnOrderUpdate = [this](const Exchange::MEClientResponse * client_response) {
         onOrderUpdate(client_response);
     };
 

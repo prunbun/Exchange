@@ -2,7 +2,7 @@
 
 Trading::LiquidityTaker::LiquidityTaker(Common::Logger *logger_param, TradeEngine *trade_engine_param, 
                                         FeatureEngine *feature_engine_param, OrderManager *order_manager_param, 
-                                        TradeEngineConfigHashmap &ticker_cfg_param):
+                                        const TradeEngineConfigHashmap &ticker_cfg_param):
                                         feature_engine(feature_engine_param), order_manager(order_manager_param),
                                         logger(logger_param), ticker_configs_hashmap(ticker_cfg_param) {
 
@@ -11,11 +11,11 @@ Trading::LiquidityTaker::LiquidityTaker(Common::Logger *logger_param, TradeEngin
         onOrderBookUpdate(ticker_id, price, side, book);
     };
 
-    trade_engine_param->algoOnTradeUpdate = [this](Exchange::MEMarketUpdate * market_update, const MarketOrderBook * book) {
+    trade_engine_param->algoOnTradeUpdate = [this](const Exchange::MEMarketUpdate * market_update, const MarketOrderBook * book) {
         onTradeUpdate(market_update, book);
     };
 
-    trade_engine_param->algoOnOrderUpdate = [this](Exchange::MEClientResponse * client_response) {
+    trade_engine_param->algoOnOrderUpdate = [this](const Exchange::MEClientResponse * client_response) {
         onOrderUpdate(client_response);
     };
 
