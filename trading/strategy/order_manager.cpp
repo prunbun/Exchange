@@ -4,7 +4,7 @@
 void Trading::OrderManager::newOrder(OMOrder *order, TickerId ticker_id, Price price, Side side, Qty qty) noexcept
 {
     // first, we place the order with the specified details
-    const Exchange::MEClientRequest new_request{Exchange::ClientRequestType::NEW, trade_engine->client_id(), ticker_id, next_order_id, side, price, qty};
+    const Exchange::MEClientRequest new_request{Exchange::ClientRequestType::NEW, trade_engine->clientId(), ticker_id, next_order_id, side, price, qty};
     trade_engine->sendClientRequest(&new_request);
 
     // next it updates the order state in the OMOrder struct

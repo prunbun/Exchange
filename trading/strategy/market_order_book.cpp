@@ -101,7 +101,7 @@ void Trading::MarketOrderBook::onMarketUpdate(const Exchange::MEMarketUpdate *ma
     // cool! now our order book has been updated with the proper methods
     // we can now ask the trading engine to 'react' to these updates
     updateBBO(bid_updated, ask_updated);
-    trade_engine->onOrderBookUpdate(market_update->ticker_id, market_update->price, market_update->side);
+    trade_engine->onOrderBookUpdate(market_update->ticker_id, market_update->price, market_update->side, this);
 
     logger->log("%:% %() % OrderBook \n % \n", 
         __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),

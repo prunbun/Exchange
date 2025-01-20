@@ -9,6 +9,8 @@
 #include "om_order.h"
 #include "risk_manager.h"
 
+#include "trade_engine.h"
+
 using namespace Common;
 
 namespace Trading {

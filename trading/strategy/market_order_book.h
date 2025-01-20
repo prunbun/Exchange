@@ -6,6 +6,7 @@
 
 #include "market_order.h"
 #include "exchange/market_publisher/market_update.h"
+#include "trade_engine.h"
 
 namespace Trading {
 

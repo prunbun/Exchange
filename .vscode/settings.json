@@ -53,6 +53,7 @@
         "fstream": "cpp",
         "iomanip": "cpp",
         "unordered_set": "cpp",
-        "csignal": "cpp"
+        "csignal": "cpp",
+        "version": "cpp"
     }
 }

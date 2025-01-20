@@ -80,14 +80,57 @@ namespace Trading {
             TradeEngine(Common::ClientId client_id_param, AlgoType algo_type, const TradeEngineConfigHashmap &ticker_cfg, 
                         Exchange::ClientRequestLFQueue *client_requests_param, Exchange::ClientResponseLFQueue *client_responses_param, Exchange::MEMarketUpdateLFQueue *market_updates_param);
 
+            ~TradeEngine();
+
             void start() {
                 running = true;
 
-                ASSERT(Common::createAndStartThread(-1, "Trading/TradeEngine", [this]{ run();}) != nullptr, 
+                ASSERT(Common::createAndStartThread(-1, "Trading/TradeEngine", [this]{run();}) != nullptr, 
                         "Failed to start TradeEngine thread!"
                 );
             }
 
+            void stop() {
+
+                while(incoming_responses->size() || incoming_md_updates->size()) {
+                    logger.log("%:% %() % Sleeping till all updates are consumed, exch-receipts-lfq-size: %, market-updates-lfq-size:% \n",
+                        __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
+                        incoming_responses->size(), incoming_md_updates->size()
+                    );
+
+                    using namespace std::literals::chrono_literals;
+                    std::this_thread::sleep_for(10ms);
+                }
+
+                logger.log("%:% %() % POSITIONS \n % \n",
+                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
+                    position_keeper.toString()
+                );
+
+                running = false;
+            }
+
+            void sendClientRequest(const Exchange::MEClientRequest *client_request) noexcept;
+            void run() noexcept;
+
+            void onOrderBookUpdate(TickerId ticker_id, Price price, Side side, const MarketOrderBook *book) noexcept;
+            void onTradeUpdate(const Exchange::MEMarketUpdate *market_update, const MarketOrderBook *book) noexcept;
+            void onOrderUpdate(const Exchange::MEClientResponse *client_response) noexcept;
+
+            // sets the last event time to the current time
+            void initLastEventTime() {
+                last_event_time = Common::getCurrentNanos();
+            }
+
+            // returns the duration, in Nanos, since the last event time
+            Nanos silentSeconds() {
+                return (Common::getCurrentNanos() - last_event_time) / NANOS_TO_SECONDS;
+            }
+
+            // returns client id
+            ClientId clientId() const {
+                return client_id;
+            }
     };
 
 
