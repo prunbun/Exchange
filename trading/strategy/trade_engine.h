@@ -80,6 +80,13 @@ namespace Trading {
             TradeEngine(Common::ClientId client_id_param, AlgoType algo_type, const TradeEngineConfigHashmap &ticker_cfg, 
                         Exchange::ClientRequestLFQueue *client_requests_param, Exchange::ClientResponseLFQueue *client_responses_param, Exchange::MEMarketUpdateLFQueue *market_updates_param);
 
+            void start() {
+                running = true;
+
+                ASSERT(Common::createAndStartThread(-1, "Trading/TradeEngine", [this]{ run();}) != nullptr, 
+                        "Failed to start TradeEngine thread!"
+                );
+            }
 
     };
 
