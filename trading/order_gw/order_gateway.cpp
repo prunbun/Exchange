@@ -3,9 +3,9 @@
 Trading::OrderGateway::OrderGateway(ClientId cliend_id_param, Exchange::ClientRequestLFQueue *client_requests, 
                                     Exchange::ClientResponseLFQueue *client_responses, std::string ip_param, 
                                     const std::string &iface, int port_param
-                                    ): client_id(cliend_id_param), outgoing_requests(client_requests),
-                                    incoming_responses(client_responses), ip(ip_param), interface(iface),
-                                    port(port_param), logger("trading_order_gateway" + std::to_string(client_id) + ".log"),
+                                    ): client_id(cliend_id_param), ip(ip_param), interface(iface),
+                                    port(port_param), outgoing_requests(client_requests),
+                                    incoming_responses(client_responses), logger("trading_order_gateway" + std::to_string(client_id) + ".log"),
                                     tcp_socket(logger) {
     
     tcp_socket.receive_callback = [this](auto socket, auto rx_time) {

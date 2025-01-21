@@ -2,8 +2,9 @@
 
 #include "utils/macros.h"
 #include "utils/logger.h"
-#include "utils/orderinfo_types.h"
-#include "market_order_book.h"
+// #include "utils/orderinfo_types.h"
+// #include "market_order_book.h"
+
 
 using namespace Common;
 
@@ -30,7 +31,7 @@ namespace Trading {
             double aggr_trade_qty_ratio = Feature_INVALID; 
 
         public:
-            FeatureEngine(Common::Logger *logger_param);
+            FeatureEngine(Common::Logger *logger_param): logger(logger_param) {};
 
             // getters for computed features
             double getMktPrice() const noexcept {

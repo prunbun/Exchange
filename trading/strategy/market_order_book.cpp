@@ -1,5 +1,7 @@
 #include "market_order_book.h"
-// #include "trade_engine.h"
+
+#include "trade_engine.h"
+
 
 Trading::MarketOrderBook::MarketOrderBook(TickerId ticker_id_param, Logger *logger_param): 
                                         ticker_id(ticker_id_param),
@@ -172,7 +174,7 @@ std::string Trading::MarketOrderBook::toString(bool detailed, bool validity_chec
         }
 
         // format print the price, qty, and num orders at this price level
-        sprintf(buf, " <px:%3s prev:%3s next:%3s> %-3s @ %-5s(%-4s)", 
+        snprintf(buf, sizeof(buf), " <px:%3s prev:%3s next:%3s> %-3s @ %-5s(%-4s)", 
             priceToString(iter->price).c_str(), priceToString(iter->prev_entry->price).c_str(),
             priceToString(iter->next_entry->price).c_str(),
             priceToString(iter->price).c_str(), qtyToString(qty).c_str(), std::to_string(num_orders).c_str()
@@ -182,7 +184,7 @@ std::string Trading::MarketOrderBook::toString(bool detailed, bool validity_chec
         // now we print each individual order if we want a detailed breakdown 
         if (detailed) {
             for (auto o_iter = iter->first_mkt_order;; o_iter = o_iter->next_order) {
-                sprintf(buf, "[oid:%s q:%s prev:%s next:%s] ",
+                snprintf(buf, sizeof(buf), "[oid:%s q:%s prev:%s next:%s] ",
                     orderIdToString(o_iter->order_id).c_str(), qtyToString(o_iter->qty).c_str(),
                     orderIdToString(o_iter->prev_order ? o_iter->prev_order->order_id : OrderId_INVALID).c_str(),
                     orderIdToString(o_iter->next_order ? o_iter->next_order->order_id : OrderId_INVALID).c_str()

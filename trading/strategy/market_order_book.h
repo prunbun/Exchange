@@ -5,8 +5,7 @@
 #include "../../utils/logger.h"
 
 #include "market_order.h"
-#include "exchange/market_publisher/market_update.h"
-#include "trade_engine.h"
+#include "../../exchange/market_publisher/market_update.h"
 
 namespace Trading {
 
@@ -181,7 +180,7 @@ namespace Trading {
                 if (!orders_at_price) {
                     order->next_order->prev_order = order;
 
-                    auto new_orders_at_price = orders_at_price_pool.allocate(order->side, order->price, order, nullptr, nullptr);
+                    MarketOrdersAtPrice * new_orders_at_price = orders_at_price_pool.allocate(order->side, order->price, order, nullptr, nullptr);
                     addOrdersAtPrice(new_orders_at_price);
                 } else {
                     auto first_order = (orders_at_price ? orders_at_price->first_mkt_order : nullptr);

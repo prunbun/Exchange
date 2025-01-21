@@ -49,9 +49,9 @@ namespace Trading {
 
         MarketOrdersAtPrice() = default;
 
-        MarketOrdersAtPrice(Side side_param, Price price_param, 
+        MarketOrdersAtPrice(Side side_param, Price price_param, MarketOrder *first_me_order_param,
                             MarketOrdersAtPrice *prev_entry_param, MarketOrdersAtPrice *next_entry_param
-                            ): side(side_param), price(price_param), prev_entry(prev_entry_param), next_entry(next_entry_param) {
+                            ): side(side_param), price(price_param), first_mkt_order(first_me_order_param), prev_entry(prev_entry_param), next_entry(next_entry_param) {
 
         }
 

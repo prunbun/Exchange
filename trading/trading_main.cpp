@@ -94,11 +94,81 @@ int main(int argc, char **argv) {
     usleep(10 * 1000 * 1000);
     trade_engine->initLastEventTime();
 
+
     // ----------------
     // LAUNCH STRATEGIES
     // ----------------
-    
+    if (algo_type == AlgoType::RANDOM) {
+        Common::OrderId order_id = client_id * 1000;
+
+        std::vector<Exchange::MEClientRequest> client_requests_vec;
+        std::array<Price, ME_MAX_TICKERS> ticker_base_price;
+        for (size_t i = 0; i < ME_MAX_TICKERS; ++i) {
+            ticker_base_price[i] = (rand() % 100) + 100;
+        }
+
+        trade_engine->initLastEventTime();
+        
+        // make random transactions to simulate market activity
+        for (size_t i = 0; i < 10; ++i) {
+
+            // first we send some random transactions
+            const Common::TickerId ticker_id = rand() % Common::ME_MAX_TICKERS;
+            const Price price = ticker_base_price[ticker_id] + (rand() % 10) + 1;
+            const Qty qty = 1 + (rand() % 100) + 1;
+            const Side side = (rand() % 2 ? Common::Side::BUY : Common::Side::SELL);
+
+            Exchange::MEClientRequest new_request{
+                                                    Exchange::ClientRequestType::NEW,
+                                                    client_id, ticker_id, order_id++, side, price, qty
+                                                };
+            trade_engine->sendClientRequest(&new_request);
+            usleep(sleep_time);
+            client_requests_vec.push_back(new_request);
 
 
+            // next, we will cancel some of them randomly
+            const int cancel_index = rand() % client_requests_vec.size();
+            Exchange::MEClientRequest cancel_request = client_requests_vec[cancel_index];
+            cancel_request.type = Exchange::ClientRequestType::CANCEL;
+            trade_engine->sendClientRequest(&cancel_request);
+            usleep(sleep_time);
+        }
+    }
 
+    // now, we will wait until there is no market activity for at least 60 seconds, if so, we will terminate this client
+    while (trade_engine->silentSeconds() < 60) {
+
+        logger->log("%:% %() % Waiting till no activity, been silen for % seconds... \n",
+            __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
+            trade_engine->silentSeconds()
+        );
+
+        using namespace std::literals::chrono_literals;
+        std::this_thread::sleep_for(10s);
+    }
+
+    // if we detect more than a minute of inactivity, the application will exit
+    trade_engine->stop();
+    market_data_consumer->stop();
+    order_gateway->stop();
+
+    using namespace std::literals::chrono_literals;
+    std::this_thread::sleep_for(10s);
+
+    delete logger;
+    logger = nullptr;
+
+    delete trade_engine;
+    trade_engine = nullptr;
+
+    delete market_data_consumer;
+    market_data_consumer = nullptr;
+
+    delete order_gateway;
+    order_gateway = nullptr;
+
+    std::this_thread::sleep_for(10s);
+
+    exit(EXIT_SUCCESS);
 }

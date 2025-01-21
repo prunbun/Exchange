@@ -1,4 +1,5 @@
 /Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/cmake-build-release/CMakeFiles/exchange_main.dir
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/cmake-build-release/CMakeFiles/trading_main.dir
 /Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/cmake-build-release/CMakeFiles/edit_cache.dir
 /Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/cmake-build-release/CMakeFiles/rebuild_cache.dir
 /Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/cmake-build-release/utils/CMakeFiles/libutils.dir

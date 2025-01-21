@@ -1,4 +1,5 @@
 #include "market_maker.h"
+#include "trade_engine.h"
 
 Trading::MarketMaker::MarketMaker(Common::Logger *logger_param, TradeEngine *trade_engine_param, const FeatureEngine *feature_engine_param,
                         OrderManager *order_manager_param, const TradeEngineConfigHashmap &ticker_cgf_param) :

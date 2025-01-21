@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <limits>
+#include <sstream>
 #include "utils/macros.h"
 #include "utils/exchange_limits.h"
 

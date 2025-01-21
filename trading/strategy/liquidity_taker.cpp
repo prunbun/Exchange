@@ -1,4 +1,5 @@
 #include "liquidity_taker.h"
+#include "trade_engine.h"
 
 Trading::LiquidityTaker::LiquidityTaker(Common::Logger *logger_param, TradeEngine *trade_engine_param, 
                                         FeatureEngine *feature_engine_param, OrderManager *order_manager_param, 

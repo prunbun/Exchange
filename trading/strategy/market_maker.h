@@ -3,10 +3,8 @@
 #include "utils/logger.h"
 #include "utils/macros.h"
 
-#include "feature_engine.h"
 #include "order_manager.h"
-
-#include "trade_engine.h"
+#include "feature_engine.h"
 
 using namespace Common;
 

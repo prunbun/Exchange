@@ -6,8 +6,6 @@
 #include "order_manager.h"
 #include "feature_engine.h"
 
-#include "trade_engine.h"
-
 using namespace Common;
 
 namespace Trading {

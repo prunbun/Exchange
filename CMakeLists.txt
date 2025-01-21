@@ -1,25 +1,27 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(Pranav's_Exchange)
+project(LowLatencyApp)
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_COMPILER clang++)
-set(CMAKE_CXX_FLAGS "-std=c++20 -Wall -Wextra -Werror -Wpedantic -Wno-unused-variable")
+set(CMAKE_CXX_COMPILER g++)
+set(CMAKE_CXX_FLAGS "-std=c++2a -Wall -Wextra -Werror -Wpedantic -Wno-unused-private-field -Wno-unused-parameter -Wno-unused-variable")
 set(CMAKE_VERBOSE_MAKEFILE on)
 
 add_subdirectory(utils)
 add_subdirectory(exchange)
 add_subdirectory(trading)
 
-list(APPEND LIBS libutils)
 list(APPEND LIBS libexchange)
 list(APPEND LIBS libtrading)
+list(APPEND LIBS libutils)
 list(APPEND LIBS pthread)
 
 include_directories(${PROJECT_SOURCE_DIR})
 include_directories(${PROJECT_SOURCE_DIR}/exchange)
 include_directories(${PROJECT_SOURCE_DIR}/trading)
 
-
 add_executable(exchange_main exchange/exchange_main.cpp)
 target_link_libraries(exchange_main PUBLIC ${LIBS})
+
+add_executable(trading_main trading/trading_main.cpp)
+target_link_libraries(trading_main PUBLIC ${LIBS})

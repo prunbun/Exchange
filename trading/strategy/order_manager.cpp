@@ -1,4 +1,5 @@
 #include "order_manager.h"
+#include "trade_engine.h"
 
 // sends a new order to the client order gateway
 void Trading::OrderManager::newOrder(OMOrder *order, TickerId ticker_id, Price price, Side side, Qty qty) noexcept
