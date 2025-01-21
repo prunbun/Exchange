@@ -138,8 +138,8 @@ int main(int argc, char **argv) {
     }
 
     // now, we will wait until there is no market activity for at least 60 seconds, if so, we will terminate this client
-    std::cout << "running, unless there is 20 seconds of inactivity in the market..." << std::endl;
-    while (trade_engine->silentSeconds() < 20) {
+    std::cout << "running, unless there is 10 seconds of inactivity in the market..." << std::endl;
+    while (trade_engine->silentSeconds() < 10) {
 
         logger->log("%:% %() % Waiting till no activity, been silent for % seconds... \n",
             __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
