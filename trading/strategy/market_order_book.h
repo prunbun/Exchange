@@ -44,7 +44,7 @@ namespace Trading {
             MarketOrderBook(const MarketOrderBook &&) = delete;
             MarketOrderBook &operator=(const MarketOrderBook &) = delete;
             MarketOrderBook &operator=(const MarketOrderBook &&) = delete;
-            
+
             ~MarketOrderBook();
 
             auto setTradingEngine(TradeEngine *trade_engine_param) {
@@ -184,7 +184,7 @@ namespace Trading {
 
                 // if the price level doesn't exist, then we have to create it, else we add it to the level
                 if (!orders_at_price) {
-                    order->next_order->prev_order = order;
+                    order->next_order = order->prev_order = order;
 
                     MarketOrdersAtPrice * new_orders_at_price = orders_at_price_pool.allocate(order->side, order->price, order, nullptr, nullptr);
                     addOrdersAtPrice(new_orders_at_price);

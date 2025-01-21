@@ -1,1 +1,4 @@
-/
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/utils/socket_utils.h:125 createSocket() Tue Jan 21 00:42:13 2025 ip:233.252.14.3 interface:lo port:20001 is_udp:1 is_blocking:0 is_listening:0 ttl:0 SOtime:0 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/exchange/market_publisher/market_data_publisher.h:79 run() Tue Jan 21 00:42:14 2025 Publisher running... 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/exchange/market_publisher/market_data_publisher.h:88 run() Tue Jan 21 00:42:36 2025 Sending seq:1 MEMarketUpdate [type: ADD, order_id: 1, ticker: 3, side: SELL, price: 131, qty: 75, priority: 1] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/utils/multicast_socket.cpp:32 sendAndRecv() Tue Jan 21 00:42:36 2025 send socket:6 len:42
