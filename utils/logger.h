@@ -51,7 +51,7 @@ namespace Common {
                         // update the queue and let the thread go on cooldown
                         queue.updateReadIndex();
                         using namespace std::chrono_literals;
-                        std::this_thread::sleep_for(10ms); 
+                        std::this_thread::sleep_for(1ms); 
                     }
                 }
             }
@@ -77,7 +77,7 @@ namespace Common {
                 while (queue.size()) {
                     using namespace std::chrono_literals;
                     std::cout << queue.size() << std::endl;
-                    std::this_thread::sleep_for(100ms); // note the longer duration than the logger cooldown of 1ms
+                    std::this_thread::sleep_for(1s);
                 }
 
                 // Next, we should stop the logger's runtime to allow flushQueue to exit
@@ -203,6 +203,7 @@ namespace Common {
                         if (UNLIKELY(*(message + 1) == '%')) {
                             ++message; // <- follows same logic as above for escaping '%'
                         } else {
+                            // std::cout << *(message - 16) << *(message - 15) << *(message - 14) << *(message - 13) << *(message - 12) << *(message - 11) << *(message - 10) << *(message - 9) << *(message - 8) << *(message - 7) << *(message - 6) << *(message - 5) << *(message - 4) << *(message - 3) << *(message - 2) << *(message - 1) << std::endl; 
                             FATAL("Found a printf keyword in the plain string log(), but variables were not provided");
                         }
                     }

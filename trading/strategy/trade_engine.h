@@ -57,7 +57,7 @@ namespace Trading {
             std::function<void(const Exchange::MEClientResponse *client_response)> algoOnOrderUpdate;
 
             void defaultAlgoOnOrderBookUpdate(TickerId ticker_id, Price price, Side side, const MarketOrderBook *book) noexcept {
-                logger.log("%:% %() % TradeEngine orderbook update default - ticker:% price:% side:% \n"
+                logger.log("%:% %() % TradeEngine orderbook update default - ticker:% price:% side:% \n",
                     __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                     ticker_id, Common::priceToString(price).c_str(), Common::sideToString(side).c_str()
                 );

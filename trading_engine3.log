@@ -1,1 +1,321 @@
-/
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:40 TradeEngine() Tue Jan 21 01:05:40 2025 TradeEngine Configs Initialized RANDOM Ticker: 0 TradeEngineConfig { trade-size: 0 feature-threshold: 0 risk config: RiskConfig { max-order-size: 0 max-position: 0 max-loss: 0 } }. 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:40 TradeEngine() Tue Jan 21 01:05:40 2025 TradeEngine Configs Initialized RANDOM Ticker: 1 TradeEngineConfig { trade-size: 0 feature-threshold: 0 risk config: RiskConfig { max-order-size: 0 max-position: 0 max-loss: 0 } }. 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:40 TradeEngine() Tue Jan 21 01:05:40 2025 TradeEngine Configs Initialized RANDOM Ticker: 2 TradeEngineConfig { trade-size: 0 feature-threshold: 0 risk config: RiskConfig { max-order-size: 0 max-position: 0 max-loss: 0 } }. 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:40 TradeEngine() Tue Jan 21 01:05:40 2025 TradeEngine Configs Initialized RANDOM Ticker: 3 TradeEngineConfig { trade-size: 0 feature-threshold: 0 risk config: RiskConfig { max-order-size: 0 max-position: 0 max-loss: 0 } }. 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:40 TradeEngine() Tue Jan 21 01:05:40 2025 TradeEngine Configs Initialized RANDOM Ticker: 4 TradeEngineConfig { trade-size: 0 feature-threshold: 0 risk config: RiskConfig { max-order-size: 0 max-position: 0 max-loss: 0 } }. 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:40 TradeEngine() Tue Jan 21 01:05:40 2025 TradeEngine Configs Initialized RANDOM Ticker: 5 TradeEngineConfig { trade-size: 0 feature-threshold: 0 risk config: RiskConfig { max-order-size: 0 max-position: 0 max-loss: 0 } }. 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:40 TradeEngine() Tue Jan 21 01:05:40 2025 TradeEngine Configs Initialized RANDOM Ticker: 6 TradeEngineConfig { trade-size: 0 feature-threshold: 0 risk config: RiskConfig { max-order-size: 0 max-position: 0 max-loss: 0 } }. 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:40 TradeEngine() Tue Jan 21 01:05:40 2025 TradeEngine Configs Initialized RANDOM Ticker: 7 TradeEngineConfig { trade-size: 0 feature-threshold: 0 risk config: RiskConfig { max-order-size: 0 max-position: 0 max-loss: 0 } }. 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:80 run() Tue Jan 21 01:05:40 2025 TradeEngine running! 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: NEW, client: 3, ticker: 3, order_id: 3000, side: SELL, qty: 75, price: 131]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:102 run() Tue Jan 21 01:05:55 2025 Processing Market Update MEMarketUpdate [type: ADD, order_id: 1, ticker: 3, side: SELL, price: 131, qty: 75, priority: 1] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:119 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to orderbook change - ticker: 3 price: 131 side: SELL 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/feature_engine.h:63 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 ticker:3 price:131 side:SELL mkt-price:nan aggr-trade-ratio:nan 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:61 defaultAlgoOnOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine orderbook update default - ticker:3 price:131 side:SELL 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:109 onMarketUpdate() Tue Jan 21 01:05:55 2025 OrderBook 
+ Ticker: 3
+ASKS L:0 =>  <px:131 prev:131 next:131> 131 @ 75   (1   )
+
+                          X
+
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: CANCEL, client: 3, ticker: 3, order_id: 3000, side: SELL, qty: 75, price: 131]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: NEW, client: 3, ticker: 6, order_id: 3001, side: BUY, qty: 64, price: 134]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:102 run() Tue Jan 21 01:05:55 2025 Processing Market Update MEMarketUpdate [type: CANCEL, order_id: 1, ticker: 3, side: SELL, price: 131, qty: 0, priority: 1] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:119 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to orderbook change - ticker: 3 price: 131 side: SELL 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/feature_engine.h:63 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 ticker:3 price:131 side:SELL mkt-price:nan aggr-trade-ratio:nan 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:61 defaultAlgoOnOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine orderbook update default - ticker:3 price:131 side:SELL 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:109 onMarketUpdate() Tue Jan 21 01:05:55 2025 OrderBook 
+ Ticker: 3
+
+                          X
+
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: CANCEL, client: 3, ticker: 6, order_id: 3001, side: BUY, qty: 64, price: 134]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:102 run() Tue Jan 21 01:05:55 2025 Processing Market Update MEMarketUpdate [type: ADD, order_id: 1, ticker: 6, side: BUY, price: 134, qty: 64, priority: 1] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:119 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to orderbook change - ticker: 6 price: 134 side: BUY 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/feature_engine.h:63 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 ticker:6 price:134 side:BUY mkt-price:nan aggr-trade-ratio:nan 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:61 defaultAlgoOnOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine orderbook update default - ticker:6 price:134 side:BUY 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:109 onMarketUpdate() Tue Jan 21 01:05:55 2025 OrderBook 
+ Ticker: 6
+
+                          X
+
+BIDS L:0 =>  <px:134 prev:134 next:134> 134 @ 64   (1   )
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: NEW, client: 3, ticker: 1, order_id: 3002, side: BUY, qty: 64, price: 154]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: CANCEL, client: 3, ticker: 1, order_id: 3002, side: BUY, qty: 64, price: 154]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:55 2025 Processing Exchange Receipt: MEClientResponse [type: ACCEPTED, client: 3, ticker: 3, client order id: 3000, market order id: 1, side: SELL, exec_qty: 75, leaves_qty: INVALID, price: 131]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to order update - MEClientResponse [type: ACCEPTED, client: 3, ticker: 3, client order id: 3000, market order id: 1, side: SELL, exec_qty: 75, leaves_qty: INVALID, price: 131] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:55 2025 TradeEngine order update default - MEClientResponse [type: ACCEPTED, client: 3, ticker: 3, client order id: 3000, market order id: 1, side: SELL, exec_qty: 75, leaves_qty: INVALID, price: 131] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:55 2025 Processing Exchange Receipt: MEClientResponse [type: CANCELED, client: 3, ticker: 3, client order id: 3000, market order id: 1, side: SELL, exec_qty: 75, leaves_qty: INVALID, price: 131]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to order update - MEClientResponse [type: CANCELED, client: 3, ticker: 3, client order id: 3000, market order id: 1, side: SELL, exec_qty: 75, leaves_qty: INVALID, price: 131] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:55 2025 TradeEngine order update default - MEClientResponse [type: CANCELED, client: 3, ticker: 3, client order id: 3000, market order id: 1, side: SELL, exec_qty: 75, leaves_qty: INVALID, price: 131] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:102 run() Tue Jan 21 01:05:55 2025 Processing Market Update MEMarketUpdate [type: CANCEL, order_id: 1, ticker: 6, side: BUY, price: 134, qty: 0, priority: 1] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:119 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to orderbook change - ticker: 6 price: 134 side: BUY 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/feature_engine.h:63 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 ticker:6 price:134 side:BUY mkt-price:nan aggr-trade-ratio:nan 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:61 defaultAlgoOnOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine orderbook update default - ticker:6 price:134 side:BUY 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:109 onMarketUpdate() Tue Jan 21 01:05:55 2025 OrderBook 
+ Ticker: 6
+
+                          X
+
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: NEW, client: 3, ticker: 1, order_id: 3003, side: BUY, qty: 54, price: 154]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: CANCEL, client: 3, ticker: 1, order_id: 3003, side: BUY, qty: 54, price: 154]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:102 run() Tue Jan 21 01:05:55 2025 Processing Market Update MEMarketUpdate [type: ADD, order_id: 1, ticker: 1, side: BUY, price: 154, qty: 64, priority: 1] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:119 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to orderbook change - ticker: 1 price: 154 side: BUY 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/feature_engine.h:63 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 ticker:1 price:154 side:BUY mkt-price:nan aggr-trade-ratio:nan 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:61 defaultAlgoOnOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine orderbook update default - ticker:1 price:154 side:BUY 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:109 onMarketUpdate() Tue Jan 21 01:05:55 2025 OrderBook 
+ Ticker: 1
+
+                          X
+
+BIDS L:0 =>  <px:154 prev:154 next:154> 154 @ 64   (1   )
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:102 run() Tue Jan 21 01:05:55 2025 Processing Market Update MEMarketUpdate [type: CANCEL, order_id: 1, ticker: 1, side: BUY, price: 154, qty: 0, priority: 1] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:119 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to orderbook change - ticker: 1 price: 154 side: BUY 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/feature_engine.h:63 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 ticker:1 price:154 side:BUY mkt-price:nan aggr-trade-ratio:nan 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:61 defaultAlgoOnOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine orderbook update default - ticker:1 price:154 side:BUY 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:109 onMarketUpdate() Tue Jan 21 01:05:55 2025 OrderBook 
+ Ticker: 1
+
+                          X
+
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: NEW, client: 3, ticker: 1, order_id: 3004, side: SELL, qty: 99, price: 149]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:55 2025 Processing Exchange Receipt: MEClientResponse [type: ACCEPTED, client: 3, ticker: 6, client order id: 3001, market order id: 1, side: BUY, exec_qty: 64, leaves_qty: INVALID, price: 134]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to order update - MEClientResponse [type: ACCEPTED, client: 3, ticker: 6, client order id: 3001, market order id: 1, side: BUY, exec_qty: 64, leaves_qty: INVALID, price: 134] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:55 2025 TradeEngine order update default - MEClientResponse [type: ACCEPTED, client: 3, ticker: 6, client order id: 3001, market order id: 1, side: BUY, exec_qty: 64, leaves_qty: INVALID, price: 134] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:102 run() Tue Jan 21 01:05:55 2025 Processing Market Update MEMarketUpdate [type: ADD, order_id: 2, ticker: 1, side: BUY, price: 154, qty: 54, priority: 1] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:119 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to orderbook change - ticker: 1 price: 154 side: BUY 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/feature_engine.h:63 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 ticker:1 price:154 side:BUY mkt-price:nan aggr-trade-ratio:nan 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:61 defaultAlgoOnOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine orderbook update default - ticker:1 price:154 side:BUY 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:109 onMarketUpdate() Tue Jan 21 01:05:55 2025 OrderBook 
+ Ticker: 1
+
+                          X
+
+BIDS L:0 =>  <px:154 prev:154 next:154> 154 @ 54   (1   )
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: CANCEL, client: 3, ticker: 6, order_id: 3001, side: BUY, qty: 64, price: 134]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: NEW, client: 3, ticker: 1, order_id: 3005, side: SELL, qty: 101, price: 154]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:102 run() Tue Jan 21 01:05:55 2025 Processing Market Update MEMarketUpdate [type: CANCEL, order_id: 2, ticker: 1, side: BUY, price: 154, qty: 0, priority: 1] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:119 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to orderbook change - ticker: 1 price: 154 side: BUY 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/feature_engine.h:63 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 ticker:1 price:154 side:BUY mkt-price:nan aggr-trade-ratio:nan 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:61 defaultAlgoOnOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine orderbook update default - ticker:1 price:154 side:BUY 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:109 onMarketUpdate() Tue Jan 21 01:05:55 2025 OrderBook 
+ Ticker: 1
+
+                          X
+
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: CANCEL, client: 3, ticker: 6, order_id: 3001, side: BUY, qty: 64, price: 134]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:102 run() Tue Jan 21 01:05:55 2025 Processing Market Update MEMarketUpdate [type: ADD, order_id: 3, ticker: 1, side: SELL, price: 149, qty: 99, priority: 1] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:119 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to orderbook change - ticker: 1 price: 149 side: SELL 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/feature_engine.h:63 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 ticker:1 price:149 side:SELL mkt-price:nan aggr-trade-ratio:nan 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:61 defaultAlgoOnOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine orderbook update default - ticker:1 price:149 side:SELL 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:109 onMarketUpdate() Tue Jan 21 01:05:55 2025 OrderBook 
+ Ticker: 1
+ASKS L:0 =>  <px:149 prev:149 next:149> 149 @ 99   (1   )
+
+                          X
+
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: NEW, client: 3, ticker: 3, order_id: 3006, side: SELL, qty: 3, price: 134]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: CANCEL, client: 3, ticker: 1, order_id: 3005, side: SELL, qty: 101, price: 154]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: NEW, client: 3, ticker: 2, order_id: 3007, side: BUY, qty: 37, price: 134]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:55 2025 Processing Exchange Receipt: MEClientResponse [type: CANCELED, client: 3, ticker: 6, client order id: 3001, market order id: 1, side: BUY, exec_qty: 64, leaves_qty: INVALID, price: 134]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to order update - MEClientResponse [type: CANCELED, client: 3, ticker: 6, client order id: 3001, market order id: 1, side: BUY, exec_qty: 64, leaves_qty: INVALID, price: 134] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:55 2025 TradeEngine order update default - MEClientResponse [type: CANCELED, client: 3, ticker: 6, client order id: 3001, market order id: 1, side: BUY, exec_qty: 64, leaves_qty: INVALID, price: 134] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:55 2025 Processing Exchange Receipt: MEClientResponse [type: ACCEPTED, client: 3, ticker: 1, client order id: 3002, market order id: 1, side: BUY, exec_qty: 64, leaves_qty: INVALID, price: 154]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to order update - MEClientResponse [type: ACCEPTED, client: 3, ticker: 1, client order id: 3002, market order id: 1, side: BUY, exec_qty: 64, leaves_qty: INVALID, price: 154] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:55 2025 TradeEngine order update default - MEClientResponse [type: ACCEPTED, client: 3, ticker: 1, client order id: 3002, market order id: 1, side: BUY, exec_qty: 64, leaves_qty: INVALID, price: 154] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:55 2025 Processing Exchange Receipt: MEClientResponse [type: CANCELED, client: 3, ticker: 1, client order id: 3002, market order id: 1, side: BUY, exec_qty: 64, leaves_qty: INVALID, price: 154]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to order update - MEClientResponse [type: CANCELED, client: 3, ticker: 1, client order id: 3002, market order id: 1, side: BUY, exec_qty: 64, leaves_qty: INVALID, price: 154] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:55 2025 TradeEngine order update default - MEClientResponse [type: CANCELED, client: 3, ticker: 1, client order id: 3002, market order id: 1, side: BUY, exec_qty: 64, leaves_qty: INVALID, price: 154] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:55 2025 Processing Exchange Receipt: MEClientResponse [type: ACCEPTED, client: 3, ticker: 1, client order id: 3003, market order id: 2, side: BUY, exec_qty: 54, leaves_qty: INVALID, price: 154]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to order update - MEClientResponse [type: ACCEPTED, client: 3, ticker: 1, client order id: 3003, market order id: 2, side: BUY, exec_qty: 54, leaves_qty: INVALID, price: 154] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:55 2025 TradeEngine order update default - MEClientResponse [type: ACCEPTED, client: 3, ticker: 1, client order id: 3003, market order id: 2, side: BUY, exec_qty: 54, leaves_qty: INVALID, price: 154] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:55 2025 Processing Exchange Receipt: MEClientResponse [type: CANCELED, client: 3, ticker: 1, client order id: 3003, market order id: 2, side: BUY, exec_qty: 54, leaves_qty: INVALID, price: 154]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to order update - MEClientResponse [type: CANCELED, client: 3, ticker: 1, client order id: 3003, market order id: 2, side: BUY, exec_qty: 54, leaves_qty: INVALID, price: 154] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:55 2025 TradeEngine order update default - MEClientResponse [type: CANCELED, client: 3, ticker: 1, client order id: 3003, market order id: 2, side: BUY, exec_qty: 54, leaves_qty: INVALID, price: 154] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:102 run() Tue Jan 21 01:05:55 2025 Processing Market Update MEMarketUpdate [type: ADD, order_id: 4, ticker: 1, side: SELL, price: 154, qty: 101, priority: 1] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:119 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to orderbook change - ticker: 1 price: 154 side: SELL 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/feature_engine.h:63 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 ticker:1 price:154 side:SELL mkt-price:nan aggr-trade-ratio:nan 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:61 defaultAlgoOnOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine orderbook update default - ticker:1 price:154 side:SELL 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:109 onMarketUpdate() Tue Jan 21 01:05:55 2025 OrderBook 
+ Ticker: 1
+ASKS L:0 =>  <px:149 prev:154 next:154> 149 @ 99   (1   )
+ASKS L:1 =>  <px:154 prev:149 next:149> 154 @ 101  (1   )
+
+                          X
+
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: CANCEL, client: 3, ticker: 1, order_id: 3003, side: BUY, qty: 54, price: 154]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: NEW, client: 3, ticker: 6, order_id: 3008, side: SELL, qty: 11, price: 137]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:102 run() Tue Jan 21 01:05:55 2025 Processing Market Update MEMarketUpdate [type: ADD, order_id: 2, ticker: 3, side: SELL, price: 134, qty: 3, priority: 1] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:119 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to orderbook change - ticker: 3 price: 134 side: SELL 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/feature_engine.h:63 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 ticker:3 price:134 side:SELL mkt-price:nan aggr-trade-ratio:nan 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:61 defaultAlgoOnOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine orderbook update default - ticker:3 price:134 side:SELL 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:109 onMarketUpdate() Tue Jan 21 01:05:55 2025 OrderBook 
+ Ticker: 3
+ASKS L:0 =>  <px:134 prev:134 next:134> 134 @ 3    (1   )
+
+                          X
+
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:102 run() Tue Jan 21 01:05:55 2025 Processing Market Update MEMarketUpdate [type: CANCEL, order_id: 4, ticker: 1, side: SELL, price: 154, qty: 0, priority: 1] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:119 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to orderbook change - ticker: 1 price: 154 side: SELL 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/feature_engine.h:63 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 ticker:1 price:154 side:SELL mkt-price:nan aggr-trade-ratio:nan 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:61 defaultAlgoOnOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine orderbook update default - ticker:1 price:154 side:SELL 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:109 onMarketUpdate() Tue Jan 21 01:05:55 2025 OrderBook 
+ Ticker: 1
+ASKS L:0 =>  <px:149 prev:149 next:149> 149 @ 99   (1   )
+
+                          X
+
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:102 run() Tue Jan 21 01:05:55 2025 Processing Market Update MEMarketUpdate [type: ADD, order_id: 1, ticker: 2, side: BUY, price: 134, qty: 37, priority: 1] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:119 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine reaction to orderbook change - ticker: 2 price: 134 side: BUY 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/feature_engine.h:63 onOrderBookUpdate() Tue Jan 21 01:05:55 2025 ticker:2 price:134 side:BUY mkt-price:nan aggr-trade-ratio:nan 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:61 defaultAlgoOnOrderBookUpdate() Tue Jan 21 01:05:55 2025 TradeEngine orderbook update default - ticker:2 price:134 side:BUY 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:109 onMarketUpdate() Tue Jan 21 01:05:55 2025 OrderBook 
+ Ticker: 2
+
+                          X
+
+BIDS L:0 =>  <px:134 prev:134 next:134> 134 @ 37   (1   )
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:55 2025 TradeEngine Sending MEClientRequest [type: CANCEL, client: 3, ticker: 1, order_id: 3003, side: BUY, qty: 54, price: 154]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:56 2025 TradeEngine Sending MEClientRequest [type: NEW, client: 3, ticker: 0, order_id: 3009, side: BUY, qty: 72, price: 129]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:56 2025 Processing Exchange Receipt: MEClientResponse [type: ACCEPTED, client: 3, ticker: 1, client order id: 3004, market order id: 3, side: SELL, exec_qty: 99, leaves_qty: INVALID, price: 149]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine reaction to order update - MEClientResponse [type: ACCEPTED, client: 3, ticker: 1, client order id: 3004, market order id: 3, side: SELL, exec_qty: 99, leaves_qty: INVALID, price: 149] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine order update default - MEClientResponse [type: ACCEPTED, client: 3, ticker: 1, client order id: 3004, market order id: 3, side: SELL, exec_qty: 99, leaves_qty: INVALID, price: 149] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:56 2025 Processing Exchange Receipt: MEClientResponse [type: CANCEL_REJECTED, client: 3, ticker: 6, client order id: 3001, market order id: INVALID, side: INVALID, exec_qty: INVALID, leaves_qty: INVALID, price: INVALID]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine reaction to order update - MEClientResponse [type: CANCEL_REJECTED, client: 3, ticker: 6, client order id: 3001, market order id: INVALID, side: INVALID, exec_qty: INVALID, leaves_qty: INVALID, price: INVALID] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine order update default - MEClientResponse [type: CANCEL_REJECTED, client: 3, ticker: 6, client order id: 3001, market order id: INVALID, side: INVALID, exec_qty: INVALID, leaves_qty: INVALID, price: INVALID] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:56 2025 Processing Exchange Receipt: MEClientResponse [type: ACCEPTED, client: 3, ticker: 1, client order id: 3005, market order id: 4, side: SELL, exec_qty: 101, leaves_qty: INVALID, price: 154]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine reaction to order update - MEClientResponse [type: ACCEPTED, client: 3, ticker: 1, client order id: 3005, market order id: 4, side: SELL, exec_qty: 101, leaves_qty: INVALID, price: 154] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine order update default - MEClientResponse [type: ACCEPTED, client: 3, ticker: 1, client order id: 3005, market order id: 4, side: SELL, exec_qty: 101, leaves_qty: INVALID, price: 154] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:102 run() Tue Jan 21 01:05:56 2025 Processing Market Update MEMarketUpdate [type: ADD, order_id: 2, ticker: 6, side: SELL, price: 137, qty: 11, priority: 1] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:119 onOrderBookUpdate() Tue Jan 21 01:05:56 2025 TradeEngine reaction to orderbook change - ticker: 6 price: 137 side: SELL 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/feature_engine.h:63 onOrderBookUpdate() Tue Jan 21 01:05:56 2025 ticker:6 price:137 side:SELL mkt-price:nan aggr-trade-ratio:nan 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:61 defaultAlgoOnOrderBookUpdate() Tue Jan 21 01:05:56 2025 TradeEngine orderbook update default - ticker:6 price:137 side:SELL 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:109 onMarketUpdate() Tue Jan 21 01:05:56 2025 OrderBook 
+ Ticker: 6
+ASKS L:0 =>  <px:137 prev:137 next:137> 137 @ 11   (1   )
+
+                          X
+
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:68 sendClientRequest() Tue Jan 21 01:05:56 2025 TradeEngine Sending MEClientRequest [type: CANCEL, client: 3, ticker: 1, order_id: 3004, side: SELL, qty: 99, price: 149]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:102 run() Tue Jan 21 01:05:56 2025 Processing Market Update MEMarketUpdate [type: ADD, order_id: 1, ticker: 0, side: BUY, price: 129, qty: 72, priority: 1] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:119 onOrderBookUpdate() Tue Jan 21 01:05:56 2025 TradeEngine reaction to orderbook change - ticker: 0 price: 129 side: BUY 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/feature_engine.h:63 onOrderBookUpdate() Tue Jan 21 01:05:56 2025 ticker:0 price:129 side:BUY mkt-price:nan aggr-trade-ratio:nan 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:61 defaultAlgoOnOrderBookUpdate() Tue Jan 21 01:05:56 2025 TradeEngine orderbook update default - ticker:0 price:129 side:BUY 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:109 onMarketUpdate() Tue Jan 21 01:05:56 2025 OrderBook 
+ Ticker: 0
+
+                          X
+
+BIDS L:0 =>  <px:129 prev:129 next:129> 129 @ 72   (1   )
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:56 2025 Processing Exchange Receipt: MEClientResponse [type: CANCEL_REJECTED, client: 3, ticker: 6, client order id: 3001, market order id: INVALID, side: INVALID, exec_qty: INVALID, leaves_qty: INVALID, price: INVALID]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine reaction to order update - MEClientResponse [type: CANCEL_REJECTED, client: 3, ticker: 6, client order id: 3001, market order id: INVALID, side: INVALID, exec_qty: INVALID, leaves_qty: INVALID, price: INVALID] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine order update default - MEClientResponse [type: CANCEL_REJECTED, client: 3, ticker: 6, client order id: 3001, market order id: INVALID, side: INVALID, exec_qty: INVALID, leaves_qty: INVALID, price: INVALID] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:56 2025 Processing Exchange Receipt: MEClientResponse [type: ACCEPTED, client: 3, ticker: 3, client order id: 3006, market order id: 2, side: SELL, exec_qty: 3, leaves_qty: INVALID, price: 134]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine reaction to order update - MEClientResponse [type: ACCEPTED, client: 3, ticker: 3, client order id: 3006, market order id: 2, side: SELL, exec_qty: 3, leaves_qty: INVALID, price: 134] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine order update default - MEClientResponse [type: ACCEPTED, client: 3, ticker: 3, client order id: 3006, market order id: 2, side: SELL, exec_qty: 3, leaves_qty: INVALID, price: 134] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:56 2025 Processing Exchange Receipt: MEClientResponse [type: CANCELED, client: 3, ticker: 1, client order id: 3005, market order id: 4, side: SELL, exec_qty: 101, leaves_qty: INVALID, price: 154]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine reaction to order update - MEClientResponse [type: CANCELED, client: 3, ticker: 1, client order id: 3005, market order id: 4, side: SELL, exec_qty: 101, leaves_qty: INVALID, price: 154] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine order update default - MEClientResponse [type: CANCELED, client: 3, ticker: 1, client order id: 3005, market order id: 4, side: SELL, exec_qty: 101, leaves_qty: INVALID, price: 154] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:56 2025 Processing Exchange Receipt: MEClientResponse [type: ACCEPTED, client: 3, ticker: 2, client order id: 3007, market order id: 1, side: BUY, exec_qty: 37, leaves_qty: INVALID, price: 134]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine reaction to order update - MEClientResponse [type: ACCEPTED, client: 3, ticker: 2, client order id: 3007, market order id: 1, side: BUY, exec_qty: 37, leaves_qty: INVALID, price: 134] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine order update default - MEClientResponse [type: ACCEPTED, client: 3, ticker: 2, client order id: 3007, market order id: 1, side: BUY, exec_qty: 37, leaves_qty: INVALID, price: 134] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:56 2025 Processing Exchange Receipt: MEClientResponse [type: CANCEL_REJECTED, client: 3, ticker: 1, client order id: 3003, market order id: INVALID, side: INVALID, exec_qty: INVALID, leaves_qty: INVALID, price: INVALID]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine reaction to order update - MEClientResponse [type: CANCEL_REJECTED, client: 3, ticker: 1, client order id: 3003, market order id: INVALID, side: INVALID, exec_qty: INVALID, leaves_qty: INVALID, price: INVALID] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine order update default - MEClientResponse [type: CANCEL_REJECTED, client: 3, ticker: 1, client order id: 3003, market order id: INVALID, side: INVALID, exec_qty: INVALID, leaves_qty: INVALID, price: INVALID] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:56 2025 Processing Exchange Receipt: MEClientResponse [type: ACCEPTED, client: 3, ticker: 6, client order id: 3008, market order id: 2, side: SELL, exec_qty: 11, leaves_qty: INVALID, price: 137]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine reaction to order update - MEClientResponse [type: ACCEPTED, client: 3, ticker: 6, client order id: 3008, market order id: 2, side: SELL, exec_qty: 11, leaves_qty: INVALID, price: 137] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine order update default - MEClientResponse [type: ACCEPTED, client: 3, ticker: 6, client order id: 3008, market order id: 2, side: SELL, exec_qty: 11, leaves_qty: INVALID, price: 137] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:56 2025 Processing Exchange Receipt: MEClientResponse [type: CANCEL_REJECTED, client: 3, ticker: 1, client order id: 3003, market order id: INVALID, side: INVALID, exec_qty: INVALID, leaves_qty: INVALID, price: INVALID]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine reaction to order update - MEClientResponse [type: CANCEL_REJECTED, client: 3, ticker: 1, client order id: 3003, market order id: INVALID, side: INVALID, exec_qty: INVALID, leaves_qty: INVALID, price: INVALID] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine order update default - MEClientResponse [type: CANCEL_REJECTED, client: 3, ticker: 1, client order id: 3003, market order id: INVALID, side: INVALID, exec_qty: INVALID, leaves_qty: INVALID, price: INVALID] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:89 run() Tue Jan 21 01:05:56 2025 Processing Exchange Receipt: MEClientResponse [type: ACCEPTED, client: 3, ticker: 0, client order id: 3009, market order id: 1, side: BUY, exec_qty: 72, leaves_qty: INVALID, price: 129]
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:145 onOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine reaction to order update - MEClientResponse [type: ACCEPTED, client: 3, ticker: 0, client order id: 3009, market order id: 1, side: BUY, exec_qty: 72, leaves_qty: INVALID, price: 129] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:75 defaultAlgoOnOrderUpdate() Tue Jan 21 01:05:56 2025 TradeEngine order update default - MEClientResponse [type: ACCEPTED, client: 3, ticker: 0, client order id: 3009, market order id: 1, side: BUY, exec_qty: 72, leaves_qty: INVALID, price: 129] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:102 run() Tue Jan 21 01:05:56 2025 Processing Market Update MEMarketUpdate [type: CANCEL, order_id: 3, ticker: 1, side: SELL, price: 149, qty: 0, priority: 1] 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.cpp:119 onOrderBookUpdate() Tue Jan 21 01:05:56 2025 TradeEngine reaction to orderbook change - ticker: 1 price: 149 side: SELL 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/feature_engine.h:63 onOrderBookUpdate() Tue Jan 21 01:05:56 2025 ticker:1 price:149 side:SELL mkt-price:nan aggr-trade-ratio:nan 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:61 defaultAlgoOnOrderBookUpdate() Tue Jan 21 01:05:56 2025 TradeEngine orderbook update default - ticker:1 price:149 side:SELL 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:109 onMarketUpdate() Tue Jan 21 01:05:56 2025 OrderBook 
+ Ticker: 1
+
+                          X
+
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/trade_engine.h:112 stop() Tue Jan 21 01:06:16 2025 POSITIONS 
+ TickerId: 0 Position{ pos: 0 r-pnl: 0 u-pnl: 0 t-pnl: 0 vol: 0 vwaps:[ 0 X 0 ] BBO{ INVALID@INVALID X INVALID@INVALID }}
+TickerId: 1 Position{ pos: 0 r-pnl: 0 u-pnl: 0 t-pnl: 0 vol: 0 vwaps:[ 0 X 0 ] BBO{ INVALID@INVALID X INVALID@INVALID }}
+TickerId: 2 Position{ pos: 0 r-pnl: 0 u-pnl: 0 t-pnl: 0 vol: 0 vwaps:[ 0 X 0 ] BBO{ INVALID@INVALID X INVALID@INVALID }}
+TickerId: 3 Position{ pos: 0 r-pnl: 0 u-pnl: 0 t-pnl: 0 vol: 0 vwaps:[ 0 X 0 ] BBO{ INVALID@INVALID X INVALID@INVALID }}
+TickerId: 4 Position{ pos: 0 r-pnl: 0 u-pnl: 0 t-pnl: 0 vol: 0 vwaps:[ 0 X 0 ] }
+TickerId: 5 Position{ pos: 0 r-pnl: 0 u-pnl: 0 t-pnl: 0 vol: 0 vwaps:[ 0 X 0 ] }
+TickerId: 6 Position{ pos: 0 r-pnl: 0 u-pnl: 0 t-pnl: 0 vol: 0 vwaps:[ 0 X 0 ] BBO{ INVALID@INVALID X INVALID@INVALID }}
+TickerId: 7 Position{ pos: 0 r-pnl: 0 u-pnl: 0 t-pnl: 0 vol: 0 vwaps:[ 0 X 0 ] }
+Total PnL:0 Vol: 0
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:16 ~MarketOrderBook() Tue Jan 21 01:06:27 2025 ~MarketOrderBook() 
+ Ticker: 0
+
+                          X
+
+BIDS L:0 =>  <px:129 prev:129 next:129> 129 @ 72   (1   )
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:16 ~MarketOrderBook() Tue Jan 21 01:06:27 2025 ~MarketOrderBook() 
+ Ticker: 1
+
+                          X
+
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:16 ~MarketOrderBook() Tue Jan 21 01:06:27 2025 ~MarketOrderBook() 
+ Ticker: 2
+
+                          X
+
+BIDS L:0 =>  <px:134 prev:134 next:134> 134 @ 37   (1   )
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:16 ~MarketOrderBook() Tue Jan 21 01:06:27 2025 ~MarketOrderBook() 
+ Ticker: 3
+ASKS L:0 =>  <px:134 prev:134 next:134> 134 @ 3    (1   )
+
+                          X
+
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:16 ~MarketOrderBook() Tue Jan 21 01:06:27 2025 ~MarketOrderBook() 
+ Ticker: 4
+
+                          X
+
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:16 ~MarketOrderBook() Tue Jan 21 01:06:27 2025 ~MarketOrderBook() 
+ Ticker: 5
+
+                          X
+
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:16 ~MarketOrderBook() Tue Jan 21 01:06:27 2025 ~MarketOrderBook() 
+ Ticker: 6
+ASKS L:0 =>  <px:137 prev:137 next:137> 137 @ 11   (1   )
+
+                          X
+
+ 
+/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading/strategy/market_order_book.cpp:16 ~MarketOrderBook() Tue Jan 21 01:06:27 2025 ~MarketOrderBook() 
+ Ticker: 7
+
+                          X
+
+ 
