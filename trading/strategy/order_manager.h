@@ -39,6 +39,12 @@ namespace Trading {
 
             }
 
+            OrderManager() = delete;
+            OrderManager(const OrderManager &) = delete;
+            OrderManager(const OrderManager &&) = delete;
+            OrderManager &operator=(const OrderManager &) = delete;
+            OrderManager &operator=(const OrderManager &&) = delete;
+
             const OMOrderSideHashMap * getOMOrderSideHashmap(TickerId ticker_id) const {
                 return &(ticker_order_hashmap.at(ticker_id));
             }

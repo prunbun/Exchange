@@ -125,6 +125,11 @@ namespace Exchange {
                     recvFinishedCallback();
                 };
             };
+            OrderServer() = delete;
+            OrderServer(const OrderServer &) = delete;
+            OrderServer(const OrderServer &&) = delete;
+            OrderServer &operator=(const OrderServer &) = delete;
+            OrderServer &operator=(const OrderServer &&) = delete;
             
             ~OrderServer() {
                 stop();

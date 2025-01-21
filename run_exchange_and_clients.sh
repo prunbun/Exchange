@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bash build.sh
+bash ./build.sh
 
 date
 

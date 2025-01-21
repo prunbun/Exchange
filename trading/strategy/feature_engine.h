@@ -32,6 +32,11 @@ namespace Trading {
 
         public:
             FeatureEngine(Common::Logger *logger_param): logger(logger_param) {};
+            FeatureEngine() = delete;
+            FeatureEngine(const FeatureEngine &) = delete;
+            FeatureEngine(const FeatureEngine &&) = delete;
+            FeatureEngine &operator=(const FeatureEngine &) = delete;
+            FeatureEngine &operator=(const FeatureEngine &&) = delete;
 
             // getters for computed features
             double getMktPrice() const noexcept {

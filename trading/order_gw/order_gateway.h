@@ -35,6 +35,11 @@ namespace Trading {
                         Exchange::ClientResponseLFQueue *client_responses, std::string ip_param,
                         const std::string &iface, int port_param
                         );
+            OrderGateway() = delete;
+            OrderGateway(const OrderGateway &) = delete;
+            OrderGateway(const OrderGateway &&) = delete;
+            OrderGateway &operator=(const OrderGateway &) = delete;
+            OrderGateway &operator=(const OrderGateway &&) = delete;
 
             ~OrderGateway();
 

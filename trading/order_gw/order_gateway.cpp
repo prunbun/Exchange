@@ -41,7 +41,7 @@ void Trading::OrderGateway::stop() {
 
 void Trading::OrderGateway::run() {
 
-    logger.log("%:% %() %\n",
+    logger.log("%:% %() % \n",
         __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str)
     );
 

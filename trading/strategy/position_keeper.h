@@ -158,6 +158,11 @@ namespace Trading {
             PositionKeeper(Common::Logger * logger_param): logger(logger_param) {
 
             }
+            PositionKeeper() = delete;
+            PositionKeeper(const PositionKeeper &) = delete;
+            PositionKeeper(const PositionKeeper &&) = delete;
+            PositionKeeper &operator=(const PositionKeeper &) = delete;
+            PositionKeeper &operator=(const PositionKeeper &&) = delete;
             
             const PositionInfo * getPositionInfo(TickerId ticker_id) const noexcept {
                 return &(ticker_position.at(ticker_id));

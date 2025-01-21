@@ -36,7 +36,7 @@ namespace Trading {
     }
 
     void MarketDataConsumer::run() {
-        logger.log("%:% %() %\n", __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str));
+        logger.log("%:% %() % \n", __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str));
         
         while (running) {
             // check for updates from the market

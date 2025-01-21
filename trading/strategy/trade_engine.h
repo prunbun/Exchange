@@ -80,6 +80,12 @@ namespace Trading {
             TradeEngine(Common::ClientId client_id_param, AlgoType algo_type, const TradeEngineConfigHashmap &ticker_cfg, 
                         Exchange::ClientRequestLFQueue *client_requests_param, Exchange::ClientResponseLFQueue *client_responses_param, Exchange::MEMarketUpdateLFQueue *market_updates_param);
 
+            TradeEngine() = delete;
+            TradeEngine(const TradeEngine &) = delete;
+            TradeEngine(const TradeEngine &&) = delete;
+            TradeEngine &operator=(const TradeEngine &) = delete;
+            TradeEngine &operator=(const TradeEngine &&) = delete;
+
             ~TradeEngine();
 
             void start() {

@@ -39,6 +39,12 @@ namespace Trading {
 
         public:
             MarketOrderBook(TickerId ticker_id_param, Logger *logger_param);
+            MarketOrderBook() = delete;
+            MarketOrderBook(const MarketOrderBook &) = delete;
+            MarketOrderBook(const MarketOrderBook &&) = delete;
+            MarketOrderBook &operator=(const MarketOrderBook &) = delete;
+            MarketOrderBook &operator=(const MarketOrderBook &&) = delete;
+            
             ~MarketOrderBook();
 
             auto setTradingEngine(TradeEngine *trade_engine_param) {

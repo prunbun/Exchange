@@ -58,15 +58,13 @@ namespace Exchange {
 
         public:
             MEOrderBook(Logger *logger_param, MatchingEngine *matching_engine_param);
-            // MEOrderBook(TickerId ticker_id_param, Logger *logger_param, MatchingEngine *matching_engine_param);
-
-            ~MEOrderBook();
-
             MEOrderBook() = delete;
             MEOrderBook(const MEOrderBook &) = delete;
             MEOrderBook(const MEOrderBook &&) = delete;
             MEOrderBook &operator=(const MEOrderBook &) = delete;
             MEOrderBook &operator=(const MEOrderBook &&) = delete;
+
+            ~MEOrderBook();
 
             // Handle client order requests that want to enter new orders in the market
             void add(ClientId client_id, OrderId client_order_id, TickerId instrument_id, Side side, Price price, Qty qty) noexcept;

@@ -34,6 +34,11 @@ namespace Exchange {
 
             FIFOSequencer(ClientRequestLFQueue *client_requests, Logger * logger_param
             ): incoming_requests(client_requests), logger(logger_param) {} 
+            FIFOSequencer() = delete;
+            FIFOSequencer(const FIFOSequencer &) = delete;
+            FIFOSequencer(const FIFOSequencer &&) = delete;
+            FIFOSequencer &operator=(const FIFOSequencer &) = delete;
+            FIFOSequencer &operator=(const FIFOSequencer &&) = delete;
 
             // we just want to add this request the queue, we will sort it before publishing it
             void addClientRequest(Nanos rx_time, const MEClientRequest &request) {

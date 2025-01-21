@@ -98,7 +98,7 @@ void Trading::TradeEngine::run() noexcept {
         // process all market data updates
         for (const Exchange::MEMarketUpdate *market_update = incoming_md_updates->getNextRead(); market_update; market_update = incoming_md_updates->getNextRead()) {
 
-            logger.log("%:% %() % Processing Market Update % \n"
+            logger.log("%:% %() % Processing Market Update % \n",
                 __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                 market_update->toString().c_str()
             );

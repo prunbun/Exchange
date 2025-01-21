@@ -27,6 +27,12 @@ namespace Trading {
             MarketMaker(Common::Logger *logger_param, TradeEngine *trade_engine_param, const FeatureEngine *feature_engine_param,
                         OrderManager *order_manager_param, const TradeEngineConfigHashmap &ticker_cgf_param);
 
+            MarketMaker() = delete;
+            MarketMaker(const MarketMaker &) = delete;
+            MarketMaker(const MarketMaker &&) = delete;
+            MarketMaker &operator=(const MarketMaker &) = delete;
+            MarketMaker &operator=(const MarketMaker &&) = delete;
+
             void onOrderBookUpdate(TickerId ticker_id, Price price, Side side, const MarketOrderBook *book) noexcept;
             void onTradeUpdate(const Exchange::MEMarketUpdate *market_update, const MarketOrderBook * book) noexcept;
             void onOrderUpdate(const Exchange::MEClientResponse *client_response) noexcept;
