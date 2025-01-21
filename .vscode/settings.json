@@ -54,6 +54,8 @@
         "iomanip": "cpp",
         "unordered_set": "cpp",
         "csignal": "cpp",
-        "version": "cpp"
+        "version": "cpp",
+        "__tree": "cpp",
+        "map": "cpp"
     }
 }

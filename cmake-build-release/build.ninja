@@ -55,8 +55,6 @@ build CMakeFiles/exchange_main.dir/exchange/exchange_main.cpp.o: CXX_COMPILER__e
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading"
   OBJECT_DIR = CMakeFiles/exchange_main.dir
   OBJECT_FILE_DIR = CMakeFiles/exchange_main.dir/exchange
-  TARGET_COMPILE_PDB = CMakeFiles/exchange_main.dir/
-  TARGET_PDB = exchange_main.pdb
 
 
 # =============================================================================
@@ -72,9 +70,8 @@ build exchange_main: CXX_EXECUTABLE_LINKER__exchange_main_Release CMakeFiles/exc
   OBJECT_DIR = CMakeFiles/exchange_main.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = CMakeFiles/exchange_main.dir/
   TARGET_FILE = exchange_main
-  TARGET_PDB = exchange_main.pdb
+  TARGET_PDB = exchange_main.dbg
 
 # =============================================================================
 # Object build statements for EXECUTABLE target trading_main
@@ -91,8 +88,6 @@ build CMakeFiles/trading_main.dir/trading/trading_main.cpp.o: CXX_COMPILER__trad
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading"
   OBJECT_DIR = CMakeFiles/trading_main.dir
   OBJECT_FILE_DIR = CMakeFiles/trading_main.dir/trading
-  TARGET_COMPILE_PDB = CMakeFiles/trading_main.dir/
-  TARGET_PDB = trading_main.pdb
 
 
 # =============================================================================
@@ -108,9 +103,8 @@ build trading_main: CXX_EXECUTABLE_LINKER__trading_main_Release CMakeFiles/tradi
   OBJECT_DIR = CMakeFiles/trading_main.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = CMakeFiles/trading_main.dir/
   TARGET_FILE = trading_main
-  TARGET_PDB = trading_main.pdb
+  TARGET_PDB = trading_main.dbg
 
 
 #############################################
@@ -156,8 +150,6 @@ build utils/CMakeFiles/libutils.dir/multicast_socket.cpp.o: CXX_COMPILER__libuti
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange"
   OBJECT_DIR = utils/CMakeFiles/libutils.dir
   OBJECT_FILE_DIR = utils/CMakeFiles/libutils.dir
-  TARGET_COMPILE_PDB = utils/CMakeFiles/libutils.dir/libutils.pdb
-  TARGET_PDB = utils/liblibutils.pdb
 
 build utils/CMakeFiles/libutils.dir/tcp_server.cpp.o: CXX_COMPILER__libutils_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/utils/tcp_server.cpp || cmake_object_order_depends_target_libutils
   DEP_FILE = utils/CMakeFiles/libutils.dir/tcp_server.cpp.o.d
@@ -165,8 +157,6 @@ build utils/CMakeFiles/libutils.dir/tcp_server.cpp.o: CXX_COMPILER__libutils_uns
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange"
   OBJECT_DIR = utils/CMakeFiles/libutils.dir
   OBJECT_FILE_DIR = utils/CMakeFiles/libutils.dir
-  TARGET_COMPILE_PDB = utils/CMakeFiles/libutils.dir/libutils.pdb
-  TARGET_PDB = utils/liblibutils.pdb
 
 build utils/CMakeFiles/libutils.dir/tcp_socket.cpp.o: CXX_COMPILER__libutils_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/utils/tcp_socket.cpp || cmake_object_order_depends_target_libutils
   DEP_FILE = utils/CMakeFiles/libutils.dir/tcp_socket.cpp.o.d
@@ -174,8 +164,6 @@ build utils/CMakeFiles/libutils.dir/tcp_socket.cpp.o: CXX_COMPILER__libutils_uns
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange"
   OBJECT_DIR = utils/CMakeFiles/libutils.dir
   OBJECT_FILE_DIR = utils/CMakeFiles/libutils.dir
-  TARGET_COMPILE_PDB = utils/CMakeFiles/libutils.dir/libutils.pdb
-  TARGET_PDB = utils/liblibutils.pdb
 
 
 # =============================================================================
@@ -191,9 +179,8 @@ build utils/liblibutils.a: CXX_STATIC_LIBRARY_LINKER__libutils_Release utils/CMa
   OBJECT_DIR = utils/CMakeFiles/libutils.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = utils/CMakeFiles/libutils.dir/libutils.pdb
   TARGET_FILE = utils/liblibutils.a
-  TARGET_PDB = utils/liblibutils.pdb
+  TARGET_PDB = libutils.a.dbg
 
 
 #############################################
@@ -239,8 +226,6 @@ build exchange/CMakeFiles/libexchange.dir/matching_engine/matching_engine.cpp.o:
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/exchange"
   OBJECT_DIR = exchange/CMakeFiles/libexchange.dir
   OBJECT_FILE_DIR = exchange/CMakeFiles/libexchange.dir/matching_engine
-  TARGET_COMPILE_PDB = exchange/CMakeFiles/libexchange.dir/libexchange.pdb
-  TARGET_PDB = exchange/liblibexchange.pdb
 
 build exchange/CMakeFiles/libexchange.dir/matching_engine/me_order_book.cpp.o: CXX_COMPILER__libexchange_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/exchange/matching_engine/me_order_book.cpp || cmake_object_order_depends_target_libexchange
   DEP_FILE = exchange/CMakeFiles/libexchange.dir/matching_engine/me_order_book.cpp.o.d
@@ -248,8 +233,6 @@ build exchange/CMakeFiles/libexchange.dir/matching_engine/me_order_book.cpp.o: C
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/exchange"
   OBJECT_DIR = exchange/CMakeFiles/libexchange.dir
   OBJECT_FILE_DIR = exchange/CMakeFiles/libexchange.dir/matching_engine
-  TARGET_COMPILE_PDB = exchange/CMakeFiles/libexchange.dir/libexchange.pdb
-  TARGET_PDB = exchange/liblibexchange.pdb
 
 
 # =============================================================================
@@ -265,9 +248,8 @@ build exchange/liblibexchange.a: CXX_STATIC_LIBRARY_LINKER__libexchange_Release 
   OBJECT_DIR = exchange/CMakeFiles/libexchange.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = exchange/CMakeFiles/libexchange.dir/libexchange.pdb
   TARGET_FILE = exchange/liblibexchange.a
-  TARGET_PDB = exchange/liblibexchange.pdb
+  TARGET_PDB = libexchange.a.dbg
 
 
 #############################################
@@ -313,8 +295,6 @@ build trading/CMakeFiles/libtrading.dir/market_data/market_data_consumer.cpp.o: 
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading"
   OBJECT_DIR = trading/CMakeFiles/libtrading.dir
   OBJECT_FILE_DIR = trading/CMakeFiles/libtrading.dir/market_data
-  TARGET_COMPILE_PDB = trading/CMakeFiles/libtrading.dir/libtrading.pdb
-  TARGET_PDB = trading/liblibtrading.pdb
 
 build trading/CMakeFiles/libtrading.dir/order_gw/order_gateway.cpp.o: CXX_COMPILER__libtrading_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/trading/order_gw/order_gateway.cpp || cmake_object_order_depends_target_libtrading
   DEP_FILE = trading/CMakeFiles/libtrading.dir/order_gw/order_gateway.cpp.o.d
@@ -322,8 +302,6 @@ build trading/CMakeFiles/libtrading.dir/order_gw/order_gateway.cpp.o: CXX_COMPIL
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading"
   OBJECT_DIR = trading/CMakeFiles/libtrading.dir
   OBJECT_FILE_DIR = trading/CMakeFiles/libtrading.dir/order_gw
-  TARGET_COMPILE_PDB = trading/CMakeFiles/libtrading.dir/libtrading.pdb
-  TARGET_PDB = trading/liblibtrading.pdb
 
 build trading/CMakeFiles/libtrading.dir/strategy/liquidity_taker.cpp.o: CXX_COMPILER__libtrading_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/trading/strategy/liquidity_taker.cpp || cmake_object_order_depends_target_libtrading
   DEP_FILE = trading/CMakeFiles/libtrading.dir/strategy/liquidity_taker.cpp.o.d
@@ -331,8 +309,6 @@ build trading/CMakeFiles/libtrading.dir/strategy/liquidity_taker.cpp.o: CXX_COMP
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading"
   OBJECT_DIR = trading/CMakeFiles/libtrading.dir
   OBJECT_FILE_DIR = trading/CMakeFiles/libtrading.dir/strategy
-  TARGET_COMPILE_PDB = trading/CMakeFiles/libtrading.dir/libtrading.pdb
-  TARGET_PDB = trading/liblibtrading.pdb
 
 build trading/CMakeFiles/libtrading.dir/strategy/market_maker.cpp.o: CXX_COMPILER__libtrading_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/trading/strategy/market_maker.cpp || cmake_object_order_depends_target_libtrading
   DEP_FILE = trading/CMakeFiles/libtrading.dir/strategy/market_maker.cpp.o.d
@@ -340,8 +316,6 @@ build trading/CMakeFiles/libtrading.dir/strategy/market_maker.cpp.o: CXX_COMPILE
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading"
   OBJECT_DIR = trading/CMakeFiles/libtrading.dir
   OBJECT_FILE_DIR = trading/CMakeFiles/libtrading.dir/strategy
-  TARGET_COMPILE_PDB = trading/CMakeFiles/libtrading.dir/libtrading.pdb
-  TARGET_PDB = trading/liblibtrading.pdb
 
 build trading/CMakeFiles/libtrading.dir/strategy/market_order.cpp.o: CXX_COMPILER__libtrading_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/trading/strategy/market_order.cpp || cmake_object_order_depends_target_libtrading
   DEP_FILE = trading/CMakeFiles/libtrading.dir/strategy/market_order.cpp.o.d
@@ -349,8 +323,6 @@ build trading/CMakeFiles/libtrading.dir/strategy/market_order.cpp.o: CXX_COMPILE
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading"
   OBJECT_DIR = trading/CMakeFiles/libtrading.dir
   OBJECT_FILE_DIR = trading/CMakeFiles/libtrading.dir/strategy
-  TARGET_COMPILE_PDB = trading/CMakeFiles/libtrading.dir/libtrading.pdb
-  TARGET_PDB = trading/liblibtrading.pdb
 
 build trading/CMakeFiles/libtrading.dir/strategy/market_order_book.cpp.o: CXX_COMPILER__libtrading_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/trading/strategy/market_order_book.cpp || cmake_object_order_depends_target_libtrading
   DEP_FILE = trading/CMakeFiles/libtrading.dir/strategy/market_order_book.cpp.o.d
@@ -358,8 +330,6 @@ build trading/CMakeFiles/libtrading.dir/strategy/market_order_book.cpp.o: CXX_CO
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading"
   OBJECT_DIR = trading/CMakeFiles/libtrading.dir
   OBJECT_FILE_DIR = trading/CMakeFiles/libtrading.dir/strategy
-  TARGET_COMPILE_PDB = trading/CMakeFiles/libtrading.dir/libtrading.pdb
-  TARGET_PDB = trading/liblibtrading.pdb
 
 build trading/CMakeFiles/libtrading.dir/strategy/order_manager.cpp.o: CXX_COMPILER__libtrading_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/trading/strategy/order_manager.cpp || cmake_object_order_depends_target_libtrading
   DEP_FILE = trading/CMakeFiles/libtrading.dir/strategy/order_manager.cpp.o.d
@@ -367,8 +337,6 @@ build trading/CMakeFiles/libtrading.dir/strategy/order_manager.cpp.o: CXX_COMPIL
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading"
   OBJECT_DIR = trading/CMakeFiles/libtrading.dir
   OBJECT_FILE_DIR = trading/CMakeFiles/libtrading.dir/strategy
-  TARGET_COMPILE_PDB = trading/CMakeFiles/libtrading.dir/libtrading.pdb
-  TARGET_PDB = trading/liblibtrading.pdb
 
 build trading/CMakeFiles/libtrading.dir/strategy/risk_manager.cpp.o: CXX_COMPILER__libtrading_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/trading/strategy/risk_manager.cpp || cmake_object_order_depends_target_libtrading
   DEP_FILE = trading/CMakeFiles/libtrading.dir/strategy/risk_manager.cpp.o.d
@@ -376,8 +344,6 @@ build trading/CMakeFiles/libtrading.dir/strategy/risk_manager.cpp.o: CXX_COMPILE
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading"
   OBJECT_DIR = trading/CMakeFiles/libtrading.dir
   OBJECT_FILE_DIR = trading/CMakeFiles/libtrading.dir/strategy
-  TARGET_COMPILE_PDB = trading/CMakeFiles/libtrading.dir/libtrading.pdb
-  TARGET_PDB = trading/liblibtrading.pdb
 
 build trading/CMakeFiles/libtrading.dir/strategy/trade_engine.cpp.o: CXX_COMPILER__libtrading_unscanned_Release /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/trading/strategy/trade_engine.cpp || cmake_object_order_depends_target_libtrading
   DEP_FILE = trading/CMakeFiles/libtrading.dir/strategy/trade_engine.cpp.o.d
@@ -385,8 +351,6 @@ build trading/CMakeFiles/libtrading.dir/strategy/trade_engine.cpp.o: CXX_COMPILE
   INCLUDES = -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange" -I"/Users/pranavthatte/Desktop/Core/Princeton Senior/Winter 2023 Studying/Exchange/trading"
   OBJECT_DIR = trading/CMakeFiles/libtrading.dir
   OBJECT_FILE_DIR = trading/CMakeFiles/libtrading.dir/strategy
-  TARGET_COMPILE_PDB = trading/CMakeFiles/libtrading.dir/libtrading.pdb
-  TARGET_PDB = trading/liblibtrading.pdb
 
 
 # =============================================================================
@@ -402,9 +366,8 @@ build trading/liblibtrading.a: CXX_STATIC_LIBRARY_LINKER__libtrading_Release tra
   OBJECT_DIR = trading/CMakeFiles/libtrading.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = trading/CMakeFiles/libtrading.dir/libtrading.pdb
   TARGET_FILE = trading/liblibtrading.a
-  TARGET_PDB = trading/liblibtrading.pdb
+  TARGET_PDB = libtrading.a.dbg
 
 
 #############################################
@@ -488,14 +451,14 @@ build utils/all: phony utils/liblibutils.a
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/CMakeLists.txt /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/exchange/CMakeLists.txt /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/trading/CMakeLists.txt /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/utils/CMakeLists.txt /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCCompiler.cmake.in /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCCompilerABI.c /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCInformation.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCXXCompiler.cmake.in /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCXXCompilerABI.cpp /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCXXInformation.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCompilerIdDetection.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeDetermineCCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeDetermineCompileFeatures.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeDetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeDetermineCompilerABI.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeDetermineCompilerId.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeDetermineSystem.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeFindBinUtils.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeGenericSystem.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeInitializeConfigs.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeLanguageInformation.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeSystem.cmake.in /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeTestCCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeTestCXXCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeTestCompilerCommon.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Clang.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/GNU-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/GNU.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/HP-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/LCC-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/XL-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/zOS-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Internal/FeatureTesting.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-Clang-C.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-Clang-CXX.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-Clang.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Darwin-Determine-CXX.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Darwin-Initialize.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Darwin.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.29.3/CMakeCCompiler.cmake CMakeFiles/3.29.3/CMakeCXXCompiler.cmake CMakeFiles/3.29.3/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/CMakeLists.txt /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/exchange/CMakeLists.txt /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/trading/CMakeLists.txt /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/utils/CMakeLists.txt /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCInformation.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCXXInformation.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeGenericSystem.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeInitializeConfigs.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeLanguageInformation.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Clang.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/GNU.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-Clang-C.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-Clang-CXX.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-Clang.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Darwin-Initialize.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Darwin.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.29.3/CMakeCCompiler.cmake CMakeFiles/3.29.3/CMakeCXXCompiler.cmake CMakeFiles/3.29.3/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/CMakeLists.txt /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/exchange/CMakeLists.txt /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/trading/CMakeLists.txt /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/utils/CMakeLists.txt /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCCompiler.cmake.in /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCCompilerABI.c /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCInformation.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCXXCompiler.cmake.in /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCXXCompilerABI.cpp /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCXXInformation.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCompilerIdDetection.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeDetermineCCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeDetermineCompileFeatures.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeDetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeDetermineCompilerABI.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeDetermineCompilerId.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeDetermineSystem.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeFindBinUtils.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeGenericSystem.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeInitializeConfigs.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeLanguageInformation.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeParseImplicitIncludeInfo.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeParseImplicitLinkInfo.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeParseLibraryArchitecture.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeSystem.cmake.in /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeTestCCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeTestCXXCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeTestCompilerCommon.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/AppleClang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Borland-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Clang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Clang.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Cray-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/CrayClang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/GHS-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/GNU-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/GNU.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/HP-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/IAR-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Intel-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/LCC-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/MSVC-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/NVHPC-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/OrangeC-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/PGI-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/PathScale-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/SCO-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/TI-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/TIClang-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Tasking-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Watcom-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/XL-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/XLClang-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/zOS-C-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Internal/FeatureTesting.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-Clang-C.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-Clang-CXX.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-Clang.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Darwin-Determine-CXX.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Darwin-Initialize.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Darwin.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.29.3/CMakeCCompiler.cmake CMakeFiles/3.29.3/CMakeCXXCompiler.cmake CMakeFiles/3.29.3/CMakeSystem.cmake: phony
+build /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/CMakeLists.txt /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/exchange/CMakeLists.txt /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/trading/CMakeLists.txt /Users/pranavthatte/Desktop/Core/Princeton$ Senior/Winter$ 2023$ Studying/Exchange/utils/CMakeLists.txt /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCInformation.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCXXInformation.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeGenericSystem.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeInitializeConfigs.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeLanguageInformation.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/Clang.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Compiler/GNU.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-Clang-C.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-Clang-CXX.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Apple-Clang.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Darwin-Initialize.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/Darwin.cmake /opt/homebrew/Cellar/cmake/3.29.3/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.29.3/CMakeCCompiler.cmake CMakeFiles/3.29.3/CMakeCXXCompiler.cmake CMakeFiles/3.29.3/CMakeSystem.cmake: phony
 
 
 #############################################

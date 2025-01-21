@@ -1,4 +1,5 @@
 #include <csignal>
+#include <iostream>
 
 #include "strategy/trade_engine.h"
 #include "order_gw/order_gateway.h"
@@ -16,7 +17,7 @@ Trading::OrderGateway *order_gateway = nullptr;
     trading_main CLIENT_ID ALGO_TYPE [trade_size_1, threshold_1, max_order_size_1] ... for each ticker
 */
 int main(int argc, char **argv) {
-
+    std::cout << "parsing inputs..." << std::endl;
     // ----------------
     // PARSE INPUTS
     // ----------------
@@ -52,7 +53,7 @@ int main(int argc, char **argv) {
     Exchange::ClientResponseLFQueue client_responses(ME_MAX_CLIENT_UPDATES);
     Exchange::MEMarketUpdateLFQueue market_updates(ME_MAX_MARKET_UPDATES);
 
-
+    std::cout << "starting client components..." << std::endl;
     // ----------------
     // START ALL CLIENT COMPONENTS
     // ----------------
@@ -87,14 +88,14 @@ int main(int argc, char **argv) {
     market_data_consumer = new Trading::MarketDataConsumer(client_id, &market_updates, mkt_data_interface, snapshot_ip, snapshot_port, incremental_ip, incremental_port);
     market_data_consumer->start();
 
-
+    std::cout << "sleeping to warm up the components..." << std::endl;
     // ----------------
     // SLEEP FOR WARM UP
     // ----------------
     usleep(10 * 1000 * 1000);
     trade_engine->initLastEventTime();
 
-
+    std::cout << "launching random strategies" << std::endl;
     // ----------------
     // LAUNCH STRATEGIES
     // ----------------
@@ -137,9 +138,10 @@ int main(int argc, char **argv) {
     }
 
     // now, we will wait until there is no market activity for at least 60 seconds, if so, we will terminate this client
-    while (trade_engine->silentSeconds() < 60) {
+    std::cout << "running, unless there is 20 seconds of inactivity in the market..." << std::endl;
+    while (trade_engine->silentSeconds() < 20) {
 
-        logger->log("%:% %() % Waiting till no activity, been silen for % seconds... \n",
+        logger->log("%:% %() % Waiting till no activity, been silent for % seconds... \n",
             __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
             trade_engine->silentSeconds()
         );
@@ -149,6 +151,7 @@ int main(int argc, char **argv) {
     }
 
     // if we detect more than a minute of inactivity, the application will exit
+    std::cout << "exiting the application..." << std::endl;
     trade_engine->stop();
     market_data_consumer->stop();
     order_gateway->stop();
