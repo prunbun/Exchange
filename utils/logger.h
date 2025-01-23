@@ -203,7 +203,7 @@ namespace Common {
                         if (UNLIKELY(*(message + 1) == '%')) {
                             ++message; // <- follows same logic as above for escaping '%'
                         } else {
-                            // std::cout << *(message - 16) << *(message - 15) << *(message - 14) << *(message - 13) << *(message - 12) << *(message - 11) << *(message - 10) << *(message - 9) << *(message - 8) << *(message - 7) << *(message - 6) << *(message - 5) << *(message - 4) << *(message - 3) << *(message - 2) << *(message - 1) << std::endl; 
+                            std::cout << *(message - 16) << *(message - 15) << *(message - 14) << *(message - 13) << *(message - 12) << *(message - 11) << *(message - 10) << *(message - 9) << *(message - 8) << *(message - 7) << *(message - 6) << *(message - 5) << *(message - 4) << *(message - 3) << *(message - 2) << *(message - 1) << std::endl; 
                             FATAL("Found a printf keyword in the plain string log(), but variables were not provided");
                         }
                     }

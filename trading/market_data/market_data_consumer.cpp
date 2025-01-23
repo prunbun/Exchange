@@ -225,7 +225,7 @@ namespace Trading {
             ) {
             
             // log msg
-            logger.log("%:% %() % Next incremental message; next_exp: % vs. seq: % %.\n"
+            logger.log("%:% %() % Next incremental message; next_exp: % vs. seq: % %.\n",
                 __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                 next_exp_inc_seq_num, incr_msg->first, incr_msg->second.toString()
             );
@@ -334,7 +334,7 @@ namespace Trading {
             incremental_queued_msgs[request->seq_number] = request->me_market_update;
         }
 
-        logger.log("%:% %() % size snapshot:% incremental:% % => %\n",
+        logger.log("%:% %() % size snapshot:% incremental:% => %\n",
             __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
             snapshot_queued_messages.size(), request->seq_number, request->toString()
         );

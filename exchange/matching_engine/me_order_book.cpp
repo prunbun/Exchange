@@ -44,14 +44,14 @@ namespace Exchange {
 
         // aggressive order owner message
         client_response = {ClientResponseType::FILLED, client_id, instrument_id, client_order_id,
-                            unique_market_order_id, side, iterator->price, fill_qty, *leaves_qty
+                            unique_market_order_id, side, iterator->price, Qty_INVALID, fill_qty, *leaves_qty
                             };
         matching_engine->sendClientResponse(&client_response);
 
         // passive order owner message
         client_response = {ClientResponseType::FILLED, order->client_id, instrument_id,
                             order->client_order_id, order->market_order_id, order->side,
-                            iterator->price, fill_qty, order_qty
+                            iterator->price, Qty_INVALID, fill_qty, order->qty
                             };
         matching_engine->sendClientResponse(&client_response);
 
@@ -124,7 +124,7 @@ namespace Exchange {
         // 1. we have to accept the offer and send a receipt to the client that we got it
         OrderId const unique_market_order_id = generateNewMarketOrderId();
         client_response = {ClientResponseType::ACCEPTED, client_id, instrument_id, client_order_id,
-                            unique_market_order_id, side, price, 0, qty
+                            unique_market_order_id, side, price, qty, 0, qty
                             };
         matching_engine->sendClientResponse(&client_response); // notice how we use std::move in m.e., so it is ok to reuse this var
 

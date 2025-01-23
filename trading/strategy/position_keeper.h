@@ -48,6 +48,7 @@ namespace Trading {
             unrealized pnl is updated based on the price from the most recent market update and curr VWAP
         */
         void addFill(const Exchange::MEClientResponse *client_response, Logger *logger) noexcept {
+            bool debug_fill = true;
 
             // extract some vars
             const auto old_position = position;
@@ -59,11 +60,19 @@ namespace Trading {
             position += client_response->exec_qty * side_value;
             volume += client_response->exec_qty;
 
+            if (debug_fill) {
+                std::cout << "Found filled! " << client_response->toString() << "  going through logic now..." << std::endl;
+            }
+
             // next, we need to update the open_vwap
             if (old_position * sideToValue(client_response->side) >= 0) {
                 // notice, we don't need to update any other variables if we were 'flat' before or add to the same side
                 // in other words, there were no crosses
                 open_vwap[side_index] += (client_response->price * client_response->exec_qty);
+
+                if (debug_fill) {
+                    std::cout << "Old pos * sideToVal >= 0 so changing open_vwap " << old_position * sideToValue(client_response->side) << " " << client_response->price * client_response->exec_qty << std::endl;
+                }
 
             } else {
                 // otherwise, we need to update the realized pnl because the execution has gone against our position
@@ -82,6 +91,10 @@ namespace Trading {
                     open_vwap[side_index] = (client_response->price * std::abs(position));
                     open_vwap[opp_side_index] = 0;
                 }
+
+                if (debug_fill) {
+                    std::cout << "ELSE: execution gone against PnL, real pnl calc: client_resp->exec_qty: " << static_cast<int32_t>(client_response->exec_qty) << " old pos: " << std::abs(old_position) <<  " opp_side_vwap - client_response->price: " << (opp_side_vwap - client_response->price) << " side to Value: " << sideToValue(client_response->side) << std::endl;
+                }
             }
 
             // lastly, we update the unrealized pnl
@@ -90,6 +103,10 @@ namespace Trading {
                 open_vwap[sideToIndex(Side::BUY)] = open_vwap[sideToIndex(Side::SELL)] = 0;
                 unreal_pnl = 0;
 
+                if (debug_fill) {
+                    std::cout << "no position, unrealized pnl going to 0, open vwap reset to 0" << std::endl;
+                }
+
             } else {
 
                 if (position > 0) {
@@ -97,10 +114,18 @@ namespace Trading {
                 } else {
                     unreal_pnl = (open_vwap[sideToIndex(Side::SELL)] / std::abs(position) - client_response->price) * std::abs(position);
                 }
+
+                if (debug_fill) {
+                    std::cout << "we have a pos remaining, unrealized pnl: " << unreal_pnl << std::endl;
+                }
             }
 
             // update total forecasted pnl
             total_pnl = real_pnl + unreal_pnl;
+
+            if (debug_fill) {
+                std::cout << "final pnl update: " << total_pnl << std::endl;
+            }
  
             // log the change made to our position
             std::string time_str;

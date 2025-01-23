@@ -23,7 +23,7 @@
 #                                   50 0.3 350 300 -300 \
 #                                   300 0.8 350 300 -300 &
 
-./cmake-build-release/trading_main  3 RANDOM &
-sleep 5
+./cmake-build-release/trading_main  5 RANDOM &
+./cmake-build-release/trading_main  10 RANDOM &
 
 wait

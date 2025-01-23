@@ -27,6 +27,7 @@ namespace Common {
         for (auto socket : disconnected_sockets) {
             del(socket);
         }
+        disconnected_sockets.clear();
 
         // fetch a list of all the events we received
         const int n = kevent(kqueue_file_descriptor, nullptr, 0, events, max_events, nullptr);
