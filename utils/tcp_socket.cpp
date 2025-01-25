@@ -35,30 +35,34 @@ namespace Common {
         // where we receive the message from the socket
         // Note to readers: This code is kind of complex so I had to consult other resources for coding help
         // I am not fully confident on the code that deals with timing and some of the settings for the msg fields
+        // UPDATE: this timing methods works well on linux and for udp in general, tcp it doesn't work as well, for now, we will just use our user time instead
         const auto n_rcv = recvmsg(socket_file_descriptor, &msg, MSG_DONTWAIT);
         if (n_rcv > 0) {
             next_receive_valid_index += n_rcv;
 
-            Nanos kernel_time = 0;
-            struct timeval time_kernel;
-            if (cmsg->cmsg_level == SOL_SOCKET
-                && cmsg->cmsg_type == SCM_TIMESTAMP
-                && cmsg->cmsg_len == CMSG_LEN(sizeof(time_kernel))
-            ) {
-                memcpy(&time_kernel, CMSG_DATA(cmsg), sizeof(time_kernel));
-                kernel_time = time_kernel.tv_sec * NANOS_TO_SECONDS + time_kernel.tv_usec * NANOS_TO_MICROS;
-            }
+            /*
+            NOTE: For now, we will use our implementation of user time clocking as it works better for tcp
+
+            // Nanos kernel_time = 0;
+            // struct timeval time_kernel;
+            // if (cmsg->cmsg_level == SOL_SOCKET
+            //     && cmsg->cmsg_type == SCM_TIMESTAMP
+            //     && cmsg->cmsg_len == CMSG_LEN(sizeof(time_kernel))
+            // ) {
+            //     memcpy(&time_kernel, CMSG_DATA(cmsg), sizeof(time_kernel));
+            //     kernel_time = time_kernel.tv_sec * NANOS_TO_SECONDS + time_kernel.tv_usec * NANOS_TO_MICROS;
+            // }
+            */
 
             const auto user_time = getCurrentNanos();
 
-            logger.log("%: % %() % read socket: % len:% utime:% ktime:% diff:% \n",
+            logger.log("%: % %() % read socket: % len:% utime:% \n",
                 __FILE__, __LINE__, __FUNCTION__,
                 Common::getCurrentTimeStr(&time_string),
-                socket_file_descriptor, next_receive_valid_index, user_time,
-                kernel_time, (user_time - kernel_time)
+                socket_file_descriptor, next_receive_valid_index, user_time
             );
 
-            receive_callback(this, kernel_time);
+            receive_callback(this, user_time);
         }
 
         ssize_t n_send = std::min(TCPBufferSize, next_send_valid_index);
