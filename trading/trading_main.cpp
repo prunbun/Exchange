@@ -110,107 +110,33 @@ int main(int argc, char **argv) {
 
         trade_engine->initLastEventTime();
         
-        // // make random transactions to simulate market activity
-        // for (size_t i = 0; i < 5; ++i) {
+        // make random transactions to simulate market activity
+        for (size_t i = 0; i < 10; ++i) {
 
-        //     // first we send some random transactions
-        //     const Common::TickerId ticker_id = rand() % Common::ME_MAX_TICKERS;
-        //     const Price price = ticker_base_price[ticker_id] + (rand() % 10) + 1;
-        //     const Qty qty = 1 + (rand() % 100) + 1;
-        //     const Side side = (rand() % 2 ? Common::Side::BUY : Common::Side::SELL);
+            // first we send some random transactions
+            // const Common::TickerId ticker_id = rand() % Common::ME_MAX_TICKERS;
+            const Common::TickerId ticker_id = rand() % 2;
+            const Price price = ticker_base_price[ticker_id] + (rand() % 10) + 1;
+            const Qty qty = 1 + (rand() % 100) + 1;
+            const Side side = (rand() % 2 ? Common::Side::BUY : Common::Side::SELL);
 
-        //     Exchange::MEClientRequest new_request{
-        //                                             Exchange::ClientRequestType::NEW,
-        //                                             client_id, ticker_id, order_id++, side, price, qty
-        //                                         };
-        //     trade_engine->sendClientRequest(&new_request);
-        //     usleep(sleep_time);
-        //     client_requests_vec.push_back(new_request);
-
-
-        //     // next, we will cancel some of them randomly
-        //     const int cancel_index = rand() % client_requests_vec.size();
-        //     Exchange::MEClientRequest cancel_request = client_requests_vec[cancel_index];
-        //     cancel_request.type = Exchange::ClientRequestType::CANCEL;
-        //     trade_engine->sendClientRequest(&cancel_request);
-        //     usleep(sleep_time);
-        // }
-
-        // let the market participants trade on small set of the tickers
-        // for (size_t i = 0; i < 5; ++i) {
-
-        //     // first we send some random transactions
-        //     const Common::TickerId ticker_id = rand() % 1;
-        //     const Price price = ticker_base_price[ticker_id] + (rand() % 10) + 1;
-        //     const Qty qty = 1 + (rand() % 100) + 1;
-        //     const Side side = (rand() % 2 ? Common::Side::BUY : Common::Side::SELL);
-
-        //     Exchange::MEClientRequest new_request{
-        //                                             Exchange::ClientRequestType::NEW,
-        //                                             client_id, ticker_id, order_id++, side, price, qty
-        //                                         };
-        //     trade_engine->sendClientRequest(&new_request);
-        //     client_requests_vec.push_back(new_request);
-
-        //     usleep(sleep_time);
-        // }
-
-        // PNL Unit Test
-        if (client_id == 5) {
-            using namespace std::literals::chrono_literals;
-
-            // after a brief delay, buy at a low price
-            std::this_thread::sleep_for(10s);
-            Exchange::MEClientRequest new_request = {
-                Exchange::ClientRequestType::NEW,
-                client_id, 0, order_id++, Side::BUY, 10, 100
-            };
+            Exchange::MEClientRequest new_request{
+                                                    Exchange::ClientRequestType::NEW,
+                                                    client_id, ticker_id, order_id++, side, price, qty
+                                                };
             trade_engine->sendClientRequest(&new_request);
+            usleep(sleep_time);
+            client_requests_vec.push_back(new_request);
 
-            // then, after it has been filled, sell for a profit at a higher price
-            std::this_thread::sleep_for(10s);
-            new_request = {
-                Exchange::ClientRequestType::NEW,
-                client_id, 0, order_id++, Side::SELL, 40, 100
-            };
-            trade_engine->sendClientRequest(&new_request);
 
-        } else {
-            using namespace std::literals::chrono_literals;
-
-            // have a poor strategy and sell low 100 shares at $10
-            Exchange::MEClientRequest new_request = {
-                Exchange::ClientRequestType::NEW,
-                client_id, 0, order_id++, Side::SELL, 10, 100
-            };
-
-            trade_engine->sendClientRequest(&new_request);
-            
-
-            // after a brief delay, offer to buy at a high price at $40
-            std::this_thread::sleep_for(10s);
-            new_request = {
-                Exchange::ClientRequestType::NEW,
-                client_id, 0, order_id++, Side::BUY, 40, 100
-            };
-
-            trade_engine->sendClientRequest(&new_request);
-            std::this_thread::sleep_for(5s);
-
+            // next, we will cancel some of them randomly
+            const int cancel_index = rand() % client_requests_vec.size();
+            Exchange::MEClientRequest cancel_request = client_requests_vec[cancel_index];
+            cancel_request.type = Exchange::ClientRequestType::CANCEL;
+            trade_engine->sendClientRequest(&cancel_request);
+            usleep(sleep_time);
         }
 
-        // now we need to keep a connection alive for a bit to receive all of the socket updates, so let's just stay connected by sending dummy orders
-        for (int i = 0; i < 3; i++) {
-            using namespace std::literals::chrono_literals;
-
-            
-            Exchange::MEClientRequest new_request = {
-                Exchange::ClientRequestType::NEW,
-                client_id, 1, order_id++, Side::BUY, 10, 1
-            };
-            trade_engine->sendClientRequest(&new_request);
-            std::this_thread::sleep_for(5s);
-        }
     }
 
     // now, we will wait until there is no market activity for at least 45 seconds, if so, we will terminate this client

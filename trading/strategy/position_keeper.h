@@ -48,7 +48,7 @@ namespace Trading {
             unrealized pnl is updated based on the price from the most recent market update and curr VWAP
         */
         void addFill(const Exchange::MEClientResponse *client_response, Logger *logger) noexcept {
-            bool debug_fill = true;
+            bool debug_fill = false;
 
             // extract some vars
             const auto old_position = position;

@@ -56,7 +56,7 @@ void Trading::MarketMaker::onOrderBookUpdate(TickerId ticker_id, Price price, Si
 // so we'll just write an acknowledgement log here
 void Trading::MarketMaker::onTradeUpdate(const Exchange::MEMarketUpdate *market_update, const MarketOrderBook *book) noexcept {
 
-    logger->log("%:% %() % MM trade ACK % \n"
+    logger->log("%:% %() % MM trade ACK % \n",
         __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
         market_update->toString().c_str()
     );

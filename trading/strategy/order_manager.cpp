@@ -12,7 +12,7 @@ void Trading::OrderManager::newOrder(OMOrder *order, TickerId ticker_id, Price p
     *order = {ticker_id, next_order_id, side, price, qty, OMOrderState::PENDING_NEW};
     ++next_order_id;
 
-    logger->log("%:% %() % Sent new order % for %\n"
+    logger->log("%:% %() % Sent new order % for %\n",
         __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
         new_request.toString().c_str(), order->toString().c_str()
     );

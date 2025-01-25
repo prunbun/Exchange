@@ -1,0 +1,43 @@
+// PNL Unit Test
+if (client_id == 5) {
+    using namespace std::literals::chrono_literals;
+
+    // after a brief delay, buy at a low price
+    std::this_thread::sleep_for(10s);
+    Exchange::MEClientRequest new_request = {
+        Exchange::ClientRequestType::NEW,
+        client_id, 0, order_id++, Side::BUY, 10, 100
+    };
+    trade_engine->sendClientRequest(&new_request);
+
+    // then, after it has been filled, sell for a profit at a higher price
+    std::this_thread::sleep_for(10s);
+    new_request = {
+        Exchange::ClientRequestType::NEW,
+        client_id, 0, order_id++, Side::SELL, 40, 100
+    };
+    trade_engine->sendClientRequest(&new_request);
+
+} else {
+    using namespace std::literals::chrono_literals;
+
+    // have a poor strategy and sell low 100 shares at $10
+    Exchange::MEClientRequest new_request = {
+        Exchange::ClientRequestType::NEW,
+        client_id, 0, order_id++, Side::SELL, 10, 100
+    };
+
+    trade_engine->sendClientRequest(&new_request);
+    
+
+    // after a brief delay, offer to buy at a high price at $40
+    std::this_thread::sleep_for(10s);
+    new_request = {
+        Exchange::ClientRequestType::NEW,
+        client_id, 0, order_id++, Side::BUY, 40, 100
+    };
+
+    trade_engine->sendClientRequest(&new_request);
+    std::this_thread::sleep_for(5s);
+
+}
