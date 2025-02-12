@@ -4,6 +4,7 @@
 #include <chrono>
 #include <ctime>
 #include <string>
+#include "performance_utils.h"
 
 
 namespace Common {
@@ -28,25 +29,36 @@ namespace Common {
         3. std::chrono::duration_cast<std::chrono::nanoseconds>() puts this time into nanoseconds
         4. .count() gives us the count of the nanoseconds
    */
-   inline auto getCurrentNanos() noexcept {
-    return std::chrono::duration_cast<std::chrono::nanoseconds>(
-                std::chrono::system_clock::now().time_since_epoch()
-           ).count();
-   }
+    inline auto getCurrentNanos() noexcept {
+        return std::chrono::duration_cast<std::chrono::nanoseconds>(
+            std::chrono::system_clock::now().time_since_epoch()
+        ).count();
+    }   
 
-   inline auto getCurrentTimeStr(std::string* time_str) {
-        const auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()); // getting the time into a std::time_t data type
-        time_str->assign(ctime(&time));
+    inline auto getCurrentTimeStr(std::string* time_str) {
+        // const auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()); // getting the time into a std::time_t data type
+        // time_str->assign(ctime(&time));
 
-        // ctime() adds a newline at the end, which we want to get rid of and make the string null-terminated instead
-        if (!time_str->empty()) {
-            time_str->at(time_str->length() - 1) = '\0';
+        // // ctime() adds a newline at the end, which we want to get rid of and make the string null-terminated instead
+        // if (!time_str->empty()) {
+        //     time_str->at(time_str->length() - 1) = '\0';
 
-        }
+        // }
 
-        // Notice that we return a reference to the string object and not a pointer to it, this is a common pattern for usability for code calling this func
-        return *time_str; 
-   }
+        // // Notice that we return a reference to the string object and not a pointer to it, this is a common pattern for usability for code calling this func
+        // return *time_str; 
+
+        const auto clock = std::chrono::system_clock::now(); // fetch time_point object
+        const auto time = std::chrono::system_clock::to_time_t(clock); // convert to a time_t object
+
+        char nanos_str[24];
+        snprintf(nanos_str, 24, "%.8s.%09lld", ctime(&time) + 11, // first part of the regex strips away the month, year, day of the week from the result of ctime() which provides human-readable time
+                std::chrono::duration_cast<std::chrono::nanoseconds>(clock.time_since_epoch()).count() % NANOS_TO_SECONDS // second part is 9 digits, Unix epoch -> nanoseconds -> integer value -> only digits right of decimal
+        );
+        time_str->assign(nanos_str);
+
+        return *time_str;
+    }
 
 
     
