@@ -1,2 +1,2 @@
 #!/bin/bash
-git rm --cached *.log
+find . -name "*.log" -exec rm -f {} +

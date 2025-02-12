@@ -1,4 +1,0 @@
-Logging a char: a, an int: 3, and a ul: 65 
-Logging a float: 3.14, and a double: 100.1 
-trying to log a c-style string: testing c-style strings 
-trying to log a cpp-style string: testing cpp-style strings 
