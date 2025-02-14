@@ -84,17 +84,23 @@ namespace Exchange {
                         outgoing_md_updates->size() && market_update; market_update = outgoing_md_updates->getNextRead()
                         ) {
                         
+                        // almost at the last step to sending out an update from a client request
                         TTT_MEASURE(T5_MarketDataPublisher_LFQueue_read, logger);
-
+                        
                         logger.log("%:% %() % Sending seq:% % \n", 
                             __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                             next_inc_seq_number, market_update->toString().c_str()
                         );
 
                         // write the update to the socket buffer
+                        START_MEASURE(Exchange_MulticastSocket_send);
                         incremental_socket.send(&next_inc_seq_number, sizeof(next_inc_seq_number));
                         incremental_socket.send(market_update, sizeof(MEMarketUpdate));
+                        END_MEASURE(Exchange_MulticastSocket_send, logger);
                         outgoing_md_updates->updateReadIndex();
+
+                        // stop the clock! last time we do any processing on a market update
+                        TTT_MEASURE(T6_MarketDataPublisher_UDP_write, logger);
 
                         // also send it to the synthesizer
                         MDPMarketUpdate * next_write = snapshot_md_updates.getNextWriteTo();

@@ -74,6 +74,9 @@ namespace Exchange {
                     MEClientRequest * next_write = incoming_requests->getNextWriteTo();
                     *next_write = std::move(client_request.request);
                     incoming_requests->updateWriteIndex();
+
+                    // second stage a client request goes through in the exchange
+                    TTT_MEASURE(T2_OrderServer_LFQueue_write, (*logger));
                 } 
 
                 // empty our sequencer

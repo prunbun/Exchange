@@ -47,13 +47,18 @@ namespace Exchange {
                 while(running) {
                     const MEClientRequest * me_client_request = incoming_requests->getNextRead();
                     if (LIKELY(me_client_request)) {
+
+                        // first time an order enters the matching engine
+                        TTT_MEASURE(T3_MatchingEngine_LFQueue_read, logger);
                         
                         logger.log("%:% %() % Processing % \n",
                             __FILE__, __LINE__, __FUNCTION__,
                             Common::getCurrentTimeStr(&time_str), me_client_request->toString()
                         );
 
+                        START_MEASURE(Exchange_MatchingEngine_processClientRequest);
                         processClientRequest(me_client_request);
+                        END_MEASURE(Exchange_MatchingEngine_processClientRequest, logger);
                         incoming_requests->updateReadIndex();
                     }
                 }
@@ -75,6 +80,9 @@ namespace Exchange {
                 *next_write = std::move(*client_response);
                 outgoing_responses->updateWriteIndex();
 
+                // the order receipt is leaving the matching engine
+                TTT_MEASURE(T4t_MatchingEngine_LFQueue_write, logger);
+
                 // note that now, client_response is pointing to free memory!
                 // it will go out of scope, but this is good practice
                 // this is not necessary, but for learning purposes
@@ -92,6 +100,9 @@ namespace Exchange {
                 MEMarketUpdate * next_write = outgoing_market_updates->getNextWriteTo();
                 *next_write = std::move(*market_update);
                 outgoing_market_updates->updateWriteIndex();
+
+                // the order update is leaving the matching engine
+                TTT_MEASURE(T4_MatchingEngine_LFQueue_write, logger);
 
                 // this is not necessary, but for learning purposes
                 market_update = nullptr; 

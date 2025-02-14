@@ -43,6 +43,10 @@ namespace Exchange {
             // this function defines what we want the server to do whenever it receives a message
             // remember that in this design, it is really the socket recv() that we set up to listen to the client that executes the callback
             void recvCallback(TCPSocket *socket, Nanos rx_time) noexcept {
+                
+                // start the clock! First time a client request hits the exchange
+                TTT_MEASURE(T1_OrderServer_TCP_read, logger);
+
                 logger.log("%:% %() % Received socket:% len% rx:% \n",
                     __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                     socket->socket_file_descriptor, socket->next_receive_valid_index, rx_time
@@ -93,7 +97,9 @@ namespace Exchange {
                         // PART 2: forward the request and time to the FIFO sequencer, so it can be sent to the m.e.
                         // note that we only send the me_client_request, in the type the m.e. expects
                         ++next_expected_sequence_number;
+                        START_MEASURE(Exchange_FIFOSequencer_addClientRequest);
                         fifo_sequencer.addClientRequest(rx_time, request->me_client_request);
+                        END_MEASURE(Exchange_FIFOSequencer_addClientRequest, logger);
                     }
 
                     // after we have finished processing as many messages as we can, we update the socket's buffer
@@ -105,7 +111,9 @@ namespace Exchange {
             // this is called by the server after it has called the recv callback on all available read sockets
             // we have received all messages in this iter and we can instruct the sequencer to send them to the m.e.
             void recvFinishedCallback() noexcept {
+                START_MEASURE(Exchange_FIFOSequencer_sequenceAndPublish);
                 fifo_sequencer.sequenceAndPublish();
+                END_MEASURE(Exchange_FIFOSequencer_sequenceAndPublish, logger);
             }
 
 
@@ -166,6 +174,9 @@ namespace Exchange {
                     for (auto client_response = outgoing_responses->getNextRead(); outgoing_responses->size() && client_response; 
                         client_response = outgoing_responses->getNextRead()) {
 
+                        // almost at the last step to delivering a receipt to the client
+                        TTT_MEASURE(T5t_OrderServer_LFQueue_read, logger);
+
                         auto &next_outgoing_seq_number = cid_next_outgoing_seq_number[client_response->client_id];
                         logger.log("%:% %() % Processing cid:% seq:% % \n",
                             __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
@@ -175,12 +186,17 @@ namespace Exchange {
                         // note that we effectively send OMClientResponse by stacking the sends
                         ASSERT(cid_tcp_socket[client_response->client_id] != nullptr,
                          "Don't have a TCPSocket for ClientId:" + std::to_string(client_response->client_id));
+
+                        START_MEASURE(Exchange_TCPSOCKET_send);
                         cid_tcp_socket[client_response->client_id]->send(&next_outgoing_seq_number, sizeof(next_outgoing_seq_number));
                         cid_tcp_socket[client_response->client_id]->send(client_response, sizeof(MEClientResponse));
-                        
+                        END_MEASURE(Exchange_TCPSOCKET_send, logger);
                         outgoing_responses->updateReadIndex();
 
                         ++next_outgoing_seq_number;
+
+                        // stop the clock! last time we process a client request
+                        TTT_MEASURE(T6t_OrderServer_TCP_write, logger);
                     }
                 }
             }

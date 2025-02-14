@@ -36,18 +36,22 @@ namespace Exchange {
         // depending on what type of request it is, we call a different order book function
         switch (client_request->type) {
             case ClientRequestType::NEW: {
+                START_MEASURE(Exchange_MEOrderBook_add);
                 order_book->add(client_request->client_id,
                                 client_request->order_id,
                                 client_request->ticker_id,
                                 client_request->side, client_request->price,
                                 client_request->qty
                                 );
+                END_MEASURE(Exchange_MEOrderBook_add, logger);
             }
                 break;
 
             case ClientRequestType::CANCEL: {
                 // notice how we don't provide more params than necessary to the func
+                START_MEASURE(Exchange_MEOrderBook_cancel);
                 order_book->cancel(client_request->client_id, client_request->order_id, client_request->ticker_id);
+                END_MEASURE(Exchange_MEOrderBook_cancel, logger);
             }
                 break;
 

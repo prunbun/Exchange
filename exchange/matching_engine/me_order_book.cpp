@@ -68,7 +68,10 @@ namespace Exchange {
                             order->side, order->price, order->qty, Priority_INVALID
                             };
             matching_engine->sendMarketUpdate(&market_update);
+            START_MEASURE(Exchange_MEOrderBook_removeOrder);
             removeOrder(order);
+            END_MEASURE(Exchange_MEOrderBook_removeOrder, (*logger));
+
         } else {
             // we just tell the market about the modified amount
             market_update = {MarketUpdateType::MODIFY, order->market_order_id, instrument_id,
@@ -95,9 +98,11 @@ namespace Exchange {
                 }
 
                 // otherwise match as much as you can with the current best offer
+                START_MEASURE(Exchange_MEOrderBook_match_buy);
                 match(instrument_id, client_id, side, client_order_id,
                     unique_market_order_id, ask_iterator, &leaves_qty
                     );
+                END_MEASURE(Exchange_MEOrderBook_match_buy, (*logger));
             }
         }
 
@@ -109,9 +114,11 @@ namespace Exchange {
                     break;
                 }
 
+                START_MEASURE(Exchange_MEOrderBook_match_sell);
                 match(instrument_id, client_id, side, client_order_id,
                     unique_market_order_id, bid_iterator, &leaves_qty
                     );
+                END_MEASURE(Exchange_MEOrderBook_match_sell, (*logger));
             }
         }
 
@@ -129,13 +136,19 @@ namespace Exchange {
         matching_engine->sendClientResponse(&client_response); // notice how we use std::move in m.e., so it is ok to reuse this var
 
         // 2. we need to find out if it can be executed, only if there is some qty left over do we add it to the order book
+        START_MEASURE(Exchange_MEOrderBook_checkForMatch);
         const auto leaves_qty = checkForMatch(client_id, client_order_id, instrument_id, side, price, qty, unique_market_order_id);
+        END_MEASURE(Exchange_MEOrderBook_checkForMatch, (*logger));
+
         if (LIKELY(leaves_qty)) {
             const Priority priority = getNextPriority(price);
             MEOrder * order = order_pool.allocate(instrument_id, client_id, client_order_id, unique_market_order_id, side, price,
                                                 leaves_qty, priority, nullptr, nullptr    
                                                 ); // note we are indirectly invoking the MEOrder constructor
+
+            START_MEASURE(Exchange_MEOrderBook_addOrder);
             addOrder(order);
+            END_MEASURE(Exchange_MEOrderBook_addOrder, (*logger));
             
             // now that a new order has entered the order book, we need to notify the market about it
             market_update = {MarketUpdateType::ADD, unique_market_order_id, instrument_id, side,
@@ -170,7 +183,9 @@ namespace Exchange {
             market_update = { MarketUpdateType::CANCEL, exchange_order->market_order_id, instrument_id, exchange_order->side,
                                 exchange_order->price, 0, exchange_order->priority
                             };
+            START_MEASURE(Exchange_MEOrderBook_removeOrder);
             removeOrder(exchange_order);
+            END_MEASURE(Exchange_MEOrderBook_removeOrder, (*logger));
             matching_engine->sendMarketUpdate(&market_update);
         }
         
