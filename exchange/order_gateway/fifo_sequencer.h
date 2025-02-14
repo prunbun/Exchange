@@ -13,7 +13,7 @@ namespace Exchange {
         private:
             ClientRequestLFQueue *incoming_requests = nullptr;
 
-            std::string time_string;
+            std::string time_str;
             Logger * logger = nullptr;
 
             // way we will store the time along with the request
@@ -56,7 +56,7 @@ namespace Exchange {
                 }
 
                 logger->log("%:% %() % Processing % requests \n",
-                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string),
+                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                     pending_size
                 );
 
@@ -67,7 +67,7 @@ namespace Exchange {
                 for (size_t i = 0; i < pending_size; ++i) {
                     const auto &client_request = pending_client_requests.at(i);
                     logger->log("%:% %() % FIFO sending to M. E. RX:% Req:% \n",
-                        __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string),
+                        __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                         client_request.recv_time, client_request.request.toString()
                     );
 

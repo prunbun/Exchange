@@ -44,10 +44,10 @@ int main() {
     Exchange::ClientResponseLFQueue client_responses(ME_MAX_CLIENT_UPDATES);
     Exchange::MEMarketUpdateLFQueue market_updates(ME_MAX_MARKET_UPDATES);
 
-    std::string time_string;
+    std::string time_str;
     logger->log("%:% %() % Starting Matching Engine... \n",
         __FILE__, __LINE__, __FUNCTION__,
-        Common::getCurrentTimeStr(&time_string)
+        Common::getCurrentTimeStr(&time_str)
     );
 
     // starting the matching engine
@@ -61,7 +61,7 @@ int main() {
 
     logger->log("%:% %() % Starting Publisher... \n",
         __FILE__, __LINE__, __FUNCTION__,
-        Common::getCurrentTimeStr(&time_string)
+        Common::getCurrentTimeStr(&time_str)
     );
     market_data_publisher = new Exchange::MarketDataPublisher(
         &market_updates, mkt_publisher_interface,
@@ -76,7 +76,7 @@ int main() {
 
     logger->log("%:% %() % Starting Gateway... \n",
         __FILE__, __LINE__, __FUNCTION__,
-        Common::getCurrentTimeStr(&time_string)
+        Common::getCurrentTimeStr(&time_str)
     );
     order_server = new Exchange::OrderServer(
         &client_requests, &client_responses, 
@@ -88,7 +88,7 @@ int main() {
     // making this code run until it is explicitly killed by the user
     while (true) {
         logger->log("%:% %() % Keeping exchange alive... \n",
-            __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string)
+            __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str)
         );
         usleep(sleep_time * 1000);
     }

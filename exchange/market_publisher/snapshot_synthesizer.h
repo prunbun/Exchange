@@ -23,7 +23,7 @@ namespace Exchange {
             MDPMarketUpdateLFQueue * snapshot_md_updates = nullptr;
 
             Logger logger;
-            std::string time_string;
+            std::string time_str;
 
             volatile bool running = false;
 
@@ -125,7 +125,7 @@ namespace Exchange {
                     {MarketUpdateType::SNAPSHOT_START, last_inc_seq_num}
                 };
                 logger.log("%:% %() % START SENTINEL % \n",
-                    __FILE__, __LINE__, __FUNCTION__, getCurrentTimeStr(&time_string),
+                    __FILE__, __LINE__, __FUNCTION__, getCurrentTimeStr(&time_str),
                     start_market_update.toString()
                 );
                 snapshot_socket.send(&start_market_update, sizeof(MDPMarketUpdate));
@@ -142,7 +142,7 @@ namespace Exchange {
 
                     const MDPMarketUpdate clear_market_update{snapshot_size++, me_market_update};
                     logger.log("%:% %() % CLEAR SENTINEL % \n",
-                        __FILE__, __LINE__, __FUNCTION__, getCurrentTimeStr(&time_string),
+                        __FILE__, __LINE__, __FUNCTION__, getCurrentTimeStr(&time_str),
                         clear_market_update.toString()
                     );
                     snapshot_socket.send(&clear_market_update, sizeof(MDPMarketUpdate));
@@ -152,7 +152,7 @@ namespace Exchange {
                         if (order) {
                             const MDPMarketUpdate market_update{snapshot_size++, *order};
                             logger.log("%:% %() % % \n",
-                                __FILE__, __LINE__, __FUNCTION__, getCurrentTimeStr(&time_string),
+                                __FILE__, __LINE__, __FUNCTION__, getCurrentTimeStr(&time_str),
                                 market_update.toString()
                             );
                             snapshot_socket.send(&market_update, sizeof(MDPMarketUpdate));
@@ -167,21 +167,21 @@ namespace Exchange {
                     {MarketUpdateType::SNAPSHOT_END, last_inc_seq_num}
                 };
                 logger.log("%:% %() % END SENTINEL % \n",
-                    __FILE__, __LINE__, __FUNCTION__, getCurrentTimeStr(&time_string),
+                    __FILE__, __LINE__, __FUNCTION__, getCurrentTimeStr(&time_str),
                     end_market_update.toString()
                 );
                 snapshot_socket.send(&end_market_update, sizeof(MDPMarketUpdate));
                 snapshot_socket.sendAndRecv();
 
                 logger.log("%:% %() % Published snapshot of % orders. \n",
-                    __FILE__, __LINE__, __FUNCTION__, getCurrentTimeStr(&time_string),
+                    __FILE__, __LINE__, __FUNCTION__, getCurrentTimeStr(&time_str),
                     snapshot_size - 1
                 );
             }
 
             void run() {
                 logger.log("%:% %() % Synthesizer running... \n",
-                    __FILE__, __LINE__, __FUNCTION__, getCurrentTimeStr(&time_string)
+                    __FILE__, __LINE__, __FUNCTION__, getCurrentTimeStr(&time_str)
                 );
 
                 while(running) {
@@ -191,7 +191,7 @@ namespace Exchange {
                         market_update = snapshot_md_updates->getNextRead()
                     ) {
                         logger.log("%:% %() % Run is processing % \n",
-                            __FILE__, __LINE__, __FUNCTION__, getCurrentTimeStr(&time_string),
+                            __FILE__, __LINE__, __FUNCTION__, getCurrentTimeStr(&time_str),
                             market_update->toString().c_str()
                         );
 

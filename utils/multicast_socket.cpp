@@ -20,7 +20,7 @@ namespace Common {
         const ssize_t n_rcv = recv(socket_file_descriptor, inbound_data.data() + next_receive_valid_index, McastBufferSize - next_receive_valid_index, MSG_DONTWAIT);
         if (n_rcv > 0) {
             next_receive_valid_index += n_rcv;
-            logger.log("%:% %() % read socket:% len:%\n", __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string), socket_file_descriptor,
+            logger.log("%:% %() % read socket:% len:%\n", __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str), socket_file_descriptor,
                         next_receive_valid_index);
             receive_callback(this);
         }
@@ -29,7 +29,7 @@ namespace Common {
         if (next_send_valid_index > 0) {
             ssize_t n = ::send(socket_file_descriptor, outbound_data.data(), next_send_valid_index, MSG_DONTWAIT | MSG_NOSIGNAL);
 
-            logger.log("%:% %() % send socket:% len:%\n", __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string), socket_file_descriptor, n);
+            logger.log("%:% %() % send socket:% len:%\n", __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str), socket_file_descriptor, n);
         }
         next_send_valid_index = 0;
 

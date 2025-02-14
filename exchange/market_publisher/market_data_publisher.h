@@ -25,7 +25,7 @@ namespace Exchange {
 
             volatile bool running = false;
 
-            std::string time_string;
+            std::string time_str;
             Logger logger;
 
             Common::MulticastSocket incremental_socket;
@@ -76,16 +76,18 @@ namespace Exchange {
             void run() noexcept {
                 // PART 1: fetch the update to be published
                 logger.log("%:% %() % Publisher running... \n", 
-                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string)
+                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str)
                 );
 
                 while(running) {
                     for (const MEMarketUpdate * market_update = outgoing_md_updates->getNextRead();
                         outgoing_md_updates->size() && market_update; market_update = outgoing_md_updates->getNextRead()
                         ) {
+                        
+                        TTT_MEASURE(T5_MarketDataPublisher_LFQueue_read, logger);
 
                         logger.log("%:% %() % Sending seq:% % \n", 
-                            __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string),
+                            __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                             next_inc_seq_number, market_update->toString().c_str()
                         );
 

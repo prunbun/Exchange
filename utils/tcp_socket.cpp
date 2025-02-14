@@ -58,7 +58,7 @@ namespace Common {
 
             logger.log("%: % %() % read socket: % len:% utime:% \n",
                 __FILE__, __LINE__, __FUNCTION__,
-                Common::getCurrentTimeStr(&time_string),
+                Common::getCurrentTimeStr(&time_str),
                 socket_file_descriptor, next_receive_valid_index, user_time
             );
 
@@ -80,7 +80,7 @@ namespace Common {
 
             logger.log("%:% %() % send socket:% len:% \n",
                 __FILE__, __LINE__, __FUNCTION__,
-                Common::getCurrentTimeStr(&time_string), socket_file_descriptor, n
+                Common::getCurrentTimeStr(&time_str), socket_file_descriptor, n
             );
             
             n_send -= n;

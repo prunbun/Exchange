@@ -39,7 +39,7 @@ namespace Common {
 
         std::function<void(MulticastSocket *s)> receive_callback = nullptr;
 
-        std::string time_string;
+        std::string time_str;
         Logger &logger;
     };
 }

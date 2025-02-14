@@ -30,12 +30,12 @@ namespace Common {
         std::function<void(TCPSocket *socket, Nanos rx_time)> receive_callback;
 
         // logging utils
-        std::string time_string;
+        std::string time_str;
         Logger &logger;
         void defaultCallback(TCPSocket *socket, Nanos rx_time) noexcept {
             logger.log("% % %() % TCPSocket::defaultCallback() socket:% len:% rx:% \n",
                 __FILE__, __LINE__, __FUNCTION__,
-                Common::getCurrentTimeStr(&time_string), socket->socket_file_descriptor, socket->next_receive_valid_index, rx_time
+                Common::getCurrentTimeStr(&time_str), socket->socket_file_descriptor, socket->next_receive_valid_index, rx_time
             );
         }
 

@@ -38,7 +38,7 @@ namespace Exchange {
             // provides a new unqiue id to an order in this order book
             OrderId next_market_order_id = 1;
 
-            std::string time_string;
+            std::string time_str;
             Logger *logger = nullptr;
 
             // returns the current order_id as a unique id, then increments the internal counter

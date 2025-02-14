@@ -26,7 +26,7 @@ namespace Exchange {
             
             volatile bool running; // marked volatile to stop compiler optimizations like *const prop*
 
-            std::string time_string;
+            std::string time_str;
             Logger logger;
 
             // maps for managing connections
@@ -44,7 +44,7 @@ namespace Exchange {
             // remember that in this design, it is really the socket recv() that we set up to listen to the client that executes the callback
             void recvCallback(TCPSocket *socket, Nanos rx_time) noexcept {
                 logger.log("%:% %() % Received socket:% len% rx:% \n",
-                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string),
+                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                     socket->socket_file_descriptor, socket->next_receive_valid_index, rx_time
                 );
 
@@ -57,7 +57,7 @@ namespace Exchange {
                         const OMClientRequest * request = reinterpret_cast<const OMClientRequest *>(socket->receive_buffer + i);
 
                         logger.log("%:% %() % Gateway received OMClientRequest:% \n",
-                            __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string),
+                            __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                             request->toString()
                         );
 
@@ -72,7 +72,7 @@ namespace Exchange {
                         // unique clients must only communicate through their assigned socket from the server
                         if (cid_tcp_socket[request->me_client_request.client_id] != socket) {
                             logger.log("%:% %() % Received ClientRequest from ClientId:% on a different socket:% but expected:% \n",
-                                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string),
+                                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                                 request->me_client_request.client_id, socket->socket_file_descriptor,
                                 cid_tcp_socket[request->me_client_request.client_id]->socket_file_descriptor
                             );
@@ -83,7 +83,7 @@ namespace Exchange {
                         size_t &next_expected_sequence_number = cid_next_expected_seq_number[request->me_client_request.client_id];
                         if (request->seq_number != next_expected_sequence_number) {
                             logger.log("%:% %() % Incorrect sequence number. ClientId:% SeqNum expected:% but received:% \n",
-                                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string),
+                                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                                 request->me_client_request.client_id, next_expected_sequence_number,
                                 request->seq_number
                             );
@@ -154,7 +154,7 @@ namespace Exchange {
             // runs the server that drives the order gateway
             void run() noexcept {
                 logger.log("%:% %() % Order server running... \n",
-                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string)
+                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str)
                 );
 
                 while(running) {
@@ -168,7 +168,7 @@ namespace Exchange {
 
                         auto &next_outgoing_seq_number = cid_next_outgoing_seq_number[client_response->client_id];
                         logger.log("%:% %() % Processing cid:% seq:% % \n",
-                            __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string),
+                            __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                             client_response->client_id, next_outgoing_seq_number, client_response->toString()
                         );
 

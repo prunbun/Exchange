@@ -41,7 +41,7 @@ namespace Common {
                 if (socket == &listener_socket) {
                     // indicates we have gotten a new connection, need to make a new receiving socket to process this
                     logger.log("%:% %() % EVFILT_READ listener_socket:% \n", 
-                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string),
+                    __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                     socket->socket_file_descriptor
                     );
                     have_new_connection = true;
@@ -49,7 +49,7 @@ namespace Common {
                 }
 
                 logger.log("%:% %() % EVFILT_READ listener_socket:% \n", 
-                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string),
+                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                 socket->socket_file_descriptor
                 );
 
@@ -62,7 +62,7 @@ namespace Common {
             // new socket for sending data
             if (event.filter == EVFILT_WRITE) {
                 logger.log("%:% %() % EVFILT_WRITE listener_socket:% \n", 
-                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string),
+                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                 socket->socket_file_descriptor
                 );
 
@@ -74,7 +74,7 @@ namespace Common {
             // these sockets have an issue and need to be deactivated
             if (event.flags & (EV_ERROR | EV_EOF)) {
                 logger.log("%:% %() % EV_ERROR or EV_EOF listener_socket:% \n", 
-                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string),
+                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                 socket->socket_file_descriptor
                 );
 
@@ -87,7 +87,7 @@ namespace Common {
         // accept the new connection, create a socket for it, and register it in our kqueue and data structures
         while (have_new_connection) {
             logger.log("%:% %() % new connection! \n", 
-            __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string)
+            __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str)
             );
 
             sockaddr_storage addr;
@@ -101,7 +101,7 @@ namespace Common {
                 "Failed to set non-blocking or no-delay on socket: " + std::to_string(file_descriptor)
             );
             logger.log("%:% %() % accepted socket:% \n", 
-            __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string),
+            __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
             file_descriptor
             );
 

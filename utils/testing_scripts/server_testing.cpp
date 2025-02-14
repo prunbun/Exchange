@@ -7,7 +7,7 @@ int main() {
     using namespace Common;
 
     // create logger and helpers for timing and tracking data flow
-    std::string time_string;
+    std::string time_str;
     Logger logger("server_testing.log");
     
     auto tcpServerRecvCallback = [&](TCPSocket *socket, Nanos rx_time) noexcept {

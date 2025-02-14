@@ -41,7 +41,7 @@ namespace Exchange {
             void run() noexcept {
                 logger.log("%:% %() % \n",
                     __FILE__, __LINE__, __FUNCTION__,
-                    Common::getCurrentTimeStr(&time_string)
+                    Common::getCurrentTimeStr(&time_str)
                 );
 
                 while(running) {
@@ -50,7 +50,7 @@ namespace Exchange {
                         
                         logger.log("%:% %() % Processing % \n",
                             __FILE__, __LINE__, __FUNCTION__,
-                            Common::getCurrentTimeStr(&time_string), me_client_request->toString()
+                            Common::getCurrentTimeStr(&time_str), me_client_request->toString()
                         );
 
                         processClientRequest(me_client_request);
@@ -66,7 +66,7 @@ namespace Exchange {
             void sendClientResponse(const MEClientResponse * client_response) noexcept {
                 logger.log("%:% %() % Sending % \n",
                     __FILE__, __LINE__, __FUNCTION__,
-                    Common::getCurrentTimeStr(&time_string), client_response->toString()
+                    Common::getCurrentTimeStr(&time_str), client_response->toString()
                 );
 
                 // notice how we have a pointer to an object instead of the obj itself
@@ -84,7 +84,7 @@ namespace Exchange {
             void sendMarketUpdate(const MEMarketUpdate * market_update) {
                 logger.log("%:% %() % Sending % \n",
                     __FILE__, __LINE__, __FUNCTION__,
-                    Common::getCurrentTimeStr(&time_string), market_update->toString()
+                    Common::getCurrentTimeStr(&time_str), market_update->toString()
                 );
 
                 // notice how we have a pointer to an object instead of the obj itself
@@ -106,7 +106,7 @@ namespace Exchange {
 
             volatile bool running = false;
 
-            std::string time_string;
+            std::string time_str;
             Logger logger;
 
     };

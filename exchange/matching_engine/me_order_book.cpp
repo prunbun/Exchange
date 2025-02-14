@@ -17,7 +17,7 @@ namespace Exchange {
     MEOrderBook::~MEOrderBook() {
         logger->log("%:% %() % OrderBook destructor \n % \n",
             __FILE__, __LINE__, __FUNCTION__, 
-            Common::getCurrentTimeStr(&time_string),
+            Common::getCurrentTimeStr(&time_str),
             toString(false, true)
         );
 

@@ -116,14 +116,14 @@ namespace Common {
         // PART 1: we have to create the addrinfo struct that is used by the system to create a socket
         
         // 1.1 string that will hold the timestamp of when we create this socket
-        std::string time_string;
+        std::string time_str;
 
         // 1.2 retrieves the ip address we want this socket to listen on
         const std::string ip = t_ip.empty() ? getIFaceIP(interface) : t_ip;
 
         logger.log("%:% %() % ip:% interface:% port:% is_udp:% is_blocking:% is_listening:% ttl:% SOtime:% \n", 
             __FILE__, __LINE__, __FUNCTION__, 
-            Common::getCurrentTimeStr(&time_string),
+            Common::getCurrentTimeStr(&time_str),
             ip, interface, port, is_udp, is_blocking, is_listening, ttl, needs_so_timestamp
         );
 

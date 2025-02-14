@@ -18,19 +18,19 @@ namespace Common {
             std::function<void(TCPSocket *, Nanos rx_time)> receive_callback;
             std::function<void()> receive_finished_callback;
 
-            std::string time_string;
+            std::string time_str;
             Logger &logger;
 
             auto defaultRecvCallback(TCPSocket *socket, Nanos rx_time) noexcept {
                 logger.log("%:% %() % TCPServer::defaultRecvCallback() socket:% len:% rx:% \n", 
-                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string),
+                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                 socket->socket_file_descriptor, socket->next_receive_valid_index, rx_time
                 );
             }
 
             auto defaultRecvFinishedCallback() noexcept {
                 logger.log("%:% %() % TCPServer::defaultRecvFinishedCallback() \n", 
-                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_string)
+                __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str)
                 );
             }
 
