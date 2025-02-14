@@ -46,18 +46,27 @@ void Trading::OrderManager::moveOrder(OMOrder *order, TickerId ticker_id, Price 
 
         case OMOrderState::LIVE: { // verifies information
             if (order->price != price || order->qty != qty) {
+                START_MEASURE(Trading_OrderManager_cancelOrder);
                 cancelOrder(order);
+                END_MEASURE(Trading_OrderManager_cancelOrder, (*logger));
             }
         } 
             break;
 
         case OMOrderState::INVALID:
         case OMOrderState::DEAD: {
+
             if (LIKELY(price != Price_INVALID)) {
+
+                START_MEASURE(Trading_RiskManager_checkPreTradeRisk);
                 const RiskCheckResult risk_result = risk_manager.checkPreTradeRisk(ticker_id, side, qty);
-                
+                END_MEASURE(Trading_RiskManager_checkPreTradeRisk, (*logger));
+
                 if (LIKELY(risk_result == RiskCheckResult::ALLOWED)) {
+                    START_MEASURE(Trading_OrderManager_newOrder);
                     newOrder(order, ticker_id, price, side, qty);
+                    END_MEASURE(Trading_OrderManager_newOrder, (*logger));
+                    
                 } else {
                     logger->log("%:% %() % Ticker:% Side:% Qty:% RiskCheckResult:% \n",
                         __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),

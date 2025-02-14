@@ -52,6 +52,10 @@ namespace Trading {
     // else we will extract the MEMarketUpdate and send it to the client order book
     void MarketDataConsumer::recvCallback(MulticastSocket *socket) noexcept {
 
+        // first time data enters the client
+        TTT_MEASURE(T7_MarketDataConsumer_UDP_read, logger);
+        START_MEASURE(Trading_MarketDataConsumer_recvCallback);
+
         // we need to first determine if we are receiving snapshot recovery data or an incremental update
         const bool is_snapshot = (socket->socket_file_descriptor == snapshot_mcast_socket.socket_file_descriptor);
 
@@ -115,6 +119,9 @@ namespace Trading {
                     Exchange::MEMarketUpdate * next_write = incoming_md_updates->getNextWriteTo();
                     *next_write = std::move(request->me_market_update);
                     incoming_md_updates->updateWriteIndex();
+
+                    // the update has been sent to the client's order book
+                    TTT_MEASURE(T8_MarketDataConsumer_LFQueue_write, logger);
                 }
             }
 
@@ -122,6 +129,8 @@ namespace Trading {
             memcpy(socket->inbound_data.data(), socket->inbound_data.data() + i, socket->next_receive_valid_index - i);
             socket->next_receive_valid_index -= i;
         }
+
+        END_MEASURE(Trading_MarketDataConsumer_recvCallback, logger);
     }
 
     /*

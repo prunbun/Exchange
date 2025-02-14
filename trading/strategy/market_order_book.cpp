@@ -42,7 +42,9 @@ void Trading::MarketOrderBook::onMarketUpdate(const Exchange::MEMarketUpdate *ma
                                                 nullptr,
                                                 nullptr    
                                             );
+            START_MEASURE(Trading_MarketOrderBook_addOrder);
             addOrder(order);
+            END_MEASURE(Trading_MarketOrderBook_addOrder, (*logger));
         } 
             break;
 
@@ -54,7 +56,9 @@ void Trading::MarketOrderBook::onMarketUpdate(const Exchange::MEMarketUpdate *ma
 
         case Exchange::MarketUpdateType::CANCEL: {
             MarketOrder * order = oid_to_order.at(market_update->order_id);
+            START_MEASURE(Trading_MarketOrderBook_removeOrder);
             removeOrder(order);
+            END_MEASURE(Trading_MarketOrderBook_removeOrder, (*logger));
         }
             break;
 
@@ -102,7 +106,9 @@ void Trading::MarketOrderBook::onMarketUpdate(const Exchange::MEMarketUpdate *ma
 
     // cool! now our order book has been updated with the proper methods
     // we can now ask the trading engine to 'react' to these updates
+    START_MEASURE(Trading_MarketOrderBook_updateBBO);
     updateBBO(bid_updated, ask_updated);
+    END_MEASURE(Trading_MarketOrderBook_updateBBO, (*logger));
     trade_engine->onOrderBookUpdate(market_update->ticker_id, market_update->price, market_update->side, this);
 
     logger->log("%:% %() % OrderBook \n % \n", 

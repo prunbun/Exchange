@@ -53,15 +53,23 @@ void Trading::OrderGateway::run() {
 
         // this sends any data pending on the outgoing client requests LFQ
         for (auto client_request = outgoing_requests->getNextRead(); client_request; client_request = outgoing_requests->getNextRead()) {
+            
+            // an order to be placed has been received from the trading engine
+            TTT_MEASURE(T11_OrderGateway_LFQueue_read, logger);
 
             logger.log("%:% %() % Sending cid:% seq% %\n",
                 __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                 client_id, next_outgoing_seq_number, client_request->toString()
             );
 
+            START_MEASURE(Trading_TCPSocket_send);
             tcp_socket.send(&next_outgoing_seq_number, sizeof(next_outgoing_seq_number));
             tcp_socket.send(client_request, sizeof(Exchange::MEClientRequest));
+            END_MEASURE(Trading_TCPSocket_send, logger);
             outgoing_requests->updateReadIndex();
+
+            // the final stop for a new order in the client, the order has been sent to the exchange
+            TTT_MEASURE(T12_OrderGatewayTCP_write, logger);
 
             next_outgoing_seq_number++;
         }
@@ -69,6 +77,10 @@ void Trading::OrderGateway::run() {
 }
 
 void Trading::OrderGateway::recvCallback(TCPSocket *socket, Nanos rx_time) noexcept {
+
+    // a message from the exchange has just arrived at the client gateway
+    TTT_MEASURE(T7t_OrderGateway_TCP_read, logger);
+    START_MEASURE(Trading_OrderGateway_recvCallback);
 
     logger.log("%:% %() % Received socket:% len:% %\n",
         __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
@@ -113,6 +125,9 @@ void Trading::OrderGateway::recvCallback(TCPSocket *socket, Nanos rx_time) noexc
             auto next_write = incoming_responses->getNextWriteTo();
             *next_write = std::move(response->me_client_response);
             incoming_responses->updateWriteIndex();
+
+            // the exchange message has been sent to the trading engine
+            TTT_MEASURE(T8t_OrderGateway_LFQueue_write, logger);
         }
 
         // we have read as much information as we can, so we now update the socket buffer
@@ -122,4 +137,5 @@ void Trading::OrderGateway::recvCallback(TCPSocket *socket, Nanos rx_time) noexc
         socket->next_receive_valid_index -= i;
     }
 
+    END_MEASURE(Trading_OrderGateway_recvCallback, logger);
 }

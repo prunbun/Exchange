@@ -54,6 +54,7 @@ void Trading::LiquidityTaker::onTradeUpdate(const Exchange::MEMarketUpdate *mark
         const double feature_threshold = ticker_configs_hashmap.at(market_update->ticker_id).feature_threshold;
 
         if (aggressive_qty_ratio >= feature_threshold) {
+            START_MEASURE(OrderManager_moveOrders);
 
             // we buy at the best ask price or sell at the best buy price
             if (market_update->side == Side::BUY) {
@@ -62,6 +63,7 @@ void Trading::LiquidityTaker::onTradeUpdate(const Exchange::MEMarketUpdate *mark
                 order_manager->moveOrders(market_update->ticker_id, Price_INVALID, bbo->bid_price, trade_size);
             }
 
+            END_MEASURE(OrderManager_moveOrders, (*logger));
         }
     }
 }
@@ -73,5 +75,8 @@ void Trading::LiquidityTaker::onOrderUpdate(const Exchange::MEClientResponse *cl
         __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
         client_response->toString().c_str()
     );
+    
+    START_MEASURE(Trading_OrderManager_onOrderUpdate);
     order_manager->onOrderUpdate(client_response);
+    END_MEASURE(Trading_OrderManager_onOrderUpdate, (*logger));
 }

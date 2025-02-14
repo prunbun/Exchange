@@ -72,6 +72,9 @@ void Trading::TradeEngine::sendClientRequest(const Exchange::MEClientRequest *cl
     Exchange::MEClientRequest * next_write = outgoing_requests->getNextWriteTo();
     *next_write = std::move(*client_request);
     outgoing_requests->updateWriteIndex();
+
+    // the order has been sent to the order gateway by the trading engine
+    TTT_MEASURE(T10_TradeEngine_LFQueue_write, logger);
 }
 
 void Trading::TradeEngine::run() noexcept {
@@ -85,6 +88,9 @@ void Trading::TradeEngine::run() noexcept {
         // process incoming receipts from the exchange
         for (const Exchange::MEClientResponse *client_response = incoming_responses->getNextRead(); client_response; client_response = incoming_responses->getNextRead()) {
 
+            // the receipt has been received by the trading engine
+            TTT_MEASURE(T9t_TradeEngine_LFQueue_read, logger);
+
             logger.log("%:% %() % Processing Exchange Receipt: %\n",
                 __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
                 client_response->toString().c_str()
@@ -97,6 +103,9 @@ void Trading::TradeEngine::run() noexcept {
 
         // process all market data updates
         for (const Exchange::MEMarketUpdate *market_update = incoming_md_updates->getNextRead(); market_update; market_update = incoming_md_updates->getNextRead()) {
+
+            // the market update has been received by the trading engine
+            TTT_MEASURE(T9_TradeEngine_LFQueue_read, logger);
 
             logger.log("%:% %() % Processing Market Update % \n",
                 __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
@@ -123,9 +132,18 @@ void Trading::TradeEngine::onOrderBookUpdate(TickerId ticker_id, Price price, Si
     // if a market update causes the order book for this instrument to change, we will recalculate our 
     // current positon and PnL, recalculate features, and have the algorithm 'react'
     const BBO * bbo = book->getBBO();
+
+    START_MEASURE(Trading_PositionKeeper_updateBBO);
     position_keeper.updateBBO(ticker_id, bbo);
+    END_MEASURE(Trading_PositionKeeper_updateBBO, logger);
+
+    START_MEASURE(Trading_FeatureEngine_onOrderBookUpdate);
     feature_engine.onOrderBookUpdate(ticker_id, price, side, book);
+    END_MEASURE(Trading_FeatureEngine_onOrderBookUpdate, logger);
+
+    START_MEASURE(Trading_TradeEngine_algoOnOrderBookUpdate);
     algoOnOrderBookUpdate(ticker_id, price, side, book);
+    END_MEASURE(Trading_TradeEngine_algoOnOrderBookUpdate, logger);
 }
 
 void Trading::TradeEngine::onTradeUpdate(const Exchange::MEMarketUpdate *market_update, const MarketOrderBook *book) noexcept {
@@ -135,8 +153,13 @@ void Trading::TradeEngine::onTradeUpdate(const Exchange::MEMarketUpdate *market_
         market_update->toString().c_str()
     );
 
+    START_MEASURE(Trading_FeatureEngine_onTradeUpdate);
     feature_engine.onTradeUpdate(market_update, book);
+    END_MEASURE(Trading_FeatureEngine_onTradeUpdate, logger);
+
+    START_MEASURE(Trading_TradeEngine_algoOnTradeUpdate);
     algoOnTradeUpdate(market_update, book);
+    END_MEASURE(Trading_TradeEngine_algoOnTradeUpdate, logger);
 }
 
 void Trading::TradeEngine::onOrderUpdate(const Exchange::MEClientResponse *client_response) noexcept {
@@ -148,8 +171,12 @@ void Trading::TradeEngine::onOrderUpdate(const Exchange::MEClientResponse *clien
 
     // we'll update our PnL if an order has successfully gone through and we'll notify the algorithm of what happened
     if (UNLIKELY(client_response->type == Exchange::ClientResponseType::FILLED)) {
+        START_MEASURE(Trading_PositionKeeper_addFill);
         position_keeper.addFill(client_response);
+        END_MEASURE(Trading_PositionKeeper_addFill, logger);
     }
 
+    START_MEASURE(Trading_TradeEngine_algoOnOrderUpdate);
     algoOnOrderUpdate(client_response);
+    END_MEASURE(Trading_TradeEngine_algoOnOrderUpdate, logger);
 }

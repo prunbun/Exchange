@@ -53,12 +53,16 @@ namespace Trading {
             // primary method used by trading strategies to generate and manage orders
             void moveOrders(TickerId ticker_id, Price bid_price, Price ask_price, Qty trade_size) noexcept {
 
+                START_MEASURE(Trading_OrderManager_moveOrder_buy);
                 auto bid_order = &(ticker_order_hashmap.at(ticker_id).at(sideToIndex(Side::BUY)));
                 moveOrder(bid_order, ticker_id, bid_price, Side::BUY, trade_size);
+                END_MEASURE(Trading_OrderManager_moveOrder_buy, (*logger));
 
+                START_MEASURE(Trading_OrderManager_moveOrder_sell);
                 auto sell_order = &(ticker_order_hashmap.at(ticker_id).at(sideToIndex(Side::SELL)));
                 moveOrder(sell_order, ticker_id, ask_price, Side::SELL, trade_size);
-
+                END_MEASURE(Trading_OrderManager_moveOrder_sell, (*logger));
+                
                 return;
             }
 

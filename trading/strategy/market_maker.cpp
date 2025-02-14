@@ -47,7 +47,9 @@ void Trading::MarketMaker::onOrderBookUpdate(TickerId ticker_id, Price price, Si
         const auto bid_price = bbo->bid_price - (fair_price - bbo->bid_price >= feature_threshold ? 0 : 1);
         const auto ask_price = bbo->ask_price + (bbo->ask_price - fair_price >= feature_threshold ? 0 : 1);
 
+        START_MEASURE(Trading_OrderManager_moveOrders);
         order_manager->moveOrders(ticker_id, bid_price, ask_price, trade_size);
+        END_MEASURE(Trading_OrderManager_moveOrders, (*logger));
     }
 
 }
@@ -70,5 +72,8 @@ void Trading::MarketMaker::onOrderUpdate(const Exchange::MEClientResponse *clien
         __FILE__, __LINE__, __FUNCTION__, Common::getCurrentTimeStr(&time_str),
         client_response->toString().c_str()
     );
+
+    START_MEASURE(Trading_OrderManager_onOrderUpdate);
     order_manager->onOrderUpdate(client_response);
+    END_MEASURE(Trading_OrderManager_onOrderUpdate, (*logger));
 }
