@@ -54,8 +54,7 @@ This includes:
 | utils/tcp_server.h         | Server that highlights the 'kqueue' library to manage 'clients'                                   |
 | utils/testing_scripts/     | .cpp files with tests on util components' functionality and examples of how to use them           |
 
-#### Unit Testing
-* Note that all of these components have corresponding correctness tests in `utils/testing_scripts/` which also serve as examples on how to use the components in isolation.
+> Note that all of these components have corresponding correctness tests in `utils/testing_scripts/` which also serve as examples on how to use the components in isolation.
 <br />
 
 ## The Matching Engine
