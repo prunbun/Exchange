@@ -131,7 +131,13 @@ The final major component of the exchange is called the Market Publisher. It is 
 
 Here, I describe the flow of data through the ecosystem to help readers understand how to navigate the codebase!
 
-1. **Client Gets A Market Update** 
+#### 1. Client Gets A Market Update - `/trading/market_data/market_data_consumer.cpp`
+
+- The client is subscribed to the UDP incremental updates from the exchange.
+- We sequentially read the data from the receiving socket's buffer.
+- After checking the message's validity, we send it to the trading engine.
+
+#### 2. 
 
 <br />
 
