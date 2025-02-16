@@ -145,6 +145,7 @@ Below, the first subsection describes the similarities and differences with the 
     - The client's market data consumer must now recognize if it has missed any updates on the UDP multicast. If so, it must now subscribe to the snapshot stream to recreate its order books from scratch. As one might expect, this is expensive, but necessary (for most client strategies).
     - The trading engine now computes 'features' from the 'signals' provided by the market, which may include metrics such as projected market price, trade-volume ratios etc.
     - The trade engine doesn't directly place trades, instead, it depends on the logic provided from a quantitative trading strategy file, which instead manages the PositionKeeper, RiskManager, and OrderManager classes
+    - The RiskManager currently has thresholds on values like `max_position` , `trade_size`, etc. that can be specified from the command-line for each client instance, customizable for each instrument.
  
 ### Implementing a New Trading Strategy
 
@@ -221,13 +222,13 @@ Below, I have outlined commands to run the application. Once the process has bee
 ```
 <br />
 
-#### Several Clients at Once
-As an example of how to run several clients at once, please see the see the script called `./run_clients.sh`
-
-> Each client must have a client id (integer) specified as well as an enum for the trading strategy it uses. Please see the seciton on **Client Design Breakdown** for other steps necessary to implement a custom strategy. For each of the tickers possible to trade on the exchange, one can specify characteristics like `max_trade_qty`, `max_position`, and `max_loss`, etc. Please see `trading_main.cpp` for more specifics.
-
 #### Example Ecosystem Run
-To see an example of the exchange running with 5 clients, please run the script `./run_exchange_and_clients.sh`. For the exchange as well as each client, there will be log files generated for each component which can be inspected for state. You should be able to trace specific trades throughout the ecosystem by going through the log files.
+To see an example of the exchange running with 5 clients interacting with each other, please run the following script: 
+```
+  ./run_exchange_and_clients.sh
+```
+
+> For the exchange as well as each client, there will be log files generated for each component which can be inspected for state. You should be able to trace specific trades throughout the ecosystem by going through the log files.
 
 > All timing information can be found in the logs, including checkpoints as data flows through the exchange and as events occur in real-time, down to the nanosecond-granular timestamp.
 
