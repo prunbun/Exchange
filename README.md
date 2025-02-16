@@ -18,15 +18,15 @@ In this project, I build an end-to-end financial exchange and trading client in 
 - Next, I use these abstractions to build out the two core components of this project, the matching and trading engines!
 - The repo also includes testing scripts and simple, comprehensive code comments to make the code very reader friendly!
 
-#### Recommended Prerequisites
-To have the best experience when reviewing the code, I would recommend for the user to be familiar with the following topics:
+> #### Recommended Prerequisites
+> To have the best experience when reviewing the code, I would recommend for the user to be familiar with the following topics:
 > - Modern C++ (Memory Management, Pointers/Refereces, Templates, Object-Oriented Programming)
 > - Networking
 > - Basic Compiler Code Optimization Techniques
 > - Concurrency
 > - Data Structures and Algorithms
 
-#### Credits and Additional Notes
+### Credits and Additional Notes
 CMake and Ninja are used as build tools for this project. Code is written to be compiled on a MacOS machine.
 
 Credits to Sourav Ghosh for his resources on learning low-latency C++ and the design of this ecosystem. He has great books and I would encourage anyone who is interested in learning about low-latency systems to pick them up!
