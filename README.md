@@ -7,7 +7,7 @@
 - [Part 3: The Order Gateway](./README.md#the-order-gateway)
 - [Part 4: The Market Publisher](./README.md#the-market-publisher)
 - [Part 5: Client Design Breakdown](./README.md#client-design-breakdown)
-- [Part 6: Client Ecosystem Example Walkthrough](./README.md#ecosystem-example-walkthrough)
+- [Part 6: Client Ecosystem Example Walkthrough](./README.md#client-ecosystem-example-walkthrough)
 - [Running the Exchange](./README.md#running-the-exchange)
 - [Tradeoffs and Future Items](./README.md#tradeoffs-and-future-items)
 
