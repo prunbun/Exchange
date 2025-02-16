@@ -20,11 +20,11 @@ In this project, I build an end-to-end financial exchange and trading client in 
 
 #### Recommended Prerequisites
 To have the best experience when reviewing the code, I would recommend for the user to be familiar with the following topics:
-- Modern C++ (Memory Management, Pointers/Refereces, Templates, Object-Oriented Programming)
-- Networking
-- Basic Compiler Code Optimization Techniques
-- Concurrency
-- Data Structures and Algorithms
+> - Modern C++ (Memory Management, Pointers/Refereces, Templates, Object-Oriented Programming)
+> - Networking
+> - Basic Compiler Code Optimization Techniques
+> - Concurrency
+> - Data Structures and Algorithms
 
 #### Credits and Additional Notes
 CMake and Ninja are used as build tools for this project. Code is written to be compiled on a MacOS machine.
