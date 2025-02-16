@@ -1,4 +1,4 @@
-# An Exchange in Modern C++
+# A Financial Exchange and Trading Client in Modern C++
 
 ## Contents
 - [Introduction](./README.md#introduction)
@@ -6,15 +6,30 @@
 - [Part 2: The Matching Engine](./README.md#the-matching-engine)
 - [Part 3: The Order Gateway](./README.md#the-order-gateway)
 - [Part 4: The Market Publisher](./README.md#the-market-publisher)
-- [Tooling and Running the Exchange](./README.md#tooling-and-running-the-exchange)
+- [Part 5: Client Design Breakdown](./README.md#client-design-breakdown)
+- [Part 6: Ecosystem Example Walkthrough](./README.md#ecosystem-example-walkthrough) <-- TL;DR Here :)
+
+- [Running the Exchange](./README.md#running-the-exchange)
 
 ## Introduction
 
-In this project, I build an end-to-end financial trading exchange in Modern C++ that includes low-latency building blocks and infrastructure to support a matching engine!! It also includes testing scripts and simple, comprehensive commentary to explain the power of C++. <br />
+In this project, I build an end-to-end financial exchange and trading client in Modern C++. 
+- First, I build the low-latency building blocks of the project, including low-latency building blocks like custom wrappers of sockets, concurrency-safe data structures, and logging tools and more.
+- Next, I use these abstractions to build out the two core components of this project, the matching and trading engines!
+- The repo also includes testing scripts and simple, comprehensive code comments to make the code very reader friendly!
 
+#### Recommended Prerequisites
+To have the best experience when reviewing the code, I would recommend for the user to be familiar with the following topics:
+- Modern C++ (Memory Management, Pointers/Refereces, Templates, Object-Oriented Programming)
+- Networking
+- Basic Compiler Code Optimization Techniques
+- Concurrency
+- Data Structures and Algorithms
+
+#### Credits and Additional Notes
 CMake and Ninja are used as build tools for this project. Code is written to be compiled on a MacOS machine.
 
-Credits to Sourav Ghosh for his resources on learning low-latency C++. He has great books and I would encourage anyone who is interested to pick them up.
+Credits to Sourav Ghosh for his resources on learning low-latency C++ and the design of this ecosystem. He has great books and I would encourage anyone who is interested in learning about low-latency systems to pick them up!
 
 ## Core Building Blocks
 
@@ -39,16 +54,8 @@ This includes:
 | utils/tcp_server.h         | Server that highlights the 'kqueue' library to manage 'clients'                                   |
 | utils/testing_scripts/     | .cpp files with tests on util components' functionality and examples of how to use them           |
 
-Unit Testing
--------
-* Note that you can run the ``*.cpp`` tests in the ``../testing_scripts`` folder through the following commands:
-
-```
-  clang++ -std=c++20 [file_name].cpp
-```
-```
-  ./a.out
-```
+#### Unit Testing
+* Note that all of these components have corresponding correctness tests in `utils/testing_scripts/` which also serve as examples on how to use the components in isolation.
 <br />
 
 ## The Matching Engine
@@ -116,16 +123,44 @@ The final major component of the exchange is called the Market Publisher. It is 
 | market_publisher/snapshot_synthesizer.h    | Accumulates a collection of orders that represent a lightweight, local copy of the order book, and periodically sends out the snapshot |
 <br />
 
-## Tooling and Running the Exchange
+## Client Design Breakdown
 
-This project can be run using the exchange_main.cpp file that spins up all three components and keeps the exchange alive until it is killed through the command line.
+<br />
 
-I used CMake and Ninja to make the build/run process easier. Use the following commands to run the application. Once the process has been terminated, results can be seen in corresponding `.log` files!
+## Ecosystem Example Walkthrough
 
-From the Exchange/ directory:
+Here, I describe the flow of data through the ecosystem to help readers understand how to navigate the codebase!
+
+1. **Client Gets A Market Update** 
+
+<br />
+
+## Running the Exchange
+
+The two core files that make up this ecosystem are 
+- `exchange/exchange_main.cpp`
+- `trading/trading_main.cpp`
+<br />
+
+I used CMake and Ninja to make the build/run process easier. `build.h` in the main directory will help to compile both of these files into executables in directory at `./cmake_build_release/`.
+Below, I have outlined commands to run the application. Once the process has been terminated, results can be seen in corresponding `.log` files!
+
+#### Exchange and Single Client
 ```
   ./build.sh
 ```
 ```
   ./cmake-build-release/exchange_main
 ```
+```
+  ./cmake-build-release/trading_main [CLIENT_ID] [TRADING_STRATEGY_NAME]
+```
+<br />
+
+#### Several Clients at Once
+As an example of how to run several clients at once, please see the see the script called `./run_clients.sh`
+
+Each client must have a client id (integer) specified as well as an enum for the trading strategy it uses. Please see the seciton on **Client Design Breakdown** for other steps necessary to implement a custom strategy. For each of the tickers possible to trade on the exchange, one can specify characteristics like `max_trade_qty`, `max_position`, and `max_loss`, etc. Please see `trading_main.cpp` for more specifics.
+
+#### Example Ecosystem Run
+To see an example of the exchange running with 5 clients, please run the script `./run_exchange_and_clients.sh`. For the exchange as well as each client, there will be log files generated for each component which can be inspected for state. You should be able to trace specific trades throughout the ecosystem by going through the log files.
